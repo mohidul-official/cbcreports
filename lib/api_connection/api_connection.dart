@@ -3,4 +3,7 @@ class API {
   static const login = "$hostConnect/login.php";
   static const signup = "$hostConnect/signup.php";
   static const validateemail = "$hostConnect/validateemail.php";
+  static const ppadministrationdetails =
+      "$hostConnect/prepurchaseadministrationdetails.php";
+  static const viewprepurchasereport = "$hostConnect/viewprepurchasereport.php";
 }
