@@ -40,6 +40,7 @@ dependencies:
   fluttertoast: ^8.2.1
   shared_preferences: ^2.0.18
   font_awesome_flutter: ^10.4.0
+  flutter_file_downloader: ^1.1.0+1
 
 dev_dependencies:
   flutter_test:

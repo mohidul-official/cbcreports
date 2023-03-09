@@ -6,4 +6,13 @@ class API {
   static const ppadministrationdetails =
       "$hostConnect/prepurchaseadministrationdetails.php";
   static const viewprepurchasereport = "$hostConnect/viewprepurchasereport.php";
+  static const deleteprepurchasereport =
+      "$hostConnect/deleteprepurchasereport.php";
+
+  static const prepurchasereportpdf = "$hostConnect/prepurchasereportpdf.php";
+
+  static const prepurchasecreatepdf = "$hostConnect/prepurchasecreatepdf.php";
+  //static const prepurchasereportpdfurl = "$hostConnect/reports/";
+  static const prepurchasereportpdfurl =
+      "https://www.caseybuildingconsultants.com.au/wp-content/uploads/2023/03/";
 }
