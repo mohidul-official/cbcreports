@@ -12,7 +12,17 @@ class API {
   static const prepurchasereportpdf = "$hostConnect/prepurchasereportpdf.php";
 
   static const prepurchasecreatepdf = "$hostConnect/prepurchasecreatepdf.php";
+
   //static const prepurchasereportpdfurl = "$hostConnect/reports/";
   static const prepurchasereportpdfurl =
       "https://www.caseybuildingconsultants.com.au/wp-content/uploads/2023/03/";
+
+  static const prepurchaseagreementdetails =
+      "$hostConnect/prepurchaseagreementdetails.php";
+
+  static const prepurchaseinspectiondetails =
+      "$hostConnect/prepurchaseinspectiondetails.php";
+
+  static const prepurchaseareasgainfactorsdetails =
+      "$hostConnect/prepurchaseareasgainfactorsdetails.php";
 }

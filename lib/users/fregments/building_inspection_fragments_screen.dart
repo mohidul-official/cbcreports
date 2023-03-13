@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cbcreports/api_connection/api_connection.dart';
+import 'package:cbcreports/users/fregments/building_inspection_agreement_detailsfragments_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -39,8 +40,14 @@ class _BuildingInspectionFragmentsScreenState
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == true) {
+        String id = responce["id"];
+        print("Report Id:"+id);
         //print("Record Inserted");
+        Fluttertoast.showToast(msg: "Report Id:"+id);
         Fluttertoast.showToast(msg: "Record Inserted");
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                BuildingInspectionAgreementFragments(reportId: id)));
 
         propertyAddressController.clear();
         clientNameController.clear();
