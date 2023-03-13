@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 import '../../api_connection/api_connection.dart';
+import 'building_inspection_description_identification_property_fragments_screen.dart';
 
 class BuildingIspectionAreasGrainFactorsFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
@@ -43,9 +44,9 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState extends State<BuildingIs
         //print("Record Inserted");
 
         Fluttertoast.showToast(msg: "Record Inserted");
-        /*Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingIspectionAreasGrainFactorsFragments(reportId: id)));*/
+                BuildingInspetionDescriptionIdentificationPropertyFragments(reportId: id)));
         /*actualAreasInspectedController.clear();
         areasNotInspectedInspectedController.clear();
         areasNotFullyInspectedInspectedController.clear();

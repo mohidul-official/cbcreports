@@ -25,4 +25,16 @@ class API {
 
   static const prepurchaseareasgainfactorsdetails =
       "$hostConnect/prepurchaseareasgainfactorsdetails.php";
+
+  static const prepurchasedescriptionpropertydetails =
+      "$hostConnect/prepurchasedescriptionpropertydetails.php";
+
+  static const prepurchaseotherinspectionreportsdetails =
+      "$hostConnect/prepurchaseotherinspectionreportsdetails.php";
+
+  static const prepurchasethesitedetails =
+      "$hostConnect/prepurchasethesitedetails.php";
+
+  static const prepurchasetheexteriordetails =
+      "$hostConnect/prepurchasetheexteriordetails.php";
 }
