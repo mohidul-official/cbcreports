@@ -6,53 +6,53 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-import 'building_inspection_the_exterior_fragments_screen.dart';
+import 'building_inspection_the_sub_floor_fragments_screen.dart';
 
-class BuildingInspectionTheSiteFragments extends StatefulWidget {
+class BuildingInspectionTheRoofExteriorFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
 
   String reportId;
-  BuildingInspectionTheSiteFragments({Key? myKey, required this.reportId})
+  BuildingInspectionTheRoofExteriorFragments(
+      {Key? myKey, required this.reportId})
       : super(key: myKey);
 
   @override
-  State<BuildingInspectionTheSiteFragments> createState() =>
-      _BuildingInspectionTheSiteFragmentsState();
+  State<BuildingInspectionTheRoofExteriorFragments> createState() =>
+      _BuildingInspectionTheRoofExteriorFragmentsState();
 }
 
-class _BuildingInspectionTheSiteFragmentsState
-    extends State<BuildingInspectionTheSiteFragments> {
-  TextEditingController drivewaysController = TextEditingController();
-  TextEditingController pathsController = TextEditingController();
-  TextEditingController stepsController = TextEditingController();
-  TextEditingController retainingWallsController = TextEditingController();
-
-  TextEditingController surfaceWaterDrainageController =
+class _BuildingInspectionTheRoofExteriorFragmentsState
+    extends State<BuildingInspectionTheRoofExteriorFragments> {
+  TextEditingController roofFlashingsUndersideController =
       TextEditingController();
+  TextEditingController guttersDownpipesController = TextEditingController();
+  TextEditingController valleysController = TextEditingController();
+  TextEditingController skylightsController = TextEditingController();
 
-  TextEditingController carAccommodationController = TextEditingController();
+  TextEditingController ventsController = TextEditingController();
 
-  TextEditingController detachedBuildingsController = TextEditingController();
+  TextEditingController fluesController = TextEditingController();
 
-  TextEditingController gardenShedsFencesController = TextEditingController();
+  TextEditingController eavesController = TextEditingController();
+
+  TextEditingController faciaAndBargesController = TextEditingController();
 
   TextEditingController otherIfApplicableController = TextEditingController();
 
-  Future<void> updateTheSiteDetails(String id) async {
+  Future<void> updateTheRoofExteriorDetails(String id) async {
     try {
-      var res =
-          await http.post(Uri.parse(API.prepurchasethesitedetails), body: {
+      var res = await http
+          .post(Uri.parse(API.prepurchasetheroofexteriordetails), body: {
         "id": id,
-        "safetyhazardsdriveways": drivewaysController.text.trim(),
-        "safetyhazardspaths": pathsController.text.trim(),
-        "safetyhazardssteps": stepsController.text.trim(),
-        "safetyhazardswalls": retainingWallsController.text.trim(),
-        "safetyhazardswaterdrainage":
-            surfaceWaterDrainageController.text.trim(),
-        "safetyhazardscar": carAccommodationController.text.trim(),
-        "safetyhazardsbuildings": detachedBuildingsController.text.trim(),
-        "safetyhazardsgarden": gardenShedsFencesController.text.trim(),
-        "safetyhazardsother": otherIfApplicableController.text.trim(),
+        "roofexteriorflashings": roofFlashingsUndersideController.text.trim(),
+        "roofexteriorgutters": guttersDownpipesController.text.trim(),
+        "roofexteriorvalleys": valleysController.text.trim(),
+        "roofexteriorskylights": skylightsController.text.trim(),
+        "roofexteriorvents": ventsController.text.trim(),
+        "roofexteriorflues": fluesController.text.trim(),
+        "roofexterioreaves": eavesController.text.trim(),
+        "roofexteriorbarges": faciaAndBargesController.text.trim(),
+        "roofexteriorother": otherIfApplicableController.text.trim(),
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -61,11 +61,11 @@ class _BuildingInspectionTheSiteFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectorTheExteriorFragments(reportId: id)));
-        /*drivewaysController.clear();
-        pathsController.clear();
-        stepsController.clear();
-        retainingWallsController.clear();
+                BuildingInspectionTheSubFloorFragments(reportId: id)));
+        /*guttersDownpipesController.clear();
+        guttersDownpipesController.clear();
+        valleysController.clear();
+        skylightsController.clear();
         piersCommentsController.clear();
         flooringCommentsController.clear();*/
       } else {
@@ -91,7 +91,7 @@ class _BuildingInspectionTheSiteFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'THE SITE',
+                'THE ROOF EXTERIOR',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -111,91 +111,91 @@ class _BuildingInspectionTheSiteFragmentsState
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
-            //Driveways
+            //Roof Flashings
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: drivewaysController,
+                controller: roofFlashingsUndersideController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Driveways'),
+                  label: Text('Roof Flashings'),
                 ),
               ),
             ),
-            //Paths
+            //Gutters/Downpipes:
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: pathsController,
+                controller: guttersDownpipesController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Paths'),
+                  label: Text('Gutters/Downpipes'),
                 ),
               ),
             ),
-            //Steps
+            //Valleys
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: stepsController,
+                controller: valleysController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Steps'),
+                  label: Text('Valleys'),
                 ),
               ),
             ),
-            //Retaining Walls
+            //Skylights
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: retainingWallsController,
+                controller: skylightsController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Retaining Walls'),
+                  label: Text('Skylights'),
                 ),
               ),
             ),
-            //Surface Water Drainage
+            //Vents
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: surfaceWaterDrainageController,
+                controller: ventsController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Surface Water Drainage'),
+                  label: Text('Vents'),
                 ),
               ),
             ),
-            //Car Accommodation
+            //Flues
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: carAccommodationController,
+                controller: fluesController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Car Accommodation'),
+                  label: Text('Flues'),
                 ),
               ),
             ),
-            //Detached Buildings
+            //Eaves
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: detachedBuildingsController,
+                controller: eavesController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Detached Buildings'),
+                  label: Text('Eaves'),
                 ),
               ),
             ),
-            //Garden Sheds and Fences
+            //Facia and Barges:
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: gardenShedsFencesController,
+                controller: faciaAndBargesController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Garden Sheds and Fences'),
+                  label: Text('Facia and Barges:'),
                 ),
               ),
             ),
@@ -222,7 +222,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                         onPressed: () {
-                          updateTheSiteDetails(widget.reportId);
+                          updateTheRoofExteriorDetails(widget.reportId);
                         },
                         child: Text('Save & Next')),
                   ),

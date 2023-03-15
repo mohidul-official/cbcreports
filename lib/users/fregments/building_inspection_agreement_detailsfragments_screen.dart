@@ -72,6 +72,7 @@ class _BuildingInspectionAgreementFragmentsState
     return Scaffold(
       appBar: AppBar(
         title: Text("Pre Purchase Inspection"),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(

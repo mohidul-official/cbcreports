@@ -1,11 +1,16 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 import '../../api_connection/api_connection.dart';
+import 'dart:ui' as ui;
 
 class HomeFragmentsScreen extends StatefulWidget {
   const HomeFragmentsScreen({super.key});
@@ -15,6 +20,7 @@ class HomeFragmentsScreen extends StatefulWidget {
 }
 
 class _HomeFragmentsScreenState extends State<HomeFragmentsScreen> {
+  final GlobalKey<SfSignaturePadState> signatureGlobalKey = GlobalKey();
   List purchaseRecord = [];
   pdfBtnText(String pdfCreate) {
     if (pdfCreate == "0") {
@@ -37,13 +43,11 @@ class _HomeFragmentsScreenState extends State<HomeFragmentsScreen> {
         url: url,
         onProgress: (name, progress) {
           Fluttertoast.showToast(msg: "Downloading...");
-          
         },
         onDownloadCompleted: (value) {
           Fluttertoast.showToast(
               msg: "Download Successfull. View Your File From $value");
           print("path $value");
-          
         },
         onDownloadError: (String error) {
           print('DOWNLOAD ERROR: $error');
@@ -61,6 +65,7 @@ class _HomeFragmentsScreenState extends State<HomeFragmentsScreen> {
       if (responce["success"] == "true") {
         print("Pdf Created Successfully");
         Fluttertoast.showToast(msg: "Pdf Created Successfully");
+        downloadRecord(id);
         getRecord();
       } else {
         print("Some Issue.");
@@ -124,6 +129,26 @@ class _HomeFragmentsScreenState extends State<HomeFragmentsScreen> {
     }
   }
 
+  void saveSignatureImage() async {
+    RenderSignaturePad boundary = signatureGlobalKey.currentContext
+        ?.findRenderObject() as RenderSignaturePad;
+    ui.Image image = await boundary.toImage();
+    ByteData? byteData = await (image.toByteData(format: ui.ImageByteFormat.png)
+        as FutureOr<ByteData?>);
+    if (byteData != null) {
+      final time = DateTime.now().microsecond;
+      final name = "signature_$time.png";
+      final result = await ImageGallerySaver.saveImage(
+          byteData.buffer.asUint8List(),
+          quality: 100,
+          name: name);
+      print(result);
+      Fluttertoast.showToast(msg: result.toString());
+      final isSuccess = result['isSuccess'];
+      signatureGlobalKey.currentState?.clear();
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -136,6 +161,7 @@ class _HomeFragmentsScreenState extends State<HomeFragmentsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('All Reports'),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -214,6 +240,40 @@ class _HomeFragmentsScreenState extends State<HomeFragmentsScreen> {
                   );
                 },
               ),
+            ),
+
+            //Signature
+            Container(
+              margin: EdgeInsets.all(10),
+              child: SfSignaturePad(
+                key: signatureGlobalKey,
+                backgroundColor: Color.fromARGB(255, 187, 224, 243),
+                strokeColor: Colors.black,
+                minimumStrokeWidth: 3.0,
+                maximumStrokeWidth: 6.0,
+              ),
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.black)),
+            ),
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        saveSignatureImage();
+                      },
+                      child: Text('Save As Image')),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        signatureGlobalKey.currentState?.clear();
+                      },
+                      child: Text('Clear')),
+                ),
+              ],
             ),
           ],
         ),

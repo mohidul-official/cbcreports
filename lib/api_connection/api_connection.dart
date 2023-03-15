@@ -13,9 +13,8 @@ class API {
 
   static const prepurchasecreatepdf = "$hostConnect/prepurchasecreatepdf.php";
 
-  //static const prepurchasereportpdfurl = "$hostConnect/reports/";
-  static const prepurchasereportpdfurl =
-      "https://www.caseybuildingconsultants.com.au/wp-content/uploads/2023/03/";
+  static const prepurchasereportpdfurl = "$hostConnect/reports/";
+  //static const prepurchasereportpdfurl ="https://www.caseybuildingconsultants.com.au/wp-content/uploads/2023/03/";
 
   static const prepurchaseagreementdetails =
       "$hostConnect/prepurchaseagreementdetails.php";
@@ -37,4 +36,22 @@ class API {
 
   static const prepurchasetheexteriordetails =
       "$hostConnect/prepurchasetheexteriordetails.php";
+
+  static const prepurchasetheinteriordetails =
+      "$hostConnect/prepurchasetheinteriordetails.php";
+
+  static const prepurchasetheroofinteriordetails =
+      "$hostConnect/prepurchasetheroofinteriordetails.php";
+
+  static const prepurchasetheroofexteriordetails =
+      "$hostConnect/prepurchasetheroofexteriordetails.php";
+
+  static const prepurchasethesubfloordetails =
+      "$hostConnect/prepurchasethesubfloordetails.php";
+
+  static const prepurchasecreckingbuildingmembersdetails =
+      "$hostConnect/prepurchasecreckingbuildingmembersdetails.php";
+
+  static const prepurchasecontacttheinspectordetails =
+      "$hostConnect/prepurchasecontacttheinspectordetails.php";
 }

@@ -6,68 +6,78 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-import 'building_inspection_the_interior_fragments_screen.dart';
-import 'building_inspection_the_roof_exterior_fragments_screen.dart';
+import 'building_inspection_the_roof_interior_fragments_screen.dart';
 
-class BuildingInspectorTheExteriorFragments extends StatefulWidget {
+class BuildingInspectionTheInteriorFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
 
   String reportId;
-  BuildingInspectorTheExteriorFragments({Key? myKey, required this.reportId})
+  BuildingInspectionTheInteriorFragments({Key? myKey, required this.reportId})
       : super(key: myKey);
 
   @override
-  State<BuildingInspectorTheExteriorFragments> createState() =>
-      _BuildingInspectorTheExteriorFragmentsState();
+  State<BuildingInspectionTheInteriorFragments> createState() =>
+      _BuildingInspectionTheInteriorFragmentsState();
 }
 
-class _BuildingInspectorTheExteriorFragmentsState
-    extends State<BuildingInspectorTheExteriorFragments> {
-  TextEditingController wallsController = TextEditingController();
-  TextEditingController externalCladdingController = TextEditingController();
-  TextEditingController lintelsController = TextEditingController();
-  TextEditingController doorsController = TextEditingController();
+class _BuildingInspectionTheInteriorFragmentsState
+    extends State<BuildingInspectionTheInteriorFragments> {
+  TextEditingController entryController = TextEditingController();
+  TextEditingController hallController = TextEditingController();
+  TextEditingController linenCupboardController = TextEditingController();
+  TextEditingController loungeRoomController = TextEditingController();
 
-  TextEditingController windowsController = TextEditingController();
+  TextEditingController diningRoomController = TextEditingController();
 
-  TextEditingController timberSteelStructuresController =
-      TextEditingController();
+  TextEditingController kitchenController = TextEditingController();
+
+  TextEditingController familyRoomController = TextEditingController();
+
+  TextEditingController studyController = TextEditingController();
 
   TextEditingController stairsController = TextEditingController();
 
-  TextEditingController balustradesController = TextEditingController();
+  TextEditingController laundryController = TextEditingController();
 
-  TextEditingController balconiesController = TextEditingController();
+  TextEditingController toiletController = TextEditingController();
 
-  TextEditingController verandasController = TextEditingController();
+  TextEditingController bathroomController = TextEditingController();
 
-  TextEditingController patiosController = TextEditingController();
+  TextEditingController enSuiteController = TextEditingController();
 
-  TextEditingController decksController = TextEditingController();
+  TextEditingController bedroomOneController = TextEditingController();
 
-  TextEditingController chimneysController = TextEditingController();
+  TextEditingController bedroomTwoController = TextEditingController();
+
+  TextEditingController bedroomThreeController = TextEditingController();
+
+  TextEditingController bedroomFourController = TextEditingController();
 
   TextEditingController otherIfApplicableController = TextEditingController();
 
-  Future<void> updateTheExteriorDetails(String id) async {
+  Future<void> updateTheInteriorDetails(String id) async {
     try {
       var res =
-          await http.post(Uri.parse(API.prepurchasetheexteriordetails), body: {
+          await http.post(Uri.parse(API.prepurchasetheinteriordetails), body: {
         "id": id,
-        "exteriordefectswalls": wallsController.text.trim(),
-        "exteriordefectscladding": externalCladdingController.text.trim(),
-        "exteriordefectslintels": lintelsController.text.trim(),
-        "exteriordefectsdoors": doorsController.text.trim(),
-        "exteriordefectswindows": windowsController.text.trim(),
-        "exteriordefectstimber": timberSteelStructuresController.text.trim(),
-        "exteriordefectsstairs": stairsController.text.trim(),
-        "exteriordefectsbalustrades": balustradesController.text.trim(),
-        "exteriordefectsbalconies": balconiesController.text.trim(),
-        "exteriordefectsverandas": verandasController.text.trim(),
-        "exteriordefectspatios": patiosController.text.trim(),
-        "exteriordefectsdecks": decksController.text.trim(),
-        "exteriordefectschimneys": chimneysController.text.trim(),
-        "exteriordefectsother": otherIfApplicableController.text.trim(),
+        "interiordefectsentry": entryController.text.trim(),
+        "interiordefectshall": hallController.text.trim(),
+        "interiordefectscupboard": linenCupboardController.text.trim(),
+        "interiordefectslounge": loungeRoomController.text.trim(),
+        "interiordefectsdining": diningRoomController.text.trim(),
+        "interiordefectskitchen": kitchenController.text.trim(),
+        "interiordefectsfamily": familyRoomController.text.trim(),
+        "interiordefectsstudy": studyController.text.trim(),
+        "interiordefectsstairs": stairsController.text.trim(),
+        "interiordefectslaundry": laundryController.text.trim(),
+        "interiordefectstoilet": toiletController.text.trim(),
+        "interiordefectsbathroom": bathroomController.text.trim(),
+        "interiordefectsensuite": enSuiteController.text.trim(),
+        "interiordefectsbedroomone": bedroomOneController.text.trim(),
+        "interiordefectsbedroomtwo": bedroomTwoController.text.trim(),
+        "interiordefectsbedroomthree": bedroomThreeController.text.trim(),
+        "interiordefectsbedroomfour": bedroomFourController.text.trim(),
+        "interiordefectsother": otherIfApplicableController.text.trim(),
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -76,11 +86,11 @@ class _BuildingInspectorTheExteriorFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectionTheInteriorFragments(reportId: id)));
-        /*wallsController.clear();
-        externalCladdingController.clear();
-        lintelsController.clear();
-        doorsController.clear();
+                BuildingInspectionTheRoofInteriorFragments(reportId: id)));
+        /*entryController.clear();
+        hallController.clear();
+        linenCupboardController.clear();
+        loungeRoomController.clear();
         piersCommentsController.clear();
         flooringCommentsController.clear();*/
       } else {
@@ -106,7 +116,7 @@ class _BuildingInspectorTheExteriorFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'EXTERIOR OF THE BUILDING',
+                'INTERIOR OF THE BUILDING',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -126,69 +136,91 @@ class _BuildingInspectorTheExteriorFragmentsState
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
-            //Walls
+            //Entry
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: wallsController,
+                controller: entryController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Walls'),
+                  label: Text('Entry'),
                 ),
               ),
             ),
-            //External Cladding
+            //Hall
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: externalCladdingController,
+                controller: hallController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('External Cladding'),
+                  label: Text('Hall'),
                 ),
               ),
             ),
-            //Lintels
+            //Linen Cupboard
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: lintelsController,
+                controller: linenCupboardController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Lintels'),
+                  label: Text('Linen Cupboard'),
                 ),
               ),
             ),
-            //Doors
+            //Lounge Room
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: doorsController,
+                controller: loungeRoomController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Doors'),
+                  label: Text('Lounge Room'),
                 ),
               ),
             ),
-            //Windows
+            //Dining Room
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: windowsController,
+                controller: diningRoomController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Windows'),
+                  label: Text('Dining Room'),
                 ),
               ),
             ),
-            //Timber and Steel Structures
+            //Kitchen
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: timberSteelStructuresController,
+                controller: kitchenController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Timber and Steel Structures'),
+                  label: Text('Kitchen'),
+                ),
+              ),
+            ),
+            //Family Room
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: familyRoomController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Family Room'),
+                ),
+              ),
+            ),
+            //Study
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: studyController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Study'),
                 ),
               ),
             ),
@@ -203,69 +235,91 @@ class _BuildingInspectorTheExteriorFragmentsState
                 ),
               ),
             ),
-            //Balustrades
+            //Laundry
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: balustradesController,
+                controller: laundryController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Balustrades'),
+                  label: Text('Laundry'),
                 ),
               ),
             ),
-            //Balconies
+            //Toilet
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: balconiesController,
+                controller: toiletController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Balconies'),
+                  label: Text('Toilet'),
                 ),
               ),
             ),
-            //Verandas
+            //Bathroom
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: verandasController,
+                controller: bathroomController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Verandas'),
+                  label: Text('Bathroom'),
                 ),
               ),
             ),
-            //Patios
+            //En-suite
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: patiosController,
+                controller: enSuiteController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Patios'),
+                  label: Text('En-suite'),
                 ),
               ),
             ),
-            //Decks
+            //Bedroom  1
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: decksController,
+                controller: bedroomOneController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Decks'),
+                  label: Text('Bedroom  1'),
                 ),
               ),
             ),
-            //Chimneys
+            //Bedroom  2
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: chimneysController,
+                controller: bedroomTwoController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Chimneys'),
+                  label: Text('Bedroom 2'),
+                ),
+              ),
+            ),
+            //Bedroom 3
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: bedroomThreeController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Bedroom 3'),
+                ),
+              ),
+            ),
+            //Bedroom 4
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: bedroomFourController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Bedroom 4'),
                 ),
               ),
             ),
@@ -292,7 +346,7 @@ class _BuildingInspectorTheExteriorFragmentsState
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                         onPressed: () {
-                          updateTheExteriorDetails(widget.reportId);
+                          updateTheInteriorDetails(widget.reportId);
                         },
                         child: Text('Save & Next')),
                   ),
