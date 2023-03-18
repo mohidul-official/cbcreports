@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 import '../../api_connection/api_connection.dart';
 import 'dart:ui' as ui;
+import 'package:image_picker/image_picker.dart';
 
 class HomeFragmentsScreen extends StatefulWidget {
   const HomeFragmentsScreen({super.key});
@@ -22,6 +24,41 @@ class HomeFragmentsScreen extends StatefulWidget {
 class _HomeFragmentsScreenState extends State<HomeFragmentsScreen> {
   final GlobalKey<SfSignaturePadState> signatureGlobalKey = GlobalKey();
   List purchaseRecord = [];
+  File? imagePath;
+  String? imageName;
+  String? imageData;
+  ImagePicker imagePicker = new ImagePicker();
+
+  Future<void> getImage() async {
+    var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imagePath = File(getimage!.path);
+      imageName = getimage.path.split('/').last;
+      imageData = base64Encode(imagePath!.readAsBytesSync());
+      print(imagePath);
+      print(imageName);
+      print(imageData);
+    });
+  }
+
+  Future<void> uploadImage() async {
+    try {
+      String uri = "http://192.168.0.111/cbcreports/imageupload.php";
+      var res = await http.post(Uri.parse(uri), body: {
+        "data": imageData,
+        "name": imageName,
+      });
+      var responce = jsonDecode(res.body);
+      if (responce["success"] == "true") {
+        print("uploaded");
+      } else {
+        print("Not Uploaded");
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   pdfBtnText(String pdfCreate) {
     if (pdfCreate == "0") {
       var pdftext = Text("Create");
@@ -241,39 +278,30 @@ class _HomeFragmentsScreenState extends State<HomeFragmentsScreen> {
                 },
               ),
             ),
-
-            //Signature
             Container(
               margin: EdgeInsets.all(10),
-              child: SfSignaturePad(
-                key: signatureGlobalKey,
-                backgroundColor: Color.fromARGB(255, 187, 224, 243),
-                strokeColor: Colors.black,
-                minimumStrokeWidth: 3.0,
-                maximumStrokeWidth: 6.0,
-              ),
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black)),
+              child: imagePath != null
+                  ? Image.file(imagePath!)
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
             ),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        saveSignatureImage();
-                      },
-                      child: Text('Save As Image')),
-                ),
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        signatureGlobalKey.currentState?.clear();
-                      },
-                      child: Text('Clear')),
-                ),
-              ],
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                  onPressed: () {
+                    getImage();
+                  },
+                  child: Text('Choose Image')),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      uploadImage();
+                    });
+                  },
+                  child: Text('Upload Image')),
             ),
           ],
         ),

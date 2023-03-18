@@ -1,5 +1,8 @@
 class API {
   static const hostConnect = "http://192.168.0.111/cbcreports";
+  /*static const hostConnect =
+      "https://www.caseybuildingconsultants.com.au/cbcreports";*/
+
   static const login = "$hostConnect/login.php";
   static const signup = "$hostConnect/signup.php";
   static const validateemail = "$hostConnect/validateemail.php";
@@ -54,4 +57,7 @@ class API {
 
   static const prepurchasecontacttheinspectordetails =
       "$hostConnect/prepurchasecontacttheinspectordetails.php";
+
+  static const prepurchasesignatureupload =
+      "$hostConnect/prepurchasesignatureupload.php";
 }

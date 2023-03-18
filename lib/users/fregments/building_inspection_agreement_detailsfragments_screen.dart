@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 import '../../api_connection/api_connection.dart';
+import 'building_inspection_contact_the_inspector_fragments_screen.dart';
 import 'building_inspection_inspection_details_fragments_screen.dart';
 
 class BuildingInspectionAgreementFragments extends StatefulWidget {
@@ -50,6 +51,9 @@ class _BuildingInspectionAgreementFragmentsState
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 BuildingIspectionIspectionFragments(reportId: id)));
+        /*Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                BuildingInspectionContactTheIspectorFragments(reportId: id)));*/
         /*agreementNoController.clear();
         dateOfAgreementController.clear();
         timeOfAgreementController.clear();

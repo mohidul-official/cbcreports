@@ -12,6 +12,8 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 import 'dart:ui' as ui;
 
+import 'building_inspection_upload_signature_fragments_screen.dart';
+
 class BuildingInspectionContactTheIspectorFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
 
@@ -58,7 +60,7 @@ class _BuildingInspectionContactTheIspectorFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildInspectionPdfCreateFragments(reportId: id)));
+                BuildingInspectionUploadSignatureFragments(reportId: id)));
         /*inspectorLicenceController.clear();
         inspectorLicenceController.clear();
         inspectorDayOfController.clear();
