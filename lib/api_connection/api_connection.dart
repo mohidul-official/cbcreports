@@ -6,6 +6,9 @@ class API {
   static const login = "$hostConnect/login.php";
   static const signup = "$hostConnect/signup.php";
   static const validateemail = "$hostConnect/validateemail.php";
+
+  //Pre Purchase Inspection Api Urls
+
   static const ppadministrationdetails =
       "$hostConnect/prepurchaseadministrationdetails.php";
   static const viewprepurchasereport = "$hostConnect/viewprepurchasereport.php";
@@ -60,4 +63,21 @@ class API {
 
   static const prepurchasesignatureupload =
       "$hostConnect/prepurchasesignatureupload.php";
+
+  //Timber & pest Inspection API URLs
+
+  static const viewtimberpestreport = "$hostConnect/viewtimberpestreport.php";
+
+  static const deletetimberpestreport =
+      "$hostConnect/deletetimberpestreport.php";
+
+  static const timberpestcreatepdf = "$hostConnect/timberpestcreatepdf.php";
+
+  static const timberpestreportpdf = "$hostConnect/timberpestreportpdf.php";
+
+  static const timberpestinspectionsteponedetails =
+      "$hostConnect/timberpestinspectionsteponedetails.php";
+
+  static const timberpestinspectionsteptwodetails =
+      "$hostConnect/timberpestinspectionsteptwodetails.php";
 }

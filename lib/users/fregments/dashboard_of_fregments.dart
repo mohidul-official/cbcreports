@@ -1,5 +1,6 @@
 import 'package:cbcreports/users/fregments/building_inspection_fragments_screen.dart';
 import 'package:cbcreports/users/fregments/home_fregments_screen.dart';
+import 'package:cbcreports/users/fregments/pre_purchase_inspection_fregments_screen.dart';
 import 'package:cbcreports/users/fregments/profile_inspection_fragments_screen.dart';
 import 'package:cbcreports/users/fregments/timber_inspection_fragments_screen.dart';
 import 'package:cbcreports/users/userPreference/current_user.dart';
