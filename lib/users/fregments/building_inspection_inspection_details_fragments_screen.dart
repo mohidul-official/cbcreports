@@ -28,6 +28,11 @@ class _BuildingIspectionIspectionFragmentsState
   TextEditingController recentConditionsController = TextEditingController();
   TextEditingController buildingFurnishedController = TextEditingController();
   TextEditingController buildingTenancyController = TextEditingController();
+  var personsinattendance = "NA";
+  var weatherconditions = "NA";
+  var recentweather = "NA";
+  var buildingfurnished = "NA";
+  var buildingtenancy = "NA";
   Future<void> updateInspectionDetails(String id) async {
     try {
       var res =
@@ -35,11 +40,16 @@ class _BuildingIspectionIspectionFragmentsState
         "id": id,
         "dateofinspection": dateOfInspectionController.text.trim(),
         "timeofinspection": timeOfInspectionController.text.trim(),
-        "personsinattendance": personsInAttendanceController.text.trim(),
-        "weatherconditions": weatherConditionsController.text.trim(),
-        "recentweather": recentConditionsController.text.trim(),
-        "buildingfurnished": buildingFurnishedController.text.trim(),
-        "buildingtenancy": buildingTenancyController.text.trim(),
+        //"personsinattendance": personsInAttendanceController.text.trim(),
+        "personsinattendance": personsinattendance,
+        "weatherconditions": weatherconditions,
+        "weatherconditionscomments": weatherConditionsController.text.trim(),
+        "recentweather": recentweather,
+        "recentweathercomments": recentConditionsController.text.trim(),
+        "buildingfurnished": buildingfurnished,
+        "buildingfurnishedcomments": buildingFurnishedController.text.trim(),
+        "buildingtenancy": buildingtenancy,
+        "buildingtenancycomments": buildingTenancyController.text.trim(),
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -116,12 +126,79 @@ class _BuildingIspectionIspectionFragmentsState
             //Persons in Attendance
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: personsInAttendanceController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Persons in Attendance'),
                 ),
+                value: personsinattendance,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Venor'),
+                    value: "Venor",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Agent'),
+                    value: "Agent",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Buyer'),
+                    value: "Buyer",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Tenant'),
+                    value: "Tenant",
+                  ),
+                ],
+                onChanged: (personsinattendance) {
+                  setState(() {
+                    this.personsinattendance = personsinattendance!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            //Weather Conditions at the time of Inspection
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Weather Conditions at the time of Inspection'),
+                ),
+                value: weatherconditions,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Dry'),
+                    value: "Dry",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Wet'),
+                    value: "Wet",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Intermittent Rain'),
+                    value: "Intermittent Rain",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Refer to comments'),
+                    value: "Refer to comments",
+                  ),
+                ],
+                onChanged: (weatherconditions) {
+                  setState(() {
+                    this.weatherconditions = weatherconditions!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             //Weather Conditions at the time of Inspection
@@ -132,8 +209,55 @@ class _BuildingIspectionIspectionFragmentsState
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Weather Conditions at the time of Inspection'),
+                  label: Text('Comments'),
                 ),
+              ),
+            ),
+            //Recent Weather Conditions
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Recent Weather Conditions'),
+                ),
+                value: recentweather,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Dry'),
+                    value: "Dry",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Wet'),
+                    value: "Wet",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Extended Dry Period'),
+                    value: "Extended Dry Period",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Extended Wet Period'),
+                    value: "Extended Wet Period",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Dry & Wet Periods'),
+                    value: "Dry & Wet Periods",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Refer to comments'),
+                    value: "Refer to comments",
+                  ),
+                ],
+                onChanged: (recentweather) {
+                  setState(() {
+                    this.recentweather = recentweather!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             //Recent Weather Conditions
@@ -144,8 +268,39 @@ class _BuildingIspectionIspectionFragmentsState
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Recent Weather Conditions'),
+                  label: Text('Comments'),
                 ),
+              ),
+            ),
+            //Building Furnished
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Building Furnished'),
+                ),
+                value: buildingfurnished,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Yes'),
+                    value: "Yes",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No'),
+                    value: "No",
+                  ),
+                ],
+                onChanged: (buildingfurnished) {
+                  setState(() {
+                    this.buildingfurnished = buildingfurnished!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             //Building Furnished
@@ -156,8 +311,43 @@ class _BuildingIspectionIspectionFragmentsState
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Building Furnished'),
+                  label: Text('Comments'),
                 ),
+              ),
+            ),
+            //Building Tenancy
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Building Tenancy'),
+                ),
+                value: buildingtenancy,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Occupied'),
+                    value: "Occupied",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Unoccupied'),
+                    value: "Unoccupied",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Refer to comments'),
+                    value: "Refer to comments",
+                  ),
+                ],
+                onChanged: (buildingtenancy) {
+                  setState(() {
+                    this.buildingtenancy = buildingtenancy!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             //Building Tenancy
@@ -168,7 +358,7 @@ class _BuildingIspectionIspectionFragmentsState
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Building Tenancy'),
+                  label: Text('Comments'),
                 ),
               ),
             ),
