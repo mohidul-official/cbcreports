@@ -40,6 +40,9 @@ class API {
   static const prepurchasethesitedetails =
       "$hostConnect/prepurchasethesitedetails.php";
 
+  static const prepurchasethesitesteptwodetails =
+      "$hostConnect/prepurchasethesitesteptwodetails.php";
+
   static const prepurchasetheexteriordetails =
       "$hostConnect/prepurchasetheexteriordetails.php";
 

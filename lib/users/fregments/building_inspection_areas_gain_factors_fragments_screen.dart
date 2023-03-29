@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:multiselect/multiselect.dart';
 
 import '../../api_connection/api_connection.dart';
 import 'building_inspection_description_identification_property_fragments_screen.dart';
@@ -35,15 +36,26 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       TextEditingController();
   TextEditingController influencingTheInspectionController =
       TextEditingController();
+  //var actualareasinspected = "NA";
+  List<String> actualareasinspectedselected = [];
   var actualareasinspected = "NA";
 
   var limitationsyesno = "No Limitations at Time of Inspection";
   var limitationsis = "NA";
+  var apparentdefects = "NA";
+
+  var apparentdefectsvalue = "NA";
+  var informationprovidedinspector = "NA";
+  var informationprovidedinspectorvalue = "NA";
   File? imagePath;
 
   String? imageName;
   String? imageData;
-  ImagePicker imagePicker = new ImagePicker();
+  File? apparentConcealmentImagePath;
+
+  String? apparentConcealmentImageName;
+  String? apparentConcealmentImageData;
+  ImagePicker imagePicker = ImagePicker();
 
   Future<void> getImage() async {
     var getimage = await imagePicker.pickImage(
@@ -54,6 +66,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         return;
       } else {
         imagePath = File(getimage.path);
+        
         imageName = getimage.path.split('/').last;
         imageData = base64Encode(imagePath!.readAsBytesSync());
         print(imagePath);
@@ -81,32 +94,44 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
     });
   }
 
-  /*Future<void> uploadImage(String id) async {
-    try {
-      //String uri = "http://192.168.0.111/cbcreports/imageupload.php";
-      var res =
-          await http.post(Uri.parse(API.prepurchasesignatureupload), body: {
-        "id": id,
-        "data": imageData,
-        "name": imageName,
-      });
-      var responce = jsonDecode(res.body);
-      if (responce["success"] == "true") {
-        print("uploaded");
-
-        Fluttertoast.showToast(msg: "Record Inserted");
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                BuildInspectionPdfCreateFragments(reportId: id)));
+  Future<void> apparentConcealmentGetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
       } else {
-        print("Not Uploaded");
-
-        Fluttertoast.showToast(msg: "Not Uploaded");
+        apparentConcealmentImagePath = File(getimage.path);
+        apparentConcealmentImageName = getimage.path.split('/').last;
+        apparentConcealmentImageData =
+            base64Encode(apparentConcealmentImagePath!.readAsBytesSync());
+        print(apparentConcealmentImagePath);
+        print(apparentConcealmentImageName);
+        print(apparentConcealmentImageData);
       }
-    } catch (e) {
-      print(e);
-    }
-  }*/
+    });
+  }
+
+  Future<void> apparentConcealmentCaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        apparentConcealmentImagePath = File(getimage.path);
+        apparentConcealmentImageName = getimage.path.split('/').last;
+        apparentConcealmentImageData =
+            base64Encode(apparentConcealmentImagePath!.readAsBytesSync());
+        print(apparentConcealmentImagePath);
+        print(apparentConcealmentImageName);
+        print(apparentConcealmentImageData);
+      }
+    });
+  }
+
   Future<void> updateAreasGainFactorsDetails(String id) async {
     try {
       var res = await http
@@ -120,13 +145,18 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         "gainaccessandreinspect": gainedAccessController.text.trim(),
         "limitationsyesno": limitationsyesno,
         "limitationsis": limitationsis,
-        "possibledefects": apparentDefectsController.text.trim(),
-        "informationprovidedinspector":
-            informationProvidedInspectorController.text.trim(),
+        //"possibledefects": apparentDefectsController.text.trim(),
+        "possibledefects": apparentdefects,
+        "apparentdefectsvalue": apparentdefectsvalue,
+        //"informationprovidedinspector":informationProvidedInspectorController.text.trim(),
+        "informationprovidedinspector": informationprovidedinspector,
+        "informationprovidedinspectorvalue": informationprovidedinspectorvalue,
         "otherfactorsinfluencing":
             influencingTheInspectionController.text.trim(),
         "data": imageData,
         "name": imageName,
+        "apparentconcealmentimagedata": apparentConcealmentImageData,
+        "apparentconcealmentimagename": apparentConcealmentImageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -196,6 +226,49 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
     }
   }
 
+  apparentdefectsCheck() {
+    if (apparentdefects ==
+        "Evidence of apparent concealed defect(s) was seen and details were") {
+      setState(() {
+        apparentdefectsvalue =
+            "Dwelling was recently painted. It could have done to conceal few previous defects.";
+      });
+
+      return Text(
+          'Dwelling was recently painted. It could have done to conceal few previous defects.');
+    }
+  }
+
+  informationprovidedinspectorCheck() {
+    if (informationprovidedinspector ==
+        "Additional Information provided to inspector was") {
+      return DropdownButtonFormField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          label: Text('Additional Information provided to inspector was'),
+        ),
+        value: informationprovidedinspectorvalue,
+        items: [
+          DropdownMenuItem(
+            child: Text('Yes'),
+            value: "Yes",
+          ),
+          DropdownMenuItem(
+            child: Text('No'),
+            value: "No",
+          ),
+        ],
+        onChanged: (informationprovidedinspectorvalue) {
+          setState(() {
+            this.informationprovidedinspectorvalue =
+                informationprovidedinspectorvalue!;
+            //print(personsinattendance);
+          });
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,48 +295,28 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
               ),
             ),
             //The Actual Areas Inspected were
+
             Container(
               margin: EdgeInsets.all(10),
-              child: DropdownButtonFormField(
+              child: DropDownMultiSelect(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('The Actual Areas Inspected were'),
                 ),
-                value: actualareasinspected,
-                items: [
-                  DropdownMenuItem(
-                    child: Text('-Select-'),
-                    value: "NA",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('The Building Interior'),
-                    value: "The Building Interior",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('The Building Exterior'),
-                    value: "The Building Exterior",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('The Roof Space'),
-                    value: "The Roof Space",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('The Roof Exterior'),
-                    value: "The Roof Exterior",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('The Subfloor'),
-                    value: "The Subfloor",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('The Site'),
-                    value: "The Site",
-                  ),
+                options: [
+                  'The Building Interior',
+                  'The Building Exterior',
+                  'The Roof Space',
+                  'The Roof Exterior',
+                  'The Subfloor',
+                  'The Site'
                 ],
-                onChanged: (actualareasinspected) {
+                selectedValues: actualareasinspectedselected,
+                onChanged: (List<String> actualareasinspectedx) {
                   setState(() {
-                    this.actualareasinspected = actualareasinspected!;
-                    //print(personsinattendance);
+                    actualareasinspectedselected = actualareasinspectedx;
+                    actualareasinspected =
+                        actualareasinspectedselected.join(", ");
                   });
                 },
               ),
@@ -411,31 +464,122 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
                 ],
               ),
             ),
+
             //Details of Apparent concealment of possible defects:
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: apparentDefectsController,
-                keyboardType: TextInputType.multiline,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text(
-                      'Details of Apparent concealment of possible defects'),
+                      'Details of Apparent concealment of possible defects:'),
                 ),
+                value: apparentdefects,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text(
+                        'Evidence of apparent concealed\n defect(s) was seen and details were\n\n '),
+                    value:
+                        "Evidence of apparent concealed defect(s) was seen and details were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text(
+                        'No visual sign of apparent\n concealment observed'),
+                    value: "No visual sign of apparent concealment observed",
+                  ),
+                ],
+                onChanged: (apparentdefects) {
+                  setState(() {
+                    this.apparentdefects = apparentdefects!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: apparentdefectsCheck(),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: apparentConcealmentImagePath != null
+                  ? Image.file(apparentConcealmentImagePath!)
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          apparentConcealmentCaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          apparentConcealmentGetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Information provided to the Inspector that has a bearing on the Inspection and/or Report and from whom and when that information was provided:
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: informationProvidedInspectorController,
-                keyboardType: TextInputType.multiline,
+              child: Text(
+                  'Information provided to the Inspector that has a bearing on the Inspection and/or Report and from whom and when that information was provided:'),
+            ),
+
+            //Information provided to the Inspector that has a bearing on the Inspection and/or Report and from whom and when that information was provided:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text(
-                      'Information provided to the Inspector that has a bearing on the Inspection and/or Report and from whom and when that information was provided:'),
+                  //label: Text('Details of Apparent concealment of possible defects:'),
                 ),
+                value: informationprovidedinspector,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text(
+                        'Additional Information provided to inspector\n was\n'),
+                    value: "Additional Information provided to inspector was",
+                  ),
+                  DropdownMenuItem(
+                    child:
+                        Text('There was no additional information\n provided'),
+                    value: "There was no additional information provided",
+                  ),
+                ],
+                onChanged: (informationprovidedinspector) {
+                  setState(() {
+                    this.informationprovidedinspector =
+                        informationprovidedinspector!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: informationprovidedinspectorCheck(),
             ),
             //Details of Other Factors influencing the inspection:
             Container(

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:multiselect/multiselect.dart';
 
 import '../../api_connection/api_connection.dart';
 import 'building_inspection_areas_gain_factors_fragments_screen.dart';
@@ -28,11 +29,13 @@ class _BuildingIspectionIspectionFragmentsState
   TextEditingController recentConditionsController = TextEditingController();
   TextEditingController buildingFurnishedController = TextEditingController();
   TextEditingController buildingTenancyController = TextEditingController();
-  var personsinattendance = "NA";
+  //var personsinattendance = "NA";
   var weatherconditions = "NA";
   var recentweather = "NA";
   var buildingfurnished = "NA";
   var buildingtenancy = "NA";
+  List<String> personsinattendanceselected = [];
+  var personsinattendance = "NA";
   Future<void> updateInspectionDetails(String id) async {
     try {
       var res =
@@ -42,6 +45,7 @@ class _BuildingIspectionIspectionFragmentsState
         "timeofinspection": timeOfInspectionController.text.trim(),
         //"personsinattendance": personsInAttendanceController.text.trim(),
         "personsinattendance": personsinattendance,
+
         "weatherconditions": weatherconditions,
         "weatherconditionscomments": weatherConditionsController.text.trim(),
         "recentweather": recentweather,
@@ -126,38 +130,18 @@ class _BuildingIspectionIspectionFragmentsState
             //Persons in Attendance
             Container(
               margin: EdgeInsets.all(10),
-              child: DropdownButtonFormField(
+              child: DropDownMultiSelect(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Persons in Attendance'),
                 ),
-                value: personsinattendance,
-                items: [
-                  DropdownMenuItem(
-                    child: Text('-Select-'),
-                    value: "NA",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Venor'),
-                    value: "Venor",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Agent'),
-                    value: "Agent",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Buyer'),
-                    value: "Buyer",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Tenant'),
-                    value: "Tenant",
-                  ),
-                ],
-                onChanged: (personsinattendance) {
+                options: ['Venor', 'Agent', 'Buyer', 'Tenant'],
+                selectedValues: personsinattendanceselected,
+                onChanged: (List<String> personsinattendancex) {
                   setState(() {
-                    this.personsinattendance = personsinattendance!;
-                    //print(personsinattendance);
+                    personsinattendanceselected = personsinattendancex;
+                    personsinattendance =
+                        personsinattendanceselected.join(", ");
                   });
                 },
               ),

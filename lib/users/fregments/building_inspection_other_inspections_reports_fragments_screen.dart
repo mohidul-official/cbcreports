@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:multiselect/multiselect.dart';
 
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
@@ -29,15 +30,24 @@ class _BuildingInspectionOtherInspectionsReportFragmentsState
       TextEditingController();
   TextEditingController plumbingInspectionController = TextEditingController();
   TextEditingController otherController = TextEditingController();
+  List<String> councilPlanInspectionselected = [];
+  var councilPlanInspection = "NA";
+  List<String> electricalInspectionselected = [];
+  var electricalInspection = "NA";
+  List<String> plumbingInspectionselected = [];
+  var plumbingInspection = "NA";
 
   Future<void> updateOtherInspectionReportsDetails(String id) async {
     try {
       var res = await http
           .post(Uri.parse(API.prepurchaseotherinspectionreportsdetails), body: {
         "id": id,
-        "councilplaninspection": councilPlanInspectionController.text.trim(),
-        "electricalinspection": electricalInspectionController.text.trim(),
-        "plumbinginspection": plumbingInspectionController.text.trim(),
+        //"councilplaninspection": councilPlanInspectionController.text.trim(),
+        "councilplaninspection": councilPlanInspection,
+        //"electricalinspection": electricalInspectionController.text.trim(),
+        "electricalinspection": electricalInspection,
+        //"plumbinginspection": plumbingInspectionController.text.trim(),
+        "plumbinginspection": plumbingInspection,
         "otherinspectionsreports": otherController.text.trim(),
       });
       var responce = jsonDecode(res.body);
@@ -93,34 +103,78 @@ class _BuildingInspectionOtherInspectionsReportFragmentsState
             //Council Plan Inspection
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: councilPlanInspectionController,
+              child: DropDownMultiSelect(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Council Plan Inspection '),
+                  label: Text('Council Plan Inspection'),
                 ),
+                options: [
+                  'Timber Pest Inspection ',
+                  'Swimming Pool Inspection',
+                  'Mould Inspection',
+                  'Airconditioning Inspection',
+                  'Mechanical Services',
+                  'Estimating Report'
+                ],
+                selectedValues: councilPlanInspectionselected,
+                onChanged: (List<String> councilPlanInspectionx) {
+                  setState(() {
+                    councilPlanInspectionselected = councilPlanInspectionx;
+                    councilPlanInspection =
+                        councilPlanInspectionselected.join(", ");
+                  });
+                },
               ),
             ),
             //Electrical Inspection
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: electricalInspectionController,
+              child: DropDownMultiSelect(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Electrical Inspection'),
                 ),
+                options: [
+                  'Structural (Engineer)',
+                  'Drainage Inspection',
+                  'Gasfitting Inspection',
+                  'Alarm/Intercom/Data Systems ',
+                  'Hazards Inspection',
+                  'Garage Door Mechanical '
+                ],
+                selectedValues: electricalInspectionselected,
+                onChanged: (List<String> electricalInspectionx) {
+                  setState(() {
+                    electricalInspectionselected = electricalInspectionx;
+                    electricalInspection =
+                        electricalInspectionselected.join(", ");
+                  });
+                },
               ),
             ),
             //Plumbing Inspection
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: plumbingInspectionController,
+              child: DropDownMultiSelect(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Plumbing Inspection'),
                 ),
+                options: [
+                  'Geotechnical Inspection',
+                  'Asbestos Inspection',
+                  'Appliances Inspection',
+                  'Hydraulics Inspection',
+                  'Fire/Chimney Inspection',
+                  'Durability of Exposed Surfaces'
+                ],
+                selectedValues: plumbingInspectionselected,
+                onChanged: (List<String> plumbingInspectionx) {
+                  setState(() {
+                    plumbingInspectionselected = plumbingInspectionx;
+                    plumbingInspection = plumbingInspectionselected.join(", ");
+                  });
+                },
               ),
             ),
             //Other

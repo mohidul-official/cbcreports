@@ -1,12 +1,15 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
 import 'building_inspection_the_exterior_fragments_screen.dart';
+import 'building_inspection_the_site_step_two_fragments_screen.dart';
 
 class BuildingInspectionTheSiteFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
@@ -38,6 +41,222 @@ class _BuildingInspectionTheSiteFragmentsState
 
   TextEditingController otherIfApplicableController = TextEditingController();
 
+  File? safetyhazardsdrivewaysimagepath;
+  String? safetyhazardsdrivewaysimagename;
+  String? safetyhazardsdrivewaysimagedata;
+
+  File? safetyhazardspathsimagepath;
+  String? safetyhazardspathsimagename;
+  String? safetyhazardspathsimagedata;
+
+  File? safetyhazardsstepsimagepath;
+  String? safetyhazardsstepsimagename;
+  String? safetyhazardsstepsimagedata;
+
+  File? safetyhazardsretainingwallsimagepath;
+  String? safetyhazardsretainingwallsimagename;
+  String? safetyhazardsretainingwallsimagedata;
+
+  File? safetyhazardscaraccommodationimagepath;
+  String? safetyhazardscaraccommodationimagename;
+  String? safetyhazardscaraccommodationimagedata;
+
+  File? safetyhazardsdetachedbuildingsimagepath;
+  String? safetyhazardsdetachedbuildingsimagename;
+  String? safetyhazardsdetachedbuildingsimagedata;
+
+  ImagePicker imagePicker = ImagePicker();
+
+  Future<void> getImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardsdrivewaysimagepath = File(getimage.path);
+        safetyhazardsdrivewaysimagename = getimage.path.split('/').last;
+        safetyhazardsdrivewaysimagedata =
+            base64Encode(safetyhazardsdrivewaysimagepath!.readAsBytesSync());
+        print(safetyhazardsdrivewaysimagepath);
+        print(safetyhazardsdrivewaysimagename);
+        print(safetyhazardsdrivewaysimagedata);
+      }
+    });
+  }
+
+  Future<void> captureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardsdrivewaysimagepath = File(getimage.path);
+        safetyhazardsdrivewaysimagename = getimage.path.split('/').last;
+        safetyhazardsdrivewaysimagedata =
+            base64Encode(safetyhazardsdrivewaysimagepath!.readAsBytesSync());
+        print(safetyhazardsdrivewaysimagepath);
+        print(safetyhazardsdrivewaysimagename);
+        print(safetyhazardsdrivewaysimagedata);
+      }
+    });
+  }
+
+  Future<void> safetyhazardsPathsGetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardspathsimagepath = File(getimage.path);
+        safetyhazardspathsimagename = getimage.path.split('/').last;
+        safetyhazardspathsimagedata =
+            base64Encode(safetyhazardspathsimagepath!.readAsBytesSync());
+        print(safetyhazardspathsimagepath);
+        print(safetyhazardspathsimagename);
+        print(safetyhazardspathsimagedata);
+      }
+    });
+  }
+
+  Future<void> safetyhazardsPathsCaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardspathsimagepath = File(getimage.path);
+        safetyhazardspathsimagename = getimage.path.split('/').last;
+        safetyhazardspathsimagedata =
+            base64Encode(safetyhazardspathsimagepath!.readAsBytesSync());
+        print(safetyhazardspathsimagepath);
+        print(safetyhazardspathsimagename);
+        print(safetyhazardspathsimagedata);
+      }
+    });
+  }
+
+  Future<void> safetyhazardsStepsGetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardsstepsimagepath = File(getimage.path);
+        safetyhazardsstepsimagename = getimage.path.split('/').last;
+        safetyhazardsstepsimagedata =
+            base64Encode(safetyhazardsstepsimagepath!.readAsBytesSync());
+        print(safetyhazardsstepsimagepath);
+        print(safetyhazardsstepsimagename);
+        print(safetyhazardsstepsimagedata);
+      }
+    });
+  }
+
+  Future<void> safetyhazardsStepsCaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardsstepsimagepath = File(getimage.path);
+        safetyhazardsstepsimagename = getimage.path.split('/').last;
+        safetyhazardsstepsimagedata =
+            base64Encode(safetyhazardsstepsimagepath!.readAsBytesSync());
+        print(safetyhazardsstepsimagepath);
+        print(safetyhazardsstepsimagename);
+        print(safetyhazardsstepsimagedata);
+      }
+    });
+  }
+
+  Future<void> safetyhazardsretainingWallsGetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardsretainingwallsimagepath = File(getimage.path);
+        safetyhazardsretainingwallsimagename = getimage.path.split('/').last;
+        safetyhazardsretainingwallsimagedata = base64Encode(
+            safetyhazardsretainingwallsimagepath!.readAsBytesSync());
+        print(safetyhazardsretainingwallsimagepath);
+        print(safetyhazardsretainingwallsimagename);
+        print(safetyhazardsretainingwallsimagedata);
+      }
+    });
+  }
+
+  Future<void> safetyhazardsretainingWallsCaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardsretainingwallsimagepath = File(getimage.path);
+        safetyhazardsretainingwallsimagename = getimage.path.split('/').last;
+        safetyhazardsretainingwallsimagedata = base64Encode(
+            safetyhazardsretainingwallsimagepath!.readAsBytesSync());
+        print(safetyhazardsretainingwallsimagepath);
+        print(safetyhazardsretainingwallsimagename);
+        print(safetyhazardsretainingwallsimagedata);
+      }
+    });
+  }
+
+  Future<void> safetyhazardscarAccommodationGetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardscaraccommodationimagepath = File(getimage.path);
+        safetyhazardscaraccommodationimagename = getimage.path.split('/').last;
+        safetyhazardscaraccommodationimagedata = base64Encode(
+            safetyhazardscaraccommodationimagepath!.readAsBytesSync());
+        print(safetyhazardscaraccommodationimagepath);
+        print(safetyhazardscaraccommodationimagename);
+        print(safetyhazardscaraccommodationimagedata);
+      }
+    });
+  }
+
+  Future<void> safetyhazardscarAccommodationCaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        safetyhazardscaraccommodationimagepath = File(getimage.path);
+        safetyhazardscaraccommodationimagename = getimage.path.split('/').last;
+        safetyhazardscaraccommodationimagedata = base64Encode(
+            safetyhazardscaraccommodationimagepath!.readAsBytesSync());
+        print(safetyhazardscaraccommodationimagepath);
+        print(safetyhazardscaraccommodationimagename);
+        print(safetyhazardscaraccommodationimagedata);
+      }
+    });
+  }
+
   Future<void> updateTheSiteDetails(String id) async {
     try {
       var res =
@@ -50,9 +269,20 @@ class _BuildingInspectionTheSiteFragmentsState
         "safetyhazardswaterdrainage":
             surfaceWaterDrainageController.text.trim(),
         "safetyhazardscar": carAccommodationController.text.trim(),
-        "safetyhazardsbuildings": detachedBuildingsController.text.trim(),
-        "safetyhazardsgarden": gardenShedsFencesController.text.trim(),
-        "safetyhazardsother": otherIfApplicableController.text.trim(),
+        "safetyhazardsdrivewaysimagedata": safetyhazardsdrivewaysimagedata,
+        "safetyhazardsdrivewaysimagename": safetyhazardsdrivewaysimagename,
+        "safetyhazardspathsimagedata": safetyhazardspathsimagedata,
+        "safetyhazardspathsimagename": safetyhazardspathsimagename,
+        "safetyhazardsstepsimagedata": safetyhazardsstepsimagedata,
+        "safetyhazardsstepsimagename": safetyhazardsstepsimagename,
+        "safetyhazardsretainingwallsimagedata":
+            safetyhazardsretainingwallsimagedata,
+        "safetyhazardsretainingwallsimagename":
+            safetyhazardsretainingwallsimagename,
+        "safetyhazardscaraccommodationimagedata":
+            safetyhazardscaraccommodationimagedata,
+        "safetyhazardscaraccommodationimagename":
+            safetyhazardscaraccommodationimagename,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -61,7 +291,7 @@ class _BuildingInspectionTheSiteFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectorTheExteriorFragments(reportId: id)));
+                BuildingInspectionTheSiteStepTwoFragments(reportId: id)));
         /*drivewaysController.clear();
         pathsController.clear();
         stepsController.clear();
@@ -91,7 +321,7 @@ class _BuildingInspectionTheSiteFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'THE SITE',
+                'THE SITE (STEP 1)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -122,6 +352,36 @@ class _BuildingInspectionTheSiteFragmentsState
                 ),
               ),
             ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: safetyhazardsdrivewaysimagepath != null
+                  ? Image.file(safetyhazardsdrivewaysimagepath!)
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          captureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          getImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
             //Paths
             Container(
               margin: EdgeInsets.all(10),
@@ -131,6 +391,36 @@ class _BuildingInspectionTheSiteFragmentsState
                   border: OutlineInputBorder(),
                   label: Text('Paths'),
                 ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: safetyhazardspathsimagepath != null
+                  ? Image.file(safetyhazardspathsimagepath!)
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          safetyhazardsPathsCaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          safetyhazardsPathsGetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Steps
@@ -144,6 +434,36 @@ class _BuildingInspectionTheSiteFragmentsState
                 ),
               ),
             ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: safetyhazardsstepsimagepath != null
+                  ? Image.file(safetyhazardsstepsimagepath!)
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          safetyhazardsStepsCaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          safetyhazardsStepsGetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
             //Retaining Walls
             Container(
               margin: EdgeInsets.all(10),
@@ -153,6 +473,36 @@ class _BuildingInspectionTheSiteFragmentsState
                   border: OutlineInputBorder(),
                   label: Text('Retaining Walls'),
                 ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: safetyhazardsretainingwallsimagepath != null
+                  ? Image.file(safetyhazardsretainingwallsimagepath!)
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          safetyhazardsretainingWallsCaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          safetyhazardsretainingWallsGetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Surface Water Drainage
@@ -177,37 +527,34 @@ class _BuildingInspectionTheSiteFragmentsState
                 ),
               ),
             ),
-            //Detached Buildings
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: detachedBuildingsController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Detached Buildings'),
-                ),
-              ),
+              child: safetyhazardscaraccommodationimagepath != null
+                  ? Image.file(safetyhazardscaraccommodationimagepath!)
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
             ),
-            //Garden Sheds and Fences
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: gardenShedsFencesController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Garden Sheds and Fences'),
-                ),
-              ),
-            ),
-            //Other if Applicable
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: otherIfApplicableController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Other if Applicable'),
-                ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          safetyhazardscarAccommodationCaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          safetyhazardscarAccommodationGetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             Container(
