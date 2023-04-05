@@ -234,7 +234,6 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
   }
 
   Future<void> verandascaptureImage() async {
-    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
     setState(() {
