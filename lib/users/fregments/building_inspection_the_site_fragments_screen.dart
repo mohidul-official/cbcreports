@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-import 'building_inspection_the_exterior_fragments_screen.dart';
+//import 'building_inspection_the_exterior_fragments_screen.dart';
 import 'building_inspection_the_site_step_two_fragments_screen.dart';
 
 class BuildingInspectionTheSiteFragments extends StatefulWidget {
@@ -64,6 +64,23 @@ class _BuildingInspectionTheSiteFragmentsState
   File? safetyhazardsdetachedbuildingsimagepath;
   String? safetyhazardsdetachedbuildingsimagename;
   String? safetyhazardsdetachedbuildingsimagedata;
+
+  var safetyhazardsdriveways = "NA";
+  var safetyhazardsdrivewaysvalue = "NA";
+
+  var safetyhazardspaths = "NA";
+  var safetyhazardspathsvalue = "NA";
+
+  var safetyhazardssteps = "NA";
+  var safetyhazardsstepsvalue = "NA";
+
+  var safetyhazardswalls = "NA";
+  var safetyhazardswallsvalue = "NA";
+
+  var safetyhazardswaterdrainage = "NA";
+  var safetyhazardswaterdrainagevalue = "NA";
+
+  var safetyhazardscar = "NA";
 
   ImagePicker imagePicker = ImagePicker();
 
@@ -257,18 +274,135 @@ class _BuildingInspectionTheSiteFragmentsState
     });
   }
 
+  safetyhazardsdrivewaysCheck() {
+    if (safetyhazardsdriveways == "Defects/Safety Hazards found were") {
+      setState(() {
+        safetyhazardsdrivewaysvalue =
+            "Movement Cracking to driveway was observed. This does not have any impact on the building.";
+      });
+
+      return Text(
+          'Movement Cracking to driveway was observed. This does not have any impact on the building.');
+    } else {
+      setState(() {
+        safetyhazardsdrivewaysvalue = " ";
+      });
+    }
+  }
+
+  safetyhazardspathsCheck() {
+    if (safetyhazardspaths == "Defects/Safety Hazards found were") {
+      setState(() {
+        safetyhazardspathsvalue =
+            "Gaps were found between brickwork and concreting due to lose soil under the concrete. It is recommended to contact a certified concreter for further advise.";
+      });
+
+      return Text(
+          'Gaps were found between brickwork and concreting due to lose soil under the concrete. It is recommended to contact a certified concreter for further advise.');
+    } else {
+      setState(() {
+        safetyhazardspathsvalue = " ";
+      });
+    }
+  }
+
+  safetyhazardsstepsCheck() {
+    if (safetyhazardssteps == "Defects/Safety Hazards found were") {
+      setState(() {
+        safetyhazardsstepsvalue =
+            "Cracking to steps found due to General movement.";
+      });
+
+      return Text('Cracking to steps found due to General movement.');
+    } else {
+      setState(() {
+        safetyhazardsstepsvalue = " ";
+      });
+    }
+  }
+
+  safetyhazardswallsCheck() {
+    if (safetyhazardswalls == "Defects/Safety Hazards found were") {
+      setState(() {
+        safetyhazardswallsvalue =
+            "Retaining wall was weathered. It is recommended to contact a certified carpenter for further advise.";
+      });
+
+      return Text(
+          'Retaining wall was weathered. It is recommended to contact a certified carpenter for further advise.');
+    } else {
+      setState(() {
+        safetyhazardswallsvalue = " ";
+      });
+    }
+  }
+
+  safetyhazardswaterdrainageCheck() {
+    if (safetyhazardswaterdrainage == "Defects/Safety Hazards found were") {
+      return DropdownButtonFormField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          label: Text('Defects/Safety Hazards found were'),
+        ),
+        value: safetyhazardswaterdrainagevalue,
+        items: [
+          DropdownMenuItem(
+            child: Text('-Select-'),
+            value: "NA",
+          ),
+          DropdownMenuItem(
+            child: Text(
+                'Natural slope of the ground is towards \nthe dwelling. It is recommended to contact\n a licensed plumber to install adequate\n drainage.\n'),
+            value:
+                "Natural slope of the ground is towards the dwelling. It is recommended to contact a licensed plumber to install adequate drainage.",
+          ),
+          DropdownMenuItem(
+            child: Text(
+                'Natural slope of the ground is towards \nthe dwelling. It is recommended to make\n sure that slope must be going away \nfrom the dwelling.'),
+            value:
+                "Natural slope of the ground is towards the dwelling. It is recommended to make sure that slope must be going away from the dwelling.",
+          ),
+        ],
+        onChanged: (safetyhazardswaterdrainagevalue) {
+          setState(() {
+            this.safetyhazardswaterdrainagevalue =
+                safetyhazardswaterdrainagevalue!;
+            //print(personsinattendance);
+          });
+        },
+      );
+    }
+  }
+
   Future<void> updateTheSiteDetails(String id) async {
     try {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        },
+      );
       var res =
           await http.post(Uri.parse(API.prepurchasethesitedetails), body: {
         "id": id,
-        "safetyhazardsdriveways": drivewaysController.text.trim(),
-        "safetyhazardspaths": pathsController.text.trim(),
-        "safetyhazardssteps": stepsController.text.trim(),
-        "safetyhazardswalls": retainingWallsController.text.trim(),
-        "safetyhazardswaterdrainage":
-            surfaceWaterDrainageController.text.trim(),
-        "safetyhazardscar": carAccommodationController.text.trim(),
+        //"safetyhazardsdriveways": drivewaysController.text.trim(),
+        "safetyhazardsdriveways": safetyhazardsdriveways,
+        "safetyhazardsdrivewaysvalue": safetyhazardsdrivewaysvalue,
+        //"safetyhazardspaths": pathsController.text.trim(),
+        "safetyhazardspaths": safetyhazardspaths,
+        "safetyhazardspathsvalue": safetyhazardspathsvalue,
+        //"safetyhazardssteps": stepsController.text.trim(),
+        "safetyhazardssteps": safetyhazardssteps,
+        "safetyhazardsstepsvalue": safetyhazardsstepsvalue,
+        //"safetyhazardswalls": retainingWallsController.text.trim(),
+        "safetyhazardswalls": safetyhazardswalls,
+        "safetyhazardswallsvalue": safetyhazardswallsvalue,
+        /*"safetyhazardswaterdrainage":
+            surfaceWaterDrainageController.text.trim(),*/
+        "safetyhazardswaterdrainage": safetyhazardswaterdrainage,
+        "safetyhazardswaterdrainagevalue": safetyhazardswaterdrainagevalue,
+        //"safetyhazardscar": carAccommodationController.text.trim(),
+        "safetyhazardscar": safetyhazardscar,
         "safetyhazardsdrivewaysimagedata": safetyhazardsdrivewaysimagedata,
         "safetyhazardsdrivewaysimagename": safetyhazardsdrivewaysimagename,
         "safetyhazardspathsimagedata": safetyhazardspathsimagedata,
@@ -286,6 +420,7 @@ class _BuildingInspectionTheSiteFragmentsState
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
+        Navigator.of(context).pop();
         //print("Record Inserted");
 
         Fluttertoast.showToast(msg: "Record Inserted");
@@ -299,10 +434,12 @@ class _BuildingInspectionTheSiteFragmentsState
         piersCommentsController.clear();
         flooringCommentsController.clear();*/
       } else {
+        Navigator.of(context).pop();
         print("Some Issue.");
         Fluttertoast.showToast(msg: "Some Issue.");
       }
     } catch (e) {
+      Navigator.of(context).pop();
       print(e);
 
       Fluttertoast.showToast(msg: e.toString());
@@ -342,15 +479,49 @@ class _BuildingInspectionTheSiteFragmentsState
               ),
             ),
             //Driveways
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: drivewaysController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Driveways'),
                 ),
+                value: safetyhazardsdriveways,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (safetyhazardsdriveways) {
+                  setState(() {
+                    this.safetyhazardsdriveways = safetyhazardsdriveways!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: safetyhazardsdrivewaysCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -383,15 +554,49 @@ class _BuildingInspectionTheSiteFragmentsState
               ),
             ),
             //Paths
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: pathsController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Paths'),
                 ),
+                value: safetyhazardspaths,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (safetyhazardspaths) {
+                  setState(() {
+                    this.safetyhazardspaths = safetyhazardspaths!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: safetyhazardspathsCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -424,15 +629,49 @@ class _BuildingInspectionTheSiteFragmentsState
               ),
             ),
             //Steps
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: stepsController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Steps'),
                 ),
+                value: safetyhazardssteps,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (safetyhazardssteps) {
+                  setState(() {
+                    this.safetyhazardssteps = safetyhazardssteps!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: safetyhazardsstepsCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -465,15 +704,49 @@ class _BuildingInspectionTheSiteFragmentsState
               ),
             ),
             //Retaining Walls
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: retainingWallsController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Retaining Walls'),
                 ),
+                value: safetyhazardswalls,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (safetyhazardswalls) {
+                  setState(() {
+                    this.safetyhazardswalls = safetyhazardswalls!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: safetyhazardswallsCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -506,25 +779,89 @@ class _BuildingInspectionTheSiteFragmentsState
               ),
             ),
             //Surface Water Drainage
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: surfaceWaterDrainageController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Surface Water Drainage'),
                 ),
+                value: safetyhazardswaterdrainage,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (safetyhazardswaterdrainage) {
+                  setState(() {
+                    this.safetyhazardswaterdrainage =
+                        safetyhazardswaterdrainage!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
-            //Car Accommodation
+            //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: carAccommodationController,
+              child: safetyhazardswaterdrainageCheck(),
+            ),
+            //Car Accommodation
+
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Car Accommodation'),
                 ),
+                value: safetyhazardscar,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (safetyhazardscar) {
+                  setState(() {
+                    this.safetyhazardscar = safetyhazardscar!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             Container(

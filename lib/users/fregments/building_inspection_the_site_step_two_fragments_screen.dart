@@ -53,6 +53,13 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
   String? otherimageName;
   String? otherimageData;
 
+  var safetyhazardsbuildings = "NA";
+
+  var safetyhazardsgarden = "NA";
+  var safetyhazardsgardenvalue = "NA";
+
+  var safetyhazardsother = "NA";
+
   ImagePicker imagePicker = ImagePicker();
 
   Future<void> getImage() async {
@@ -163,14 +170,59 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
     });
   }
 
+  safetyhazardsgardenCheck() {
+    if (safetyhazardsgarden == "Defects/Safety Hazards found were") {
+      return DropdownButtonFormField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          label: Text('Defects/Safety Hazards found were'),
+        ),
+        value: safetyhazardsgardenvalue,
+        items: [
+          DropdownMenuItem(
+            child: Text('-Select-'),
+            value: "NA",
+          ),
+          DropdownMenuItem(
+            child:
+                Text('Fence is in bad condition and\n needs to be replaced.\n'),
+            value: "Fence is in bad condition and needs to be replaced.",
+          ),
+          DropdownMenuItem(
+            child: Text(
+                'Fence is leaning. It is recommended to\n contact a certified fencer to fix it.'),
+            value:
+                "Fence is leaning. It is recommended to contact a certified fencer to fix it.",
+          ),
+        ],
+        onChanged: (safetyhazardsgardenvalue) {
+          setState(() {
+            this.safetyhazardsgardenvalue = safetyhazardsgardenvalue!;
+            //print(personsinattendance);
+          });
+        },
+      );
+    }
+  }
+
   Future<void> updateTheSiteDetails(String id) async {
     try {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        },
+      );
       var res = await http
           .post(Uri.parse(API.prepurchasethesitesteptwodetails), body: {
         "id": id,
-        "safetyhazardsbuildings": detachedBuildingsController.text.trim(),
-        "safetyhazardsgarden": gardenShedsFencesController.text.trim(),
-        "safetyhazardsother": otherIfApplicableController.text.trim(),
+        //"safetyhazardsbuildings": detachedBuildingsController.text.trim(),
+        "safetyhazardsbuildings": safetyhazardsbuildings,
+        //"safetyhazardsgarden": gardenShedsFencesController.text.trim(),
+        "safetyhazardsgarden": safetyhazardsgarden,
+        "safetyhazardsgardenvalue": safetyhazardsgardenvalue,
+        //"safetyhazardsother": otherIfApplicableController.text.trim(),
+        "safetyhazardsother": safetyhazardsother,
         "data": imageData,
         "name": imageName,
         "gardendata": gardenimageData,
@@ -180,6 +232,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
+        Navigator.of(context).pop();
         //print("Record Inserted");
 
         Fluttertoast.showToast(msg: "Record Inserted");
@@ -193,10 +246,12 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
         piersCommentsController.clear();
         flooringCommentsController.clear();*/
       } else {
+        Navigator.of(context).pop();
         print("Some Issue.");
         Fluttertoast.showToast(msg: "Some Issue.");
       }
     } catch (e) {
+      Navigator.of(context).pop();
       print(e);
 
       Fluttertoast.showToast(msg: e.toString());
@@ -236,14 +291,43 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
               ),
             ),
             //Detached Buildings
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: detachedBuildingsController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Detached Buildings'),
                 ),
+                value: safetyhazardsbuildings,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (safetyhazardsbuildings) {
+                  setState(() {
+                    this.safetyhazardsbuildings = safetyhazardsbuildings!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             Container(
@@ -277,15 +361,49 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
               ),
             ),
             //Garden Sheds and Fences
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: gardenShedsFencesController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Garden Sheds and Fences'),
                 ),
+                value: safetyhazardsgarden,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (safetyhazardsgarden) {
+                  setState(() {
+                    this.safetyhazardsgarden = safetyhazardsgarden!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: safetyhazardsgardenCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -318,14 +436,43 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
               ),
             ),
             //Other if Applicable
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: otherIfApplicableController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Other if Applicable'),
                 ),
+                value: safetyhazardsother,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (safetyhazardsother) {
+                  setState(() {
+                    this.safetyhazardsother = safetyhazardsother!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             Container(

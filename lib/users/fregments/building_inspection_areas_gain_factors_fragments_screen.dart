@@ -66,7 +66,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         return;
       } else {
         imagePath = File(getimage.path);
-        
+
         imageName = getimage.path.split('/').last;
         imageData = base64Encode(imagePath!.readAsBytesSync());
         print(imagePath);
@@ -134,6 +134,12 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
 
   Future<void> updateAreasGainFactorsDetails(String id) async {
     try {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        },
+      );
       var res = await http
           .post(Uri.parse(API.prepurchaseareasgainfactorsdetails), body: {
         "id": id,
@@ -160,6 +166,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
+        Navigator.of(context).pop();
         //print("Record Inserted");
 
         Fluttertoast.showToast(msg: "Record Inserted");
@@ -174,10 +181,12 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         apparentDefectsController.clear();
         informationProvidedInspectorController.clear();*/
       } else {
+        Navigator.of(context).pop();
         print("Some Issue.");
         Fluttertoast.showToast(msg: "Some Issue.");
       }
     } catch (e) {
+      Navigator.of(context).pop();
       print(e);
 
       Fluttertoast.showToast(msg: e.toString());
@@ -236,6 +245,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
 
       return Text(
           'Dwelling was recently painted. It could have done to conceal few previous defects.');
+    } else {
+      setState(() {
+        apparentdefectsvalue = " ";
+      });
     }
   }
 
@@ -249,6 +262,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         ),
         value: informationprovidedinspectorvalue,
         items: [
+          DropdownMenuItem(
+            child: Text('-SELECT-'),
+            value: "NA",
+          ),
           DropdownMenuItem(
             child: Text('Yes'),
             value: "Yes",

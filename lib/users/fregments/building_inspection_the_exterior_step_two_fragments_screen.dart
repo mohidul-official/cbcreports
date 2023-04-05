@@ -8,52 +8,66 @@ import 'package:image_picker/image_picker.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-import 'building_inspection_the_exterior_step_two_fragments_screen.dart';
+import 'building_inspection_the_interior_fragments_screen.dart';
+import 'building_inspection_the_roof_exterior_fragments_screen.dart';
 
-class BuildingInspectorTheExteriorFragments extends StatefulWidget {
+class BuildingInspectorTheExteriorStepTwoFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
 
   String reportId;
-  BuildingInspectorTheExteriorFragments({Key? myKey, required this.reportId})
+  BuildingInspectorTheExteriorStepTwoFragments(
+      {Key? myKey, required this.reportId})
       : super(key: myKey);
 
   @override
-  State<BuildingInspectorTheExteriorFragments> createState() =>
-      _BuildingInspectorTheExteriorFragmentsState();
+  State<BuildingInspectorTheExteriorStepTwoFragments> createState() =>
+      _BuildingInspectorTheExteriorStepTwoFragmentsState();
 }
 
-class _BuildingInspectorTheExteriorFragmentsState
-    extends State<BuildingInspectorTheExteriorFragments> {
-  TextEditingController wallsController = TextEditingController();
-  TextEditingController externalCladdingController = TextEditingController();
-  TextEditingController lintelsController = TextEditingController();
-  TextEditingController doorsController = TextEditingController();
+class _BuildingInspectorTheExteriorStepTwoFragmentsState
+    extends State<BuildingInspectorTheExteriorStepTwoFragments> {
+  TextEditingController timberSteelStructuresController =
+      TextEditingController();
 
-  TextEditingController windowsController = TextEditingController();
+  TextEditingController stairsController = TextEditingController();
 
-  File? wallsimagePath;
-  String? wallsimageName;
-  String? wallsimageData;
+  TextEditingController balustradesController = TextEditingController();
 
-  File? claddingimagePath;
-  String? claddingimageName;
-  String? claddingimageData;
+  TextEditingController balconiesController = TextEditingController();
 
-  File? lintelsimagePath;
-  String? lintelsimageName;
-  String? lintelsimageData;
+  TextEditingController verandasController = TextEditingController();
 
-  File? doorsimagePath;
-  String? doorsimageName;
-  String? doorsimageData;
+  TextEditingController patiosController = TextEditingController();
 
-  File? windowsimagePath;
-  String? windowsimageName;
-  String? windowsimageData;
+  TextEditingController decksController = TextEditingController();
+
+  TextEditingController chimneysController = TextEditingController();
+
+  TextEditingController otherIfApplicableController = TextEditingController();
+
+  File? timberimagePath;
+  String? timberimageName;
+  String? timberimageData;
+
+  File? stairsimagePath;
+  String? stairsimageName;
+  String? stairsimageData;
+
+  File? balustradesimagePath;
+  String? balustradesimageName;
+  String? balustradesimageData;
+
+  File? balconiesimagePath;
+  String? balconiesimageName;
+  String? balconiesimageData;
+
+  File? verandasimagePath;
+  String? verandasimageName;
+  String? verandasimageData;
 
   ImagePicker imagePicker = ImagePicker();
 
-  Future<void> wallsgetImage() async {
+  Future<void> timbergetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -61,17 +75,17 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        wallsimagePath = File(getimage.path);
-        wallsimageName = getimage.path.split('/').last;
-        wallsimageData = base64Encode(wallsimagePath!.readAsBytesSync());
-        print(wallsimagePath);
-        print(wallsimageName);
-        print(wallsimageData);
+        timberimagePath = File(getimage.path);
+        timberimageName = getimage.path.split('/').last;
+        timberimageData = base64Encode(timberimagePath!.readAsBytesSync());
+        print(timberimagePath);
+        print(timberimageName);
+        print(timberimageData);
       }
     });
   }
 
-  Future<void> wallscaptureImage() async {
+  Future<void> timbercaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -79,17 +93,17 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        wallsimagePath = File(getimage.path);
-        wallsimageName = getimage.path.split('/').last;
-        wallsimageData = base64Encode(wallsimagePath!.readAsBytesSync());
-        print(wallsimagePath);
-        print(wallsimageName);
-        print(wallsimageData);
+        timberimagePath = File(getimage.path);
+        timberimageName = getimage.path.split('/').last;
+        timberimageData = base64Encode(timberimagePath!.readAsBytesSync());
+        print(timberimagePath);
+        print(timberimageName);
+        print(timberimageData);
       }
     });
   }
 
-  Future<void> claddinggetImage() async {
+  Future<void> stairsgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -97,17 +111,17 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        claddingimagePath = File(getimage.path);
-        claddingimageName = getimage.path.split('/').last;
-        claddingimageData = base64Encode(claddingimagePath!.readAsBytesSync());
-        print(claddingimagePath);
-        print(claddingimageName);
-        print(claddingimageData);
+        stairsimagePath = File(getimage.path);
+        stairsimageName = getimage.path.split('/').last;
+        stairsimageData = base64Encode(stairsimagePath!.readAsBytesSync());
+        print(stairsimagePath);
+        print(stairsimageName);
+        print(stairsimageData);
       }
     });
   }
 
-  Future<void> claddingcaptureImage() async {
+  Future<void> stairscaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -115,17 +129,17 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        claddingimagePath = File(getimage.path);
-        claddingimageName = getimage.path.split('/').last;
-        claddingimageData = base64Encode(claddingimagePath!.readAsBytesSync());
-        print(claddingimagePath);
-        print(claddingimageName);
-        print(claddingimageData);
+        stairsimagePath = File(getimage.path);
+        stairsimageName = getimage.path.split('/').last;
+        stairsimageData = base64Encode(stairsimagePath!.readAsBytesSync());
+        print(stairsimagePath);
+        print(stairsimageName);
+        print(stairsimageData);
       }
     });
   }
 
-  Future<void> lintelsgetImage() async {
+  Future<void> balustradesgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -133,17 +147,18 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        lintelsimagePath = File(getimage.path);
-        lintelsimageName = getimage.path.split('/').last;
-        lintelsimageData = base64Encode(lintelsimagePath!.readAsBytesSync());
-        print(lintelsimagePath);
-        print(lintelsimageName);
-        print(lintelsimageData);
+        balustradesimagePath = File(getimage.path);
+        balustradesimageName = getimage.path.split('/').last;
+        balustradesimageData =
+            base64Encode(balustradesimagePath!.readAsBytesSync());
+        print(balustradesimagePath);
+        print(balustradesimageName);
+        print(balustradesimageData);
       }
     });
   }
 
-  Future<void> lintelscaptureImage() async {
+  Future<void> balustradescaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -151,17 +166,18 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        lintelsimagePath = File(getimage.path);
-        lintelsimageName = getimage.path.split('/').last;
-        lintelsimageData = base64Encode(lintelsimagePath!.readAsBytesSync());
-        print(lintelsimagePath);
-        print(lintelsimageName);
-        print(lintelsimageData);
+        balustradesimagePath = File(getimage.path);
+        balustradesimageName = getimage.path.split('/').last;
+        balustradesimageData =
+            base64Encode(balustradesimagePath!.readAsBytesSync());
+        print(balustradesimagePath);
+        print(balustradesimageName);
+        print(balustradesimageData);
       }
     });
   }
 
-  Future<void> doorsgetImage() async {
+  Future<void> balconiesgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -169,17 +185,18 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        doorsimagePath = File(getimage.path);
-        doorsimageName = getimage.path.split('/').last;
-        doorsimageData = base64Encode(doorsimagePath!.readAsBytesSync());
-        print(doorsimagePath);
-        print(doorsimageName);
-        print(doorsimageData);
+        balconiesimagePath = File(getimage.path);
+        balconiesimageName = getimage.path.split('/').last;
+        balconiesimageData =
+            base64Encode(balconiesimagePath!.readAsBytesSync());
+        print(balconiesimagePath);
+        print(balconiesimageName);
+        print(balconiesimageData);
       }
     });
   }
 
-  Future<void> doorscaptureImage() async {
+  Future<void> balconiescaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -187,17 +204,18 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        doorsimagePath = File(getimage.path);
-        doorsimageName = getimage.path.split('/').last;
-        doorsimageData = base64Encode(doorsimagePath!.readAsBytesSync());
-        print(doorsimagePath);
-        print(doorsimageName);
-        print(doorsimageData);
+        balconiesimagePath = File(getimage.path);
+        balconiesimageName = getimage.path.split('/').last;
+        balconiesimageData =
+            base64Encode(balconiesimagePath!.readAsBytesSync());
+        print(balconiesimagePath);
+        print(balconiesimageName);
+        print(balconiesimageData);
       }
     });
   }
 
-  Future<void> windowsgetImage() async {
+  Future<void> verandasgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -205,17 +223,17 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        windowsimagePath = File(getimage.path);
-        windowsimageName = getimage.path.split('/').last;
-        windowsimageData = base64Encode(windowsimagePath!.readAsBytesSync());
-        print(windowsimagePath);
-        print(windowsimageName);
-        print(windowsimageData);
+        verandasimagePath = File(getimage.path);
+        verandasimageName = getimage.path.split('/').last;
+        verandasimageData = base64Encode(verandasimagePath!.readAsBytesSync());
+        print(verandasimagePath);
+        print(verandasimageName);
+        print(verandasimageData);
       }
     });
   }
 
-  Future<void> windowscaptureImage() async {
+  Future<void> verandascaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -223,12 +241,12 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        windowsimagePath = File(getimage.path);
-        windowsimageName = getimage.path.split('/').last;
-        windowsimageData = base64Encode(windowsimagePath!.readAsBytesSync());
-        print(windowsimagePath);
-        print(windowsimageName);
-        print(windowsimageData);
+        verandasimagePath = File(getimage.path);
+        verandasimageName = getimage.path.split('/').last;
+        verandasimageData = base64Encode(verandasimagePath!.readAsBytesSync());
+        print(verandasimagePath);
+        print(verandasimageName);
+        print(verandasimageData);
       }
     });
   }
@@ -241,24 +259,28 @@ class _BuildingInspectorTheExteriorFragmentsState
           return Center(child: CircularProgressIndicator());
         },
       );
-      var res =
-          await http.post(Uri.parse(API.prepurchasetheexteriordetails), body: {
+      var res = await http
+          .post(Uri.parse(API.prepurchasetheexteriorsteptwodetails), body: {
         "id": id,
-        "exteriordefectswalls": wallsController.text.trim(),
-        "exteriordefectscladding": externalCladdingController.text.trim(),
-        "exteriordefectslintels": lintelsController.text.trim(),
-        "exteriordefectsdoors": doorsController.text.trim(),
-        "exteriordefectswindows": windowsController.text.trim(),
-        "wallsimagedata": wallsimageData,
-        "wallsimagename": wallsimageName,
-        "claddingimagedata": claddingimageData,
-        "claddingimagename": claddingimageName,
-        "lintelsimagedata": lintelsimageData,
-        "lintelsimagename": lintelsimageName,
-        "doorsimagedata": doorsimageData,
-        "doorsimagename": doorsimageName,
-        "windowsimagedata": windowsimageData,
-        "windowsimagename": windowsimageName,
+        "exteriordefectstimber": timberSteelStructuresController.text.trim(),
+        "exteriordefectsstairs": stairsController.text.trim(),
+        "exteriordefectsbalustrades": balustradesController.text.trim(),
+        "exteriordefectsbalconies": balconiesController.text.trim(),
+        "exteriordefectsverandas": verandasController.text.trim(),
+        "exteriordefectspatios": patiosController.text.trim(),
+        "exteriordefectsdecks": decksController.text.trim(),
+        "exteriordefectschimneys": chimneysController.text.trim(),
+        "exteriordefectsother": otherIfApplicableController.text.trim(),
+        "timberimagedata": timberimageData,
+        "timberimagename": timberimageName,
+        "stairsimagedata": stairsimageData,
+        "stairsimagename": stairsimageName,
+        "balustradesimagedata": balustradesimageData,
+        "balustradesimagename": balustradesimageName,
+        "balconiesimagedata": balconiesimageData,
+        "balconiesimagename": balconiesimageName,
+        "verandasimagedata": verandasimageData,
+        "verandasimagename": verandasimageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -268,13 +290,7 @@ class _BuildingInspectorTheExteriorFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectorTheExteriorStepTwoFragments(reportId: id)));
-        /*wallsController.clear();
-        externalCladdingController.clear();
-        lintelsController.clear();
-        doorsController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
+                BuildingInspectionTheInteriorFragments(reportId: id)));
       } else {
         Navigator.of(context).pop();
         print("Some Issue.");
@@ -300,7 +316,7 @@ class _BuildingInspectorTheExteriorFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'EXTERIOR OF THE BUILDING (STEP 1)',
+                'EXTERIOR OF THE BUILDING (STEP 2)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -320,21 +336,21 @@ class _BuildingInspectorTheExteriorFragmentsState
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
-            //Walls
+            //Timber and Steel Structures
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: wallsController,
+                controller: timberSteelStructuresController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Walls'),
+                  label: Text('Timber and Steel Structures'),
                 ),
               ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: wallsimagePath != null
-                  ? Image.file(wallsimagePath!)
+              child: timberimagePath != null
+                  ? Image.file(timberimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -346,7 +362,7 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          wallscaptureImage();
+                          timbercaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -354,28 +370,28 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          wallsgetImage();
+                          timbergetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //External Cladding
+            //Stairs
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: externalCladdingController,
+                controller: stairsController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('External Cladding'),
+                  label: Text('Stairs'),
                 ),
               ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: claddingimagePath != null
-                  ? Image.file(claddingimagePath!)
+              child: stairsimagePath != null
+                  ? Image.file(stairsimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -387,7 +403,7 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          claddingcaptureImage();
+                          stairscaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -395,28 +411,28 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          claddinggetImage();
+                          stairsgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Lintels
+            //Balustrades
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: lintelsController,
+                controller: balustradesController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Lintels'),
+                  label: Text('Balustrades'),
                 ),
               ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: lintelsimagePath != null
-                  ? Image.file(lintelsimagePath!)
+              child: balustradesimagePath != null
+                  ? Image.file(balustradesimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -428,7 +444,7 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          lintelscaptureImage();
+                          balustradescaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -436,28 +452,28 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          lintelsgetImage();
+                          balustradesgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Doors
+            //Balconies
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: doorsController,
+                controller: balconiesController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Doors'),
+                  label: Text('Balconies'),
                 ),
               ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: doorsimagePath != null
-                  ? Image.file(doorsimagePath!)
+              child: balconiesimagePath != null
+                  ? Image.file(balconiesimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -469,7 +485,7 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          doorscaptureImage();
+                          balconiescaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -477,28 +493,28 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          doorsgetImage();
+                          balconiesgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Windows
+            //Verandas
             Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                controller: windowsController,
+                controller: verandasController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Windows'),
+                  label: Text('Verandas'),
                 ),
               ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: windowsimagePath != null
-                  ? Image.file(windowsimagePath!)
+              child: verandasimagePath != null
+                  ? Image.file(verandasimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -510,7 +526,7 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          windowscaptureImage();
+                          verandascaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -518,11 +534,55 @@ class _BuildingInspectorTheExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          windowsgetImage();
+                          verandasgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
+              ),
+            ),
+            //Patios
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: patiosController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Patios'),
+                ),
+              ),
+            ),
+            //Decks
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: decksController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Decks'),
+                ),
+              ),
+            ),
+            //Chimneys
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: chimneysController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Chimneys'),
+                ),
+              ),
+            ),
+            //Other if Applicable
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: otherIfApplicableController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Other if Applicable'),
+                ),
               ),
             ),
             Container(
