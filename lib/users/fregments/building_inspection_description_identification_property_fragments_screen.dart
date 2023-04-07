@@ -419,6 +419,7 @@ class _BuildingInspetionDescriptionIdentificationPropertyFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
+                isExpanded: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Roofing'),

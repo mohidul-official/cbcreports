@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
@@ -55,8 +57,284 @@ class _BuildingInspectionTheInteriorFragmentsState
 
   TextEditingController otherIfApplicableController = TextEditingController();
 
+  var imagePath = "NA";
+  var imageName = "NA";
+  var imageData = "NA";
+
+  var hallimagePath = "NA";
+  var hallimageName = "NA";
+  var hallimageData = "NA";
+
+  var linenimagePath = "NA";
+  var linenimageName = "NA";
+  var linenimageData = "NA";
+
+  var interiordefectsloungeimagePath = "NA";
+  var interiordefectsloungeimageName = "NA";
+  var interiordefectsloungeimageData = "NA";
+
+  var interiordefectsdiningimagePath = "NA";
+  var interiordefectsdiningimageName = "NA";
+  var interiordefectsdiningimageData = "NA";
+
+  var interiordefectskitchenimagePath = "NA";
+  var interiordefectskitchenimageName = "NA";
+  var interiordefectskitchenimageData = "NA";
+
+  ImagePicker imagePicker = ImagePicker();
+
+  Future<void> getImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File imagePath = File(getimage.path);
+
+        imageName = getimage.path.split('/').last;
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
+        print(imagePath);
+        print(imageName);
+        print(imageData);
+      }
+    });
+  }
+
+  Future<void> captureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File imagePath = File(getimage.path);
+        imageName = getimage.path.split('/').last;
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
+        print(imagePath);
+        print(imageName);
+        print(imageData);
+      }
+    });
+  }
+
+  Future<void> hallgetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File hallimagePath = File(getimage.path);
+
+        hallimageName = getimage.path.split('/').last;
+        hallimageData = base64Encode(hallimagePath.readAsBytesSync());
+
+        print(hallimagePath);
+        print(hallimageName);
+        print(hallimageData);
+      }
+    });
+  }
+
+  Future<void> hallcaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File hallimagePath = File(getimage.path);
+        hallimageName = getimage.path.split('/').last;
+        hallimageData = base64Encode(hallimagePath.readAsBytesSync());
+
+        print(hallimagePath);
+        print(hallimageName);
+        print(hallimageData);
+      }
+    });
+  }
+
+  Future<void> linengetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File linenimagePath = File(getimage.path);
+
+        linenimageName = getimage.path.split('/').last;
+        linenimageData = base64Encode(linenimagePath.readAsBytesSync());
+
+        print(linenimagePath);
+        print(linenimageName);
+        print(linenimageData);
+      }
+    });
+  }
+
+  Future<void> linencaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File linenimagePath = File(getimage.path);
+
+        linenimageName = getimage.path.split('/').last;
+        linenimageData = base64Encode(linenimagePath.readAsBytesSync());
+
+        print(linenimagePath);
+        print(linenimageName);
+        print(linenimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectsloungegetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectsloungeimagePath = File(getimage.path);
+
+        interiordefectsloungeimageName = getimage.path.split('/').last;
+        interiordefectsloungeimageData =
+            base64Encode(interiordefectsloungeimagePath.readAsBytesSync());
+
+        print(interiordefectsloungeimagePath);
+        print(interiordefectsloungeimageName);
+        print(interiordefectsloungeimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectsloungecaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectsloungeimagePath = File(getimage.path);
+
+        interiordefectsloungeimageName = getimage.path.split('/').last;
+        interiordefectsloungeimageData =
+            base64Encode(interiordefectsloungeimagePath.readAsBytesSync());
+
+        print(interiordefectsloungeimagePath);
+        print(interiordefectsloungeimageName);
+        print(interiordefectsloungeimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectsdininggetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectsdiningimagePath = File(getimage.path);
+
+        interiordefectsdiningimageName = getimage.path.split('/').last;
+        interiordefectsdiningimageData =
+            base64Encode(interiordefectsdiningimagePath.readAsBytesSync());
+
+        print(interiordefectsdiningimagePath);
+        print(interiordefectsdiningimageName);
+        print(interiordefectsdiningimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectsdiningcaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectsdiningimagePath = File(getimage.path);
+
+        interiordefectsdiningimageName = getimage.path.split('/').last;
+        interiordefectsdiningimageData =
+            base64Encode(interiordefectsdiningimagePath.readAsBytesSync());
+
+        print(interiordefectsdiningimagePath);
+        print(interiordefectsdiningimageName);
+        print(interiordefectsdiningimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectskitchengetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectskitchenimagePath = File(getimage.path);
+
+        interiordefectskitchenimageName = getimage.path.split('/').last;
+        interiordefectskitchenimageData =
+            base64Encode(interiordefectskitchenimagePath.readAsBytesSync());
+
+        print(interiordefectskitchenimagePath);
+        print(interiordefectskitchenimageName);
+        print(interiordefectskitchenimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectskitchencaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectskitchenimagePath = File(getimage.path);
+
+        interiordefectskitchenimageName = getimage.path.split('/').last;
+        interiordefectskitchenimageData =
+            base64Encode(interiordefectskitchenimagePath.readAsBytesSync());
+
+        print(interiordefectskitchenimagePath);
+        print(interiordefectskitchenimageName);
+        print(interiordefectskitchenimageData);
+      }
+    });
+  }
+
   Future<void> updateTheInteriorDetails(String id) async {
     try {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        },
+      );
       var res =
           await http.post(Uri.parse(API.prepurchasetheinteriordetails), body: {
         "id": id,
@@ -78,26 +356,35 @@ class _BuildingInspectionTheInteriorFragmentsState
         "interiordefectsbedroomthree": bedroomThreeController.text.trim(),
         "interiordefectsbedroomfour": bedroomFourController.text.trim(),
         "interiordefectsother": otherIfApplicableController.text.trim(),
+        "data": imageData,
+        "name": imageName,
+        "hallimagedata": hallimageData,
+        "hallimagename": hallimageName,
+        "interiordefectscupboardimagedata": linenimageData,
+        "interiordefectscupboardimagename": linenimageName,
+        "interiordefectsloungeimagedata": interiordefectsloungeimageData,
+        "interiordefectsloungeimagename": interiordefectsloungeimageName,
+        "interiordefectsdiningimagedata": interiordefectsdiningimageData,
+        "interiordefectsdiningimagename": interiordefectsdiningimageName,
+        "interiordefectskitchenimagedata": interiordefectskitchenimageData,
+        "interiordefectskitchenimagename": interiordefectskitchenimageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
+        Navigator.of(context).pop();
         //print("Record Inserted");
 
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 BuildingInspectionTheRoofInteriorFragments(reportId: id)));
-        /*entryController.clear();
-        hallController.clear();
-        linenCupboardController.clear();
-        loungeRoomController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
       } else {
+        Navigator.of(context).pop();
         print("Some Issue.");
         Fluttertoast.showToast(msg: "Some Issue.");
       }
     } catch (e) {
+      Navigator.of(context).pop();
       print(e);
 
       Fluttertoast.showToast(msg: e.toString());
@@ -147,6 +434,36 @@ class _BuildingInspectionTheInteriorFragmentsState
                 ),
               ),
             ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: imageData != "NA"
+                  ? Image.memory(base64Decode(imageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          captureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          getImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
             //Hall
             Container(
               margin: EdgeInsets.all(10),
@@ -156,6 +473,36 @@ class _BuildingInspectionTheInteriorFragmentsState
                   border: OutlineInputBorder(),
                   label: Text('Hall'),
                 ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: hallimageData != "NA"
+                  ? Image.memory(base64Decode(hallimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          hallcaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          hallgetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Linen Cupboard
@@ -169,6 +516,36 @@ class _BuildingInspectionTheInteriorFragmentsState
                 ),
               ),
             ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: linenimageData != "NA"
+                  ? Image.memory(base64Decode(linenimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          linencaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          linengetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
             //Lounge Room
             Container(
               margin: EdgeInsets.all(10),
@@ -178,6 +555,36 @@ class _BuildingInspectionTheInteriorFragmentsState
                   border: OutlineInputBorder(),
                   label: Text('Lounge Room'),
                 ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectsloungeimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectsloungeimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsloungecaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsloungegetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Dining Room
@@ -191,6 +598,36 @@ class _BuildingInspectionTheInteriorFragmentsState
                 ),
               ),
             ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectsdiningimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectsdiningimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsdiningcaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsdininggetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
             //Kitchen
             Container(
               margin: EdgeInsets.all(10),
@@ -200,6 +637,36 @@ class _BuildingInspectionTheInteriorFragmentsState
                   border: OutlineInputBorder(),
                   label: Text('Kitchen'),
                 ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectskitchenimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectskitchenimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectskitchencaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectskitchengetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Family Room

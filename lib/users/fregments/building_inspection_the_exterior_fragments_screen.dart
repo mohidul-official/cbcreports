@@ -24,12 +24,12 @@ class BuildingInspectorTheExteriorFragments extends StatefulWidget {
 
 class _BuildingInspectorTheExteriorFragmentsState
     extends State<BuildingInspectorTheExteriorFragments> {
-  TextEditingController wallsController = TextEditingController();
+  /*TextEditingController wallsController = TextEditingController();
   TextEditingController externalCladdingController = TextEditingController();
   TextEditingController lintelsController = TextEditingController();
   TextEditingController doorsController = TextEditingController();
 
-  TextEditingController windowsController = TextEditingController();
+  TextEditingController windowsController = TextEditingController();*/
 
   File? wallsimagePath;
   String? wallsimageName;
@@ -50,6 +50,20 @@ class _BuildingInspectorTheExteriorFragmentsState
   File? windowsimagePath;
   String? windowsimageName;
   String? windowsimageData;
+
+  var exteriordefectswalls = "NA";
+  var exteriordefectswallsvalue = "NA";
+
+  var exteriordefectscladding = "NA";
+  var exteriordefectscladdingvalue = "NA";
+
+  var exteriordefectslintels = "NA";
+
+  var exteriordefectsdoors = "NA";
+  var exteriordefectsdoorsvalue = "NA";
+
+  var exteriordefectswindows = "NA";
+  var exteriordefectswindowsvalue = "NA";
 
   ImagePicker imagePicker = ImagePicker();
 
@@ -233,6 +247,165 @@ class _BuildingInspectorTheExteriorFragmentsState
     });
   }
 
+  exteriordefectswallsCheck() {
+    if (exteriordefectswalls == "Defects/Safety Hazards found were") {
+      return DropdownButtonFormField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          label: Text('Defects/Safety Hazards found were'),
+        ),
+        value: exteriordefectswallsvalue,
+        items: [
+          DropdownMenuItem(
+            child: Text('-Select-'),
+            value: "NA",
+          ),
+          DropdownMenuItem(
+            child: Text('General movement cracking was found.'),
+            value: "General movement cracking was found.",
+          ),
+          DropdownMenuItem(
+            child: Text(
+                'General movement cracking was found.\nRegardless of the appearance of the cracks\na Pre-Purchase Building Inspector carrying\nout a Pre-Purchase Inspection within the\nscope of a visual inspection is unable to\ndetermine the expected consequences of\nthe cracks.\n '),
+            value:
+                "General movement cracking was found. Regardless of the appearance of the cracks a Pre-Purchase Building Inspector carrying out a Pre-Purchase Inspection within the scope of a visual inspection is unable to determine the expected consequences of the cracks. ",
+          ),
+          DropdownMenuItem(
+            child: Text(
+                'Cracking was found to the external cladding.\nRegardless of the appearance of the\ncracks a Pre-Purchase Building Inspector\ncarrying out a Pre-Purchase Inspection within\nthe scope of a visual inspection is unable to\ndetermine the expected consequences of the\ncracks. A Structural Engineer is required to\ndetermine the significance of the cracking\nprior to a decision to purchase.'),
+            value:
+                "Cracking was found to the external cladding. Regardless of the appearance of the cracks a Pre-Purchase Building Inspector carrying out a Pre-Purchase Inspection within the scope of a visual inspection is unable to determine the expected consequences of the cracks. A Structural Engineer is required to determine the significance of the cracking prior to a decision to purchase.",
+          ),
+        ],
+        onChanged: (exteriordefectswallsvalue) {
+          setState(() {
+            this.exteriordefectswallsvalue = exteriordefectswallsvalue!;
+            //print(personsinattendance);
+          });
+        },
+      );
+    }
+  }
+
+  exteriordefectscladdingCheck() {
+    if (exteriordefectscladding == "Defects/Safety Hazards found were") {
+      return DropdownButtonFormField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          label: Text('Defects/Safety Hazards found were'),
+        ),
+        value: exteriordefectscladdingvalue,
+        items: [
+          DropdownMenuItem(
+            child: Text('-Select-'),
+            value: "NA",
+          ),
+          DropdownMenuItem(
+            child: Text('General movement cracking was found.'),
+            value: "General movement cracking was found.",
+          ),
+          DropdownMenuItem(
+            child: Text(
+                'General movement cracking was found.\nRegardless of the appearance of the cracks\na Pre-Purchase Building Inspector carrying\nout a Pre-Purchase Inspection within the\nscope of a visual inspection is unable to\ndetermine the expected consequences of\nthe cracks.\n '),
+            value:
+                "General movement cracking was found. Regardless of the appearance of the cracks a Pre-Purchase Building Inspector carrying out a Pre-Purchase Inspection within the scope of a visual inspection is unable to determine the expected consequences of the cracks. ",
+          ),
+          DropdownMenuItem(
+            child: Text(
+                'Cracking was found to the external cladding.\nRegardless of the appearance of the\ncracks a Pre-Purchase Building Inspector\ncarrying out a Pre-Purchase Inspection within\nthe scope of a visual inspection is unable to\ndetermine the expected consequences of the\ncracks. A Structural Engineer is required to\ndetermine the significance of the cracking\nprior to a decision to purchase.'),
+            value:
+                "Cracking was found to the external cladding. Regardless of the appearance of the cracks a Pre-Purchase Building Inspector carrying out a Pre-Purchase Inspection within the scope of a visual inspection is unable to determine the expected consequences of the cracks. A Structural Engineer is required to determine the significance of the cracking prior to a decision to purchase.",
+          ),
+        ],
+        onChanged: (exteriordefectscladdingvalue) {
+          setState(() {
+            this.exteriordefectscladdingvalue = exteriordefectscladdingvalue!;
+            //print(personsinattendance);
+          });
+        },
+      );
+    }
+  }
+
+  exteriordefectsdoorsCheck() {
+    if (exteriordefectsdoors == "Defects/Safety Hazards found were") {
+      return DropdownButtonFormField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          label: Text('Defects/Safety Hazards found were'),
+        ),
+        value: exteriordefectsdoorsvalue,
+        items: [
+          DropdownMenuItem(
+            child: Text('-Select-'),
+            value: "NA",
+          ),
+          DropdownMenuItem(
+            child: Text('Door is damaged.'),
+            value: "Door is damaged.",
+          ),
+          DropdownMenuItem(
+            child: Text('Door is jammed.'),
+            value: "Door is jammed.",
+          ),
+          DropdownMenuItem(
+            child: Text(
+                'It is recommended to contact a certified\ncarpenter to fix it.'),
+            value:
+                "It is recommended to contact a certified carpenter to fix it.",
+          ),
+        ],
+        onChanged: (exteriordefectsdoorsvalue) {
+          setState(() {
+            this.exteriordefectsdoorsvalue = exteriordefectsdoorsvalue!;
+            //print(personsinattendance);
+          });
+        },
+      );
+    }
+  }
+
+  exteriordefectswindowsCheck() {
+    if (exteriordefectswindows == "Defects/Safety Hazards found were") {
+      return DropdownButtonFormField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          label: Text('Defects/Safety Hazards found were'),
+        ),
+        value: exteriordefectswindowsvalue,
+        items: [
+          DropdownMenuItem(
+            child: Text('-Select-'),
+            value: "NA",
+          ),
+          DropdownMenuItem(
+            child:
+                Text('Gaps around windows and brick\nwork needs to be sealed.'),
+            value: "Gaps around windows and brick work needs to be sealed.",
+          ),
+          DropdownMenuItem(
+            child: Text('Window is damaged.'),
+            value: "Window is damaged.",
+          ),
+          DropdownMenuItem(
+            child: Text('External window frame is damaged.'),
+            value: "External window frame is damaged.",
+          ),
+          DropdownMenuItem(
+            child: Text('Internal windowsill is damaged due\nto moisture.'),
+            value: "Internal windowsill is damaged due to moisture.",
+          ),
+        ],
+        onChanged: (exteriordefectswindowsvalue) {
+          setState(() {
+            this.exteriordefectswindowsvalue = exteriordefectswindowsvalue!;
+            //print(personsinattendance);
+          });
+        },
+      );
+    }
+  }
+
   Future<void> updateTheExteriorDetails(String id) async {
     try {
       showDialog(
@@ -244,11 +417,20 @@ class _BuildingInspectorTheExteriorFragmentsState
       var res =
           await http.post(Uri.parse(API.prepurchasetheexteriordetails), body: {
         "id": id,
-        "exteriordefectswalls": wallsController.text.trim(),
-        "exteriordefectscladding": externalCladdingController.text.trim(),
-        "exteriordefectslintels": lintelsController.text.trim(),
-        "exteriordefectsdoors": doorsController.text.trim(),
-        "exteriordefectswindows": windowsController.text.trim(),
+        //"exteriordefectswalls": wallsController.text.trim(),
+        "exteriordefectswalls": exteriordefectswalls,
+        "exteriordefectswallsvalue": exteriordefectswallsvalue,
+        //"exteriordefectscladding": externalCladdingController.text.trim(),
+        "exteriordefectscladding": exteriordefectscladding,
+        "exteriordefectscladdingvalue": exteriordefectscladdingvalue,
+        //"exteriordefectslintels": lintelsController.text.trim(),
+        "exteriordefectslintels": exteriordefectslintels,
+        //"exteriordefectsdoors": doorsController.text.trim(),
+        "exteriordefectsdoors": exteriordefectsdoors,
+        "exteriordefectsdoorsvalue": exteriordefectsdoorsvalue,
+        //"exteriordefectswindows": windowsController.text.trim(),
+        "exteriordefectswindows": exteriordefectswindows,
+        "exteriordefectswindowsvalue": exteriordefectswindowsvalue,
         "wallsimagedata": wallsimageData,
         "wallsimagename": wallsimageName,
         "claddingimagedata": claddingimageData,
@@ -269,12 +451,6 @@ class _BuildingInspectorTheExteriorFragmentsState
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 BuildingInspectorTheExteriorStepTwoFragments(reportId: id)));
-        /*wallsController.clear();
-        externalCladdingController.clear();
-        lintelsController.clear();
-        doorsController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
       } else {
         Navigator.of(context).pop();
         print("Some Issue.");
@@ -321,15 +497,49 @@ class _BuildingInspectorTheExteriorFragmentsState
               ),
             ),
             //Walls
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: wallsController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Walls'),
                 ),
+                value: exteriordefectswalls,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (exteriordefectswalls) {
+                  setState(() {
+                    this.exteriordefectswalls = exteriordefectswalls!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: exteriordefectswallsCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -362,15 +572,49 @@ class _BuildingInspectorTheExteriorFragmentsState
               ),
             ),
             //External Cladding
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: externalCladdingController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('External Cladding'),
                 ),
+                value: exteriordefectscladding,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (exteriordefectscladding) {
+                  setState(() {
+                    this.exteriordefectscladding = exteriordefectscladding!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: exteriordefectscladdingCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -403,14 +647,43 @@ class _BuildingInspectorTheExteriorFragmentsState
               ),
             ),
             //Lintels
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: lintelsController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Lintels'),
                 ),
+                value: exteriordefectslintels,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (exteriordefectslintels) {
+                  setState(() {
+                    this.exteriordefectslintels = exteriordefectslintels!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             Container(
@@ -444,15 +717,49 @@ class _BuildingInspectorTheExteriorFragmentsState
               ),
             ),
             //Doors
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: doorsController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Doors'),
                 ),
+                value: exteriordefectsdoors,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (exteriordefectsdoors) {
+                  setState(() {
+                    this.exteriordefectsdoors = exteriordefectsdoors!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: exteriordefectsdoorsCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -485,15 +792,49 @@ class _BuildingInspectorTheExteriorFragmentsState
               ),
             ),
             //Windows
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: windowsController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Windows'),
                 ),
+                value: exteriordefectswindows,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (exteriordefectswindows) {
+                  setState(() {
+                    this.exteriordefectswindows = exteriordefectswindows!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: exteriordefectswindowsCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),

@@ -47,10 +47,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
   var apparentdefectsvalue = "NA";
   var informationprovidedinspector = "NA";
   var informationprovidedinspectorvalue = "NA";
-  File? imagePath;
+  var imagePath = "NA";
 
-  String? imageName;
-  String? imageData;
+  var imageName = "NA";
+  var imageData = "NA";
   File? apparentConcealmentImagePath;
 
   String? apparentConcealmentImageName;
@@ -65,10 +65,11 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       if (getimage == null) {
         return;
       } else {
-        imagePath = File(getimage.path);
+        File imagePath = File(getimage.path);
 
         imageName = getimage.path.split('/').last;
-        imageData = base64Encode(imagePath!.readAsBytesSync());
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
         print(imagePath);
         print(imageName);
         print(imageData);
@@ -84,9 +85,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       if (getimage == null) {
         return;
       } else {
-        imagePath = File(getimage.path);
+        File imagePath = File(getimage.path);
         imageName = getimage.path.split('/').last;
-        imageData = base64Encode(imagePath!.readAsBytesSync());
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
         print(imagePath);
         print(imageName);
         print(imageData);
@@ -453,8 +455,8 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: imagePath != null
-                  ? Image.file(imagePath!)
+              child: imageData != "NA"
+                  ? Image.memory(base64Decode(imageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -575,7 +577,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
                   ),
                   DropdownMenuItem(
                     child: Text(
-                        'Additional Information provided to inspector\n was\n'),
+                        'Additional Information provided to\ninspector was\n'),
                     value: "Additional Information provided to inspector was",
                   ),
                   DropdownMenuItem(
