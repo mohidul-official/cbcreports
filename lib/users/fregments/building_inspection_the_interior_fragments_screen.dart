@@ -57,6 +57,22 @@ class _BuildingInspectionTheInteriorFragmentsState
 
   TextEditingController otherIfApplicableController = TextEditingController();
 
+  var interiordefectsentry = "NA";
+
+  var interiordefectshall = "NA";
+
+  var interiordefectscupboard = "NA";
+  var interiordefectscupboardvalue = "NA";
+
+  var interiordefectslounge = "NA";
+
+  var interiordefectsdining = "NA";
+
+  var interiordefectskitchen = "NA";
+  var interiordefectskitchenvalue = "NA";
+
+  var interiordefectsfamily = "NA";
+
   var imagePath = "NA";
   var imageName = "NA";
   var imageData = "NA";
@@ -327,6 +343,38 @@ class _BuildingInspectionTheInteriorFragmentsState
     });
   }
 
+  interiordefectscupboardCheck() {
+    if (interiordefectscupboard == "Defects/Safety Hazards found were") {
+      setState(() {
+        interiordefectscupboardvalue =
+            "All cupboards were full of stored items; A thorough inspection was not possible.";
+      });
+
+      return Text(
+          'All cupboards were full of stored items; A thorough inspection was not possible.');
+    } else {
+      setState(() {
+        interiordefectscupboardvalue = " ";
+      });
+    }
+  }
+
+  interiordefectskitchenCheck() {
+    if (interiordefectskitchen == "Defects/Safety Hazards found were") {
+      setState(() {
+        interiordefectskitchenvalue =
+            "It is recommended to check all the appliances to be in working order at the time of Pre handover inspection.";
+      });
+
+      return Text(
+          'It is recommended to check all the appliances to be in working order at the time of Pre handover inspection.');
+    } else {
+      setState(() {
+        interiordefectskitchenvalue = " ";
+      });
+    }
+  }
+
   Future<void> updateTheInteriorDetails(String id) async {
     try {
       showDialog(
@@ -338,13 +386,22 @@ class _BuildingInspectionTheInteriorFragmentsState
       var res =
           await http.post(Uri.parse(API.prepurchasetheinteriordetails), body: {
         "id": id,
-        "interiordefectsentry": entryController.text.trim(),
-        "interiordefectshall": hallController.text.trim(),
-        "interiordefectscupboard": linenCupboardController.text.trim(),
-        "interiordefectslounge": loungeRoomController.text.trim(),
-        "interiordefectsdining": diningRoomController.text.trim(),
-        "interiordefectskitchen": kitchenController.text.trim(),
-        "interiordefectsfamily": familyRoomController.text.trim(),
+        //"interiordefectsentry": entryController.text.trim(),
+        "interiordefectsentry": interiordefectsentry,
+        //"interiordefectshall": hallController.text.trim(),
+        "interiordefectshall": interiordefectshall,
+        //"interiordefectscupboard": linenCupboardController.text.trim(),
+        "interiordefectscupboard": interiordefectscupboard,
+        "interiordefectscupboardvalue": interiordefectscupboardvalue,
+        //"interiordefectslounge": loungeRoomController.text.trim(),
+        "interiordefectslounge": interiordefectslounge,
+        //"interiordefectsdining": diningRoomController.text.trim(),
+        "interiordefectsdining": interiordefectsdining,
+        //"interiordefectskitchen": kitchenController.text.trim(),
+        "interiordefectskitchen": interiordefectskitchen,
+        "interiordefectskitchenvalue": interiordefectskitchenvalue,
+        //"interiordefectsfamily": familyRoomController.text.trim(),
+        "interiordefectsfamily": interiordefectsfamily,
         "interiordefectsstudy": studyController.text.trim(),
         "interiordefectsstairs": stairsController.text.trim(),
         "interiordefectslaundry": laundryController.text.trim(),
@@ -424,14 +481,43 @@ class _BuildingInspectionTheInteriorFragmentsState
               ),
             ),
             //Entry
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: entryController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Entry'),
                 ),
+                value: interiordefectsentry,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectsentry) {
+                  setState(() {
+                    this.interiordefectsentry = interiordefectsentry!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             Container(
@@ -465,14 +551,43 @@ class _BuildingInspectionTheInteriorFragmentsState
               ),
             ),
             //Hall
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: hallController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Hall'),
                 ),
+                value: interiordefectshall,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectshall) {
+                  setState(() {
+                    this.interiordefectshall = interiordefectshall!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             Container(
@@ -506,15 +621,49 @@ class _BuildingInspectionTheInteriorFragmentsState
               ),
             ),
             //Linen Cupboard
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: linenCupboardController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Linen Cupboard'),
                 ),
+                value: interiordefectscupboard,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectscupboard) {
+                  setState(() {
+                    this.interiordefectscupboard = interiordefectscupboard!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectscupboardCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -547,14 +696,43 @@ class _BuildingInspectionTheInteriorFragmentsState
               ),
             ),
             //Lounge Room
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: loungeRoomController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Lounge Room'),
                 ),
+                value: interiordefectslounge,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectslounge) {
+                  setState(() {
+                    this.interiordefectslounge = interiordefectslounge!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             Container(
@@ -588,14 +766,43 @@ class _BuildingInspectionTheInteriorFragmentsState
               ),
             ),
             //Dining Room
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: diningRoomController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Dining Room'),
                 ),
+                value: interiordefectsdining,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectsdining) {
+                  setState(() {
+                    this.interiordefectsdining = interiordefectsdining!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             Container(
@@ -629,15 +836,49 @@ class _BuildingInspectionTheInteriorFragmentsState
               ),
             ),
             //Kitchen
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: kitchenController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Kitchen'),
                 ),
+                value: interiordefectskitchen,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectskitchen) {
+                  setState(() {
+                    this.interiordefectskitchen = interiordefectskitchen!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectskitchenCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
@@ -670,14 +911,43 @@ class _BuildingInspectionTheInteriorFragmentsState
               ),
             ),
             //Family Room
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: familyRoomController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Family Room'),
                 ),
+                value: interiordefectsfamily,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectsfamily) {
+                  setState(() {
+                    this.interiordefectsfamily = interiordefectsfamily!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
             //Study
