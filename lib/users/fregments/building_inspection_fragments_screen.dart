@@ -41,9 +41,9 @@ class _BuildingInspectionFragmentsScreenState
       var responce = jsonDecode(res.body);
       if (responce["success"] == true) {
         String id = responce["id"];
-        print("Report Id:"+id);
+        print("Report Id:" + id);
         //print("Record Inserted");
-        Fluttertoast.showToast(msg: "Report Id:"+id);
+        Fluttertoast.showToast(msg: "Report Id:" + id);
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
@@ -108,7 +108,7 @@ class _BuildingInspectionFragmentsScreenState
               ),
             ),
             //Purchaser Name
-            Container(
+            /*Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
                 controller: purchaserNameController,
@@ -172,7 +172,7 @@ class _BuildingInspectionFragmentsScreenState
                   label: Text('Enter Email Address'),
                 ),
               ),
-            ),
+            ),*/
             //Invoice No
             Container(
               margin: EdgeInsets.all(10),

@@ -1,12 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-import 'building_inspection_the_roof_interior_fragments_screen.dart';
+import 'building_inspection_the_interior_step_two_fragments_screen.dart';
 
 class BuildingInspectionTheInteriorFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
@@ -22,7 +24,7 @@ class BuildingInspectionTheInteriorFragments extends StatefulWidget {
 
 class _BuildingInspectionTheInteriorFragmentsState
     extends State<BuildingInspectionTheInteriorFragments> {
-  TextEditingController entryController = TextEditingController();
+  /*TextEditingController entryController = TextEditingController();
   TextEditingController hallController = TextEditingController();
   TextEditingController linenCupboardController = TextEditingController();
   TextEditingController loungeRoomController = TextEditingController();
@@ -53,51 +55,406 @@ class _BuildingInspectionTheInteriorFragmentsState
 
   TextEditingController bedroomFourController = TextEditingController();
 
-  TextEditingController otherIfApplicableController = TextEditingController();
+  TextEditingController otherIfApplicableController = TextEditingController();*/
+
+  var interiordefectsentry = "NA";
+
+  var interiordefectshall = "NA";
+
+  var interiordefectscupboard = "NA";
+  var interiordefectscupboardvalue = "NA";
+
+  var interiordefectslounge = "NA";
+
+  var interiordefectsdining = "NA";
+
+  var interiordefectskitchen = "NA";
+  var interiordefectskitchenvalue = "NA";
+
+  var interiordefectsfamily = "NA";
+
+  var interiordefectsstudy = "NA";
+
+  var interiordefectsstairs = "NA";
+
+  var interiordefectslaundry = "NA";
+  var interiordefectslaundryvalue = "NA";
+
+  var interiordefectstoilet = "NA";
+
+  var interiordefectsbathroom = "NA";
+  var interiordefectsbathroomvalue = "NA";
+
+  var interiordefectsensuite = "NA";
+  var interiordefectsensuitevalue = "NA";
+
+  var interiordefectsbedroomone = "NA";
+
+  var interiordefectsbedroomtwo = "NA";
+
+  var interiordefectsbedroomthree = "NA";
+
+  var interiordefectsbedroomfour = "NA";
+
+  var interiordefectsother = "NA";
+  var interiordefectsothervalue = "NA";
+
+  var imagePath = "NA";
+  var imageName = "NA";
+  var imageData = "NA";
+
+  var hallimagePath = "NA";
+  var hallimageName = "NA";
+  var hallimageData = "NA";
+
+  var linenimagePath = "NA";
+  var linenimageName = "NA";
+  var linenimageData = "NA";
+
+  var interiordefectsloungeimagePath = "NA";
+  var interiordefectsloungeimageName = "NA";
+  var interiordefectsloungeimageData = "NA";
+
+  var interiordefectsdiningimagePath = "NA";
+  var interiordefectsdiningimageName = "NA";
+  var interiordefectsdiningimageData = "NA";
+
+  var interiordefectskitchenimagePath = "NA";
+  var interiordefectskitchenimageName = "NA";
+  var interiordefectskitchenimageData = "NA";
+
+  ImagePicker imagePicker = ImagePicker();
+
+  Future<void> getImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File imagePath = File(getimage.path);
+
+        imageName = getimage.path.split('/').last;
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
+        print(imagePath);
+        print(imageName);
+        print(imageData);
+      }
+    });
+  }
+
+  Future<void> captureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File imagePath = File(getimage.path);
+        imageName = getimage.path.split('/').last;
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
+        print(imagePath);
+        print(imageName);
+        print(imageData);
+      }
+    });
+  }
+
+  Future<void> hallgetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File hallimagePath = File(getimage.path);
+
+        hallimageName = getimage.path.split('/').last;
+        hallimageData = base64Encode(hallimagePath.readAsBytesSync());
+
+        print(hallimagePath);
+        print(hallimageName);
+        print(hallimageData);
+      }
+    });
+  }
+
+  Future<void> hallcaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File hallimagePath = File(getimage.path);
+        hallimageName = getimage.path.split('/').last;
+        hallimageData = base64Encode(hallimagePath.readAsBytesSync());
+
+        print(hallimagePath);
+        print(hallimageName);
+        print(hallimageData);
+      }
+    });
+  }
+
+  Future<void> linengetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File linenimagePath = File(getimage.path);
+
+        linenimageName = getimage.path.split('/').last;
+        linenimageData = base64Encode(linenimagePath.readAsBytesSync());
+
+        print(linenimagePath);
+        print(linenimageName);
+        print(linenimageData);
+      }
+    });
+  }
+
+  Future<void> linencaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File linenimagePath = File(getimage.path);
+
+        linenimageName = getimage.path.split('/').last;
+        linenimageData = base64Encode(linenimagePath.readAsBytesSync());
+
+        print(linenimagePath);
+        print(linenimageName);
+        print(linenimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectsloungegetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectsloungeimagePath = File(getimage.path);
+
+        interiordefectsloungeimageName = getimage.path.split('/').last;
+        interiordefectsloungeimageData =
+            base64Encode(interiordefectsloungeimagePath.readAsBytesSync());
+
+        print(interiordefectsloungeimagePath);
+        print(interiordefectsloungeimageName);
+        print(interiordefectsloungeimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectsloungecaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectsloungeimagePath = File(getimage.path);
+
+        interiordefectsloungeimageName = getimage.path.split('/').last;
+        interiordefectsloungeimageData =
+            base64Encode(interiordefectsloungeimagePath.readAsBytesSync());
+
+        print(interiordefectsloungeimagePath);
+        print(interiordefectsloungeimageName);
+        print(interiordefectsloungeimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectsdininggetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectsdiningimagePath = File(getimage.path);
+
+        interiordefectsdiningimageName = getimage.path.split('/').last;
+        interiordefectsdiningimageData =
+            base64Encode(interiordefectsdiningimagePath.readAsBytesSync());
+
+        print(interiordefectsdiningimagePath);
+        print(interiordefectsdiningimageName);
+        print(interiordefectsdiningimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectsdiningcaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectsdiningimagePath = File(getimage.path);
+
+        interiordefectsdiningimageName = getimage.path.split('/').last;
+        interiordefectsdiningimageData =
+            base64Encode(interiordefectsdiningimagePath.readAsBytesSync());
+
+        print(interiordefectsdiningimagePath);
+        print(interiordefectsdiningimageName);
+        print(interiordefectsdiningimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectskitchengetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectskitchenimagePath = File(getimage.path);
+
+        interiordefectskitchenimageName = getimage.path.split('/').last;
+        interiordefectskitchenimageData =
+            base64Encode(interiordefectskitchenimagePath.readAsBytesSync());
+
+        print(interiordefectskitchenimagePath);
+        print(interiordefectskitchenimageName);
+        print(interiordefectskitchenimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectskitchencaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectskitchenimagePath = File(getimage.path);
+
+        interiordefectskitchenimageName = getimage.path.split('/').last;
+        interiordefectskitchenimageData =
+            base64Encode(interiordefectskitchenimagePath.readAsBytesSync());
+
+        print(interiordefectskitchenimagePath);
+        print(interiordefectskitchenimageName);
+        print(interiordefectskitchenimageData);
+      }
+    });
+  }
+
+  interiordefectscupboardCheck() {
+    if (interiordefectscupboard == "Defects/Safety Hazards found were") {
+      setState(() {
+        interiordefectscupboardvalue =
+            "All cupboards were full of stored items; A thorough inspection was not possible.";
+      });
+
+      return Text(
+          'All cupboards were full of stored items; A thorough inspection was not possible.');
+    } else {
+      setState(() {
+        interiordefectscupboardvalue = " ";
+      });
+    }
+  }
+
+  interiordefectskitchenCheck() {
+    if (interiordefectskitchen == "Defects/Safety Hazards found were") {
+      setState(() {
+        interiordefectskitchenvalue =
+            "It is recommended to check all the appliances to be in working order at the time of Pre handover inspection.";
+      });
+
+      return Text(
+          'It is recommended to check all the appliances to be in working order at the time of Pre handover inspection.');
+    } else {
+      setState(() {
+        interiordefectskitchenvalue = " ";
+      });
+    }
+  }
 
   Future<void> updateTheInteriorDetails(String id) async {
     try {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        },
+      );
       var res =
           await http.post(Uri.parse(API.prepurchasetheinteriordetails), body: {
         "id": id,
-        "interiordefectsentry": entryController.text.trim(),
-        "interiordefectshall": hallController.text.trim(),
-        "interiordefectscupboard": linenCupboardController.text.trim(),
-        "interiordefectslounge": loungeRoomController.text.trim(),
-        "interiordefectsdining": diningRoomController.text.trim(),
-        "interiordefectskitchen": kitchenController.text.trim(),
-        "interiordefectsfamily": familyRoomController.text.trim(),
-        "interiordefectsstudy": studyController.text.trim(),
-        "interiordefectsstairs": stairsController.text.trim(),
-        "interiordefectslaundry": laundryController.text.trim(),
-        "interiordefectstoilet": toiletController.text.trim(),
-        "interiordefectsbathroom": bathroomController.text.trim(),
-        "interiordefectsensuite": enSuiteController.text.trim(),
-        "interiordefectsbedroomone": bedroomOneController.text.trim(),
-        "interiordefectsbedroomtwo": bedroomTwoController.text.trim(),
-        "interiordefectsbedroomthree": bedroomThreeController.text.trim(),
-        "interiordefectsbedroomfour": bedroomFourController.text.trim(),
-        "interiordefectsother": otherIfApplicableController.text.trim(),
+        //"interiordefectsentry": entryController.text.trim(),
+        "interiordefectsentry": interiordefectsentry,
+        //"interiordefectshall": hallController.text.trim(),
+        "interiordefectshall": interiordefectshall,
+        //"interiordefectscupboard": linenCupboardController.text.trim(),
+        "interiordefectscupboard": interiordefectscupboard,
+        "interiordefectscupboardvalue": interiordefectscupboardvalue,
+        //"interiordefectslounge": loungeRoomController.text.trim(),
+        "interiordefectslounge": interiordefectslounge,
+        //"interiordefectsdining": diningRoomController.text.trim(),
+        "interiordefectsdining": interiordefectsdining,
+        //"interiordefectskitchen": kitchenController.text.trim(),
+        "interiordefectskitchen": interiordefectskitchen,
+        "interiordefectskitchenvalue": interiordefectskitchenvalue,
+        "data": imageData,
+        "name": imageName,
+        "hallimagedata": hallimageData,
+        "hallimagename": hallimageName,
+        "interiordefectscupboardimagedata": linenimageData,
+        "interiordefectscupboardimagename": linenimageName,
+        "interiordefectsloungeimagedata": interiordefectsloungeimageData,
+        "interiordefectsloungeimagename": interiordefectsloungeimageName,
+        "interiordefectsdiningimagedata": interiordefectsdiningimageData,
+        "interiordefectsdiningimagename": interiordefectsdiningimageName,
+        "interiordefectskitchenimagedata": interiordefectskitchenimageData,
+        "interiordefectskitchenimagename": interiordefectskitchenimageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
+        Navigator.of(context).pop();
         //print("Record Inserted");
 
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectionTheRoofInteriorFragments(reportId: id)));
-        /*entryController.clear();
-        hallController.clear();
-        linenCupboardController.clear();
-        loungeRoomController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
+                BuildingInspectionTheInteriorStepTwoFragments(reportId: id)));
       } else {
+        Navigator.of(context).pop();
         print("Some Issue.");
         Fluttertoast.showToast(msg: "Some Issue.");
       }
     } catch (e) {
+      Navigator.of(context).pop();
       print(e);
 
       Fluttertoast.showToast(msg: e.toString());
@@ -116,7 +473,7 @@ class _BuildingInspectionTheInteriorFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'INTERIOR OF THE BUILDING',
+                'INTERIOR OF THE BUILDING (STEP 1)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -137,201 +494,433 @@ class _BuildingInspectionTheInteriorFragmentsState
               ),
             ),
             //Entry
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: entryController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Entry'),
                 ),
+                value: interiordefectsentry,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectsentry) {
+                  setState(() {
+                    this.interiordefectsentry = interiordefectsentry!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: imageData != "NA"
+                  ? Image.memory(base64Decode(imageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          captureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          getImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Hall
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: hallController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Hall'),
                 ),
+                value: interiordefectshall,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectshall) {
+                  setState(() {
+                    this.interiordefectshall = interiordefectshall!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: hallimageData != "NA"
+                  ? Image.memory(base64Decode(hallimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          hallcaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          hallgetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Linen Cupboard
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: linenCupboardController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Linen Cupboard'),
                 ),
+                value: interiordefectscupboard,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectscupboard) {
+                  setState(() {
+                    this.interiordefectscupboard = interiordefectscupboard!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectscupboardCheck(),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: linenimageData != "NA"
+                  ? Image.memory(base64Decode(linenimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          linencaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          linengetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Lounge Room
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: loungeRoomController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Lounge Room'),
                 ),
+                value: interiordefectslounge,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectslounge) {
+                  setState(() {
+                    this.interiordefectslounge = interiordefectslounge!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectsloungeimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectsloungeimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsloungecaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsloungegetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Dining Room
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: diningRoomController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Dining Room'),
                 ),
+                value: interiordefectsdining,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectsdining) {
+                  setState(() {
+                    this.interiordefectsdining = interiordefectsdining!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectsdiningimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectsdiningimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsdiningcaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsdininggetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             //Kitchen
+
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: kitchenController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Kitchen'),
                 ),
+                value: interiordefectskitchen,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectskitchen) {
+                  setState(() {
+                    this.interiordefectskitchen = interiordefectskitchen!;
+                    //print(personsinattendance);
+                  });
+                },
               ),
             ),
-            //Family Room
+            //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: familyRoomController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Family Room'),
-                ),
-              ),
+              child: interiordefectskitchenCheck(),
             ),
-            //Study
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: studyController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Study'),
-                ),
-              ),
+              child: interiordefectskitchenimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectskitchenimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
             ),
-            //Stairs
             Container(
               margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: stairsController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Stairs'),
-                ),
-              ),
-            ),
-            //Laundry
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: laundryController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Laundry'),
-                ),
-              ),
-            ),
-            //Toilet
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: toiletController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Toilet'),
-                ),
-              ),
-            ),
-            //Bathroom
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bathroomController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bathroom'),
-                ),
-              ),
-            ),
-            //En-suite
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: enSuiteController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('En-suite'),
-                ),
-              ),
-            ),
-            //Bedroom  1
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bedroomOneController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bedroom  1'),
-                ),
-              ),
-            ),
-            //Bedroom  2
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bedroomTwoController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bedroom 2'),
-                ),
-              ),
-            ),
-            //Bedroom 3
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bedroomThreeController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bedroom 3'),
-                ),
-              ),
-            ),
-            //Bedroom 4
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bedroomFourController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bedroom 4'),
-                ),
-              ),
-            ),
-            //Other if Applicable
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: otherIfApplicableController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Other if Applicable'),
-                ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectskitchencaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectskitchengetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
               ),
             ),
             Container(

@@ -8,61 +8,59 @@ import 'package:image_picker/image_picker.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-import 'building_inspection_the_exterior_fragments_screen.dart';
+import 'building_inspection_the_interior_fragments_screen.dart';
 
-class BuildingInspectionTheSiteStepTwoFragments extends StatefulWidget {
+class BuildingInspectorTheExteriorStepThreeFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
 
   String reportId;
-  BuildingInspectionTheSiteStepTwoFragments(
+  BuildingInspectorTheExteriorStepThreeFragments(
       {Key? myKey, required this.reportId})
       : super(key: myKey);
 
   @override
-  State<BuildingInspectionTheSiteStepTwoFragments> createState() =>
-      _BuildingInspectionTheSiteStepTwoFragmentsState();
+  State<BuildingInspectorTheExteriorStepThreeFragments> createState() =>
+      _BuildingInspectorTheExteriorStepThreeFragmentsState();
 }
 
-class _BuildingInspectionTheSiteStepTwoFragmentsState
-    extends State<BuildingInspectionTheSiteStepTwoFragments> {
-  TextEditingController drivewaysController = TextEditingController();
-  TextEditingController pathsController = TextEditingController();
-  TextEditingController stepsController = TextEditingController();
-  TextEditingController retainingWallsController = TextEditingController();
+class _BuildingInspectorTheExteriorStepThreeFragmentsState
+    extends State<BuildingInspectorTheExteriorStepThreeFragments> {
+  /*TextEditingController patiosController = TextEditingController();
 
-  TextEditingController surfaceWaterDrainageController =
-      TextEditingController();
+  TextEditingController decksController = TextEditingController();
 
-  TextEditingController carAccommodationController = TextEditingController();
+  TextEditingController chimneysController = TextEditingController();
 
-  TextEditingController detachedBuildingsController = TextEditingController();
+  TextEditingController otherIfApplicableController = TextEditingController();*/
 
-  TextEditingController gardenShedsFencesController = TextEditingController();
+  File? patiosimagePath;
+  String? patiosimageName;
+  String? patiosimageData;
 
-  TextEditingController otherIfApplicableController = TextEditingController();
+  File? decksimagePath;
+  String? decksimageName;
+  String? decksimageData;
 
-  File? imagePath;
-  String? imageName;
-  String? imageData;
-
-  File? gardenimagePath;
-  String? gardenimageName;
-  String? gardenimageData;
+  File? chimneysimagePath;
+  String? chimneysimageName;
+  String? chimneysimageData;
 
   File? otherimagePath;
   String? otherimageName;
   String? otherimageData;
 
-  var safetyhazardsbuildings = "NA";
+  var exteriordefectspatios = "NA";
 
-  var safetyhazardsgarden = "NA";
-  var safetyhazardsgardenvalue = "NA";
+  var exteriordefectsdecks = "NA";
+  var exteriordefectsdecksvalue = "NA";
 
-  var safetyhazardsother = "NA";
+  var exteriordefectschimneys = "NA";
+
+  var exteriordefectsother = "NA";
 
   ImagePicker imagePicker = ImagePicker();
 
-  Future<void> getImage() async {
+  Future<void> patiosgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -70,17 +68,17 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        imagePath = File(getimage.path);
-        imageName = getimage.path.split('/').last;
-        imageData = base64Encode(imagePath!.readAsBytesSync());
-        print(imagePath);
-        print(imageName);
-        print(imageData);
+        patiosimagePath = File(getimage.path);
+        patiosimageName = getimage.path.split('/').last;
+        patiosimageData = base64Encode(patiosimagePath!.readAsBytesSync());
+        print(patiosimagePath);
+        print(patiosimageName);
+        print(patiosimageData);
       }
     });
   }
 
-  Future<void> captureImage() async {
+  Future<void> patioscaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -88,17 +86,17 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        imagePath = File(getimage.path);
-        imageName = getimage.path.split('/').last;
-        imageData = base64Encode(imagePath!.readAsBytesSync());
-        print(imagePath);
-        print(imageName);
-        print(imageData);
+        patiosimagePath = File(getimage.path);
+        patiosimageName = getimage.path.split('/').last;
+        patiosimageData = base64Encode(patiosimagePath!.readAsBytesSync());
+        print(patiosimagePath);
+        print(patiosimageName);
+        print(patiosimageData);
       }
     });
   }
 
-  Future<void> gardengetImage() async {
+  Future<void> decksgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -106,17 +104,17 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        gardenimagePath = File(getimage.path);
-        gardenimageName = getimage.path.split('/').last;
-        gardenimageData = base64Encode(gardenimagePath!.readAsBytesSync());
-        print(gardenimagePath);
-        print(gardenimageName);
-        print(gardenimageData);
+        decksimagePath = File(getimage.path);
+        decksimageName = getimage.path.split('/').last;
+        decksimageData = base64Encode(decksimagePath!.readAsBytesSync());
+        print(decksimagePath);
+        print(decksimageName);
+        print(decksimageData);
       }
     });
   }
 
-  Future<void> gardencaptureImage() async {
+  Future<void> deckscaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -124,12 +122,48 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        gardenimagePath = File(getimage.path);
-        gardenimageName = getimage.path.split('/').last;
-        gardenimageData = base64Encode(gardenimagePath!.readAsBytesSync());
-        print(gardenimagePath);
-        print(gardenimageName);
-        print(gardenimageData);
+        decksimagePath = File(getimage.path);
+        decksimageName = getimage.path.split('/').last;
+        decksimageData = base64Encode(decksimagePath!.readAsBytesSync());
+        print(decksimagePath);
+        print(decksimageName);
+        print(decksimageData);
+      }
+    });
+  }
+
+  Future<void> chimneysgetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        chimneysimagePath = File(getimage.path);
+        chimneysimageName = getimage.path.split('/').last;
+        chimneysimageData = base64Encode(chimneysimagePath!.readAsBytesSync());
+        print(chimneysimagePath);
+        print(chimneysimageName);
+        print(chimneysimageData);
+      }
+    });
+  }
+
+  Future<void> chimneyscaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        chimneysimagePath = File(getimage.path);
+        chimneysimageName = getimage.path.split('/').last;
+        chimneysimageData = base64Encode(chimneysimagePath!.readAsBytesSync());
+        print(chimneysimagePath);
+        print(chimneysimageName);
+        print(chimneysimageData);
       }
     });
   }
@@ -170,34 +204,33 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
     });
   }
 
-  safetyhazardsgardenCheck() {
-    if (safetyhazardsgarden == "Defects/Safety Hazards found were") {
+  exteriordefectsdecksCheck() {
+    if (exteriordefectsdecks == "Defects/Safety Hazards found were") {
       return DropdownButtonFormField(
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           label: Text('Defects/Safety Hazards found were'),
         ),
-        value: safetyhazardsgardenvalue,
+        value: exteriordefectsdecksvalue,
         items: [
           DropdownMenuItem(
             child: Text('-Select-'),
             value: "NA",
           ),
           DropdownMenuItem(
-            child:
-                Text('Fence is in bad condition and\n needs to be replaced.\n'),
-            value: "Fence is in bad condition and needs to be replaced.",
+            child: Text(
+                'Decking has spongy bounce. It is\nrecommended to contact a certified\ncarpenter to fix it.'),
+            value:
+                "Decking has spongy bounce. It is recommended to contact a certified carpenter to fix it.",
           ),
           DropdownMenuItem(
-            child: Text(
-                'Fence is leaning. It is recommended to\n contact a certified fencer to fix it.'),
-            value:
-                "Fence is leaning. It is recommended to contact a certified fencer to fix it.",
+            child: Text('Decking requires an external paint/stain.'),
+            value: "Decking requires an external paint/stain.",
           ),
         ],
-        onChanged: (safetyhazardsgardenvalue) {
+        onChanged: (exteriordefectsdecksvalue) {
           setState(() {
-            this.safetyhazardsgardenvalue = safetyhazardsgardenvalue!;
+            this.exteriordefectsdecksvalue = exteriordefectsdecksvalue!;
             //print(personsinattendance);
           });
         },
@@ -205,7 +238,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
     }
   }
 
-  Future<void> updateTheSiteDetails(String id) async {
+  Future<void> updateTheExteriorDetails(String id) async {
     try {
       showDialog(
         context: context,
@@ -214,21 +247,25 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
         },
       );
       var res = await http
-          .post(Uri.parse(API.prepurchasethesitesteptwodetails), body: {
+          .post(Uri.parse(API.prepurchasetheexteriorstepthreedetails), body: {
         "id": id,
-        //"safetyhazardsbuildings": detachedBuildingsController.text.trim(),
-        "safetyhazardsbuildings": safetyhazardsbuildings,
-        //"safetyhazardsgarden": gardenShedsFencesController.text.trim(),
-        "safetyhazardsgarden": safetyhazardsgarden,
-        "safetyhazardsgardenvalue": safetyhazardsgardenvalue,
-        //"safetyhazardsother": otherIfApplicableController.text.trim(),
-        "safetyhazardsother": safetyhazardsother,
-        "data": imageData,
-        "name": imageName,
-        "gardendata": gardenimageData,
-        "gardenname": gardenimageName,
-        "otherdata": otherimageData,
-        "othername": otherimageName,
+        //"exteriordefectspatios": patiosController.text.trim(),
+        "exteriordefectspatios": exteriordefectspatios,
+        //"exteriordefectsdecks": decksController.text.trim(),
+        "exteriordefectsdecks": exteriordefectsdecks,
+        "exteriordefectsdecksvalue": exteriordefectsdecksvalue,
+        //"exteriordefectschimneys": chimneysController.text.trim(),
+        "exteriordefectschimneys": exteriordefectschimneys,
+        //"exteriordefectsother": otherIfApplicableController.text.trim(),
+        "exteriordefectsother": exteriordefectsother,
+        "patiosimagedata": patiosimageData,
+        "patiosimagename": patiosimageName,
+        "decksimagedata": decksimageData,
+        "decksimagename": decksimageName,
+        "chimneysimagedata": chimneysimageData,
+        "chimneysimagename": chimneysimageName,
+        "otherimagedata": otherimageData,
+        "otherimagename": otherimageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -238,13 +275,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectorTheExteriorFragments(reportId: id)));
-        /*drivewaysController.clear();
-        pathsController.clear();
-        stepsController.clear();
-        retainingWallsController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
+                BuildingInspectionTheInteriorFragments(reportId: id)));
       } else {
         Navigator.of(context).pop();
         print("Some Issue.");
@@ -270,7 +301,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'THE SITE (STEP 2)',
+                'EXTERIOR OF THE BUILDING (STEP 3)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -290,16 +321,16 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
-            //Detached Buildings
+            //Patios
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Detached Buildings'),
+                  label: Text('Patios'),
                 ),
-                value: safetyhazardsbuildings,
+                value: exteriordefectspatios,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -322,9 +353,9 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardsbuildings) {
+                onChanged: (exteriordefectspatios) {
                   setState(() {
-                    this.safetyhazardsbuildings = safetyhazardsbuildings!;
+                    this.exteriordefectspatios = exteriordefectspatios!;
                     //print(personsinattendance);
                   });
                 },
@@ -332,8 +363,8 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: imagePath != null
-                  ? Image.file(imagePath!)
+              child: patiosimagePath != null
+                  ? Image.file(patiosimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -345,7 +376,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          captureImage();
+                          patioscaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -353,23 +384,23 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          getImage();
+                          patiosgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Garden Sheds and Fences
+            //Decks
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Garden Sheds and Fences'),
+                  label: Text('Decks'),
                 ),
-                value: safetyhazardsgarden,
+                value: exteriordefectsdecks,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -392,9 +423,9 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardsgarden) {
+                onChanged: (exteriordefectsdecks) {
                   setState(() {
-                    this.safetyhazardsgarden = safetyhazardsgarden!;
+                    this.exteriordefectsdecks = exteriordefectsdecks!;
                     //print(personsinattendance);
                   });
                 },
@@ -403,12 +434,12 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
             //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsgardenCheck(),
+              child: exteriordefectsdecksCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: gardenimagePath != null
-                  ? Image.file(gardenimagePath!)
+              child: decksimagePath != null
+                  ? Image.file(decksimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -420,7 +451,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          gardencaptureImage();
+                          deckscaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -428,7 +459,77 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          gardengetImage();
+                          decksgetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
+            //Chimneys
+
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Chimneys'),
+                ),
+                value: exteriordefectschimneys,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (exteriordefectschimneys) {
+                  setState(() {
+                    this.exteriordefectschimneys = exteriordefectschimneys!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: chimneysimagePath != null
+                  ? Image.file(chimneysimagePath!)
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          chimneyscaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          chimneysgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
@@ -440,36 +541,33 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
+                isExpanded: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Other if Applicable'),
                 ),
-                value: safetyhazardsother,
+                value: exteriordefectsother,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
                     value: "NA",
                   ),
                   DropdownMenuItem(
-                    child: Text('Defects/Safety Hazards found were'),
-                    value: "Defects/Safety Hazards found were",
+                    child: Text('No further Defects/Safety Hazards found.'),
+                    value: "No further Defects/Safety Hazards found",
                   ),
                   DropdownMenuItem(
-                    child: Text('No Defects/Safety Hazards found.'),
-                    value: "No Defects/Safety Hazards found",
+                    child: Text('Other Defects/Safety Hazards found were.'),
+                    value: "Other Defects/Safety Hazards found were",
                   ),
                   DropdownMenuItem(
-                    child: Text('Not present'),
-                    value: "Not present",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Part of common area'),
-                    value: "Part of common area",
+                    child: Text('Not applicable'),
+                    value: "Not applicable",
                   ),
                 ],
-                onChanged: (safetyhazardsother) {
+                onChanged: (exteriordefectsother) {
                   setState(() {
-                    this.safetyhazardsother = safetyhazardsother!;
+                    this.exteriordefectsother = exteriordefectsother!;
                     //print(personsinattendance);
                   });
                 },
@@ -517,7 +615,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                         onPressed: () {
-                          updateTheSiteDetails(widget.reportId);
+                          updateTheExteriorDetails(widget.reportId);
                         },
                         child: Text('Save & Next')),
                   ),

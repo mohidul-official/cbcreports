@@ -47,10 +47,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
   var apparentdefectsvalue = "NA";
   var informationprovidedinspector = "NA";
   var informationprovidedinspectorvalue = "NA";
-  File? imagePath;
+  var imagePath = "NA";
 
-  String? imageName;
-  String? imageData;
+  var imageName = "NA";
+  var imageData = "NA";
   File? apparentConcealmentImagePath;
 
   String? apparentConcealmentImageName;
@@ -65,10 +65,11 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       if (getimage == null) {
         return;
       } else {
-        imagePath = File(getimage.path);
-        
+        File imagePath = File(getimage.path);
+
         imageName = getimage.path.split('/').last;
-        imageData = base64Encode(imagePath!.readAsBytesSync());
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
         print(imagePath);
         print(imageName);
         print(imageData);
@@ -84,9 +85,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       if (getimage == null) {
         return;
       } else {
-        imagePath = File(getimage.path);
+        File imagePath = File(getimage.path);
         imageName = getimage.path.split('/').last;
-        imageData = base64Encode(imagePath!.readAsBytesSync());
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
         print(imagePath);
         print(imageName);
         print(imageData);
@@ -134,6 +136,12 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
 
   Future<void> updateAreasGainFactorsDetails(String id) async {
     try {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        },
+      );
       var res = await http
           .post(Uri.parse(API.prepurchaseareasgainfactorsdetails), body: {
         "id": id,
@@ -160,6 +168,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
+        Navigator.of(context).pop();
         //print("Record Inserted");
 
         Fluttertoast.showToast(msg: "Record Inserted");
@@ -174,10 +183,12 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         apparentDefectsController.clear();
         informationProvidedInspectorController.clear();*/
       } else {
+        Navigator.of(context).pop();
         print("Some Issue.");
         Fluttertoast.showToast(msg: "Some Issue.");
       }
     } catch (e) {
+      Navigator.of(context).pop();
       print(e);
 
       Fluttertoast.showToast(msg: e.toString());
@@ -236,6 +247,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
 
       return Text(
           'Dwelling was recently painted. It could have done to conceal few previous defects.');
+    } else {
+      setState(() {
+        apparentdefectsvalue = " ";
+      });
     }
   }
 
@@ -249,6 +264,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         ),
         value: informationprovidedinspectorvalue,
         items: [
+          DropdownMenuItem(
+            child: Text('-SELECT-'),
+            value: "NA",
+          ),
           DropdownMenuItem(
             child: Text('Yes'),
             value: "Yes",
@@ -436,8 +455,8 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: imagePath != null
-                  ? Image.file(imagePath!)
+              child: imageData != "NA"
+                  ? Image.memory(base64Decode(imageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -558,7 +577,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
                   ),
                   DropdownMenuItem(
                     child: Text(
-                        'Additional Information provided to inspector\n was\n'),
+                        'Additional Information provided to\ninspector was\n'),
                     value: "Additional Information provided to inspector was",
                   ),
                   DropdownMenuItem(

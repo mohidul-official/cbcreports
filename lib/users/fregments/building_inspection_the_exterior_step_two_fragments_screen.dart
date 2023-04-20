@@ -8,83 +8,69 @@ import 'package:image_picker/image_picker.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-//import 'building_inspection_the_exterior_fragments_screen.dart';
-import 'building_inspection_the_site_step_two_fragments_screen.dart';
+import 'building_inspection_the_exterior_step_three_fragments_screen.dart';
 
-class BuildingInspectionTheSiteFragments extends StatefulWidget {
+class BuildingInspectorTheExteriorStepTwoFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
 
   String reportId;
-  BuildingInspectionTheSiteFragments({Key? myKey, required this.reportId})
+  BuildingInspectorTheExteriorStepTwoFragments(
+      {Key? myKey, required this.reportId})
       : super(key: myKey);
 
   @override
-  State<BuildingInspectionTheSiteFragments> createState() =>
-      _BuildingInspectionTheSiteFragmentsState();
+  State<BuildingInspectorTheExteriorStepTwoFragments> createState() =>
+      _BuildingInspectorTheExteriorStepTwoFragmentsState();
 }
 
-class _BuildingInspectionTheSiteFragmentsState
-    extends State<BuildingInspectionTheSiteFragments> {
-  TextEditingController drivewaysController = TextEditingController();
-  TextEditingController pathsController = TextEditingController();
-  TextEditingController stepsController = TextEditingController();
-  TextEditingController retainingWallsController = TextEditingController();
-
-  TextEditingController surfaceWaterDrainageController =
+class _BuildingInspectorTheExteriorStepTwoFragmentsState
+    extends State<BuildingInspectorTheExteriorStepTwoFragments> {
+  /*TextEditingController timberSteelStructuresController =
       TextEditingController();
 
-  TextEditingController carAccommodationController = TextEditingController();
+  TextEditingController stairsController = TextEditingController();
 
-  TextEditingController detachedBuildingsController = TextEditingController();
+  TextEditingController balustradesController = TextEditingController();
 
-  TextEditingController gardenShedsFencesController = TextEditingController();
+  TextEditingController balconiesController = TextEditingController();
 
-  TextEditingController otherIfApplicableController = TextEditingController();
+  TextEditingController verandasController = TextEditingController();*/
 
-  File? safetyhazardsdrivewaysimagepath;
-  String? safetyhazardsdrivewaysimagename;
-  String? safetyhazardsdrivewaysimagedata;
+  File? timberimagePath;
+  String? timberimageName;
+  String? timberimageData;
 
-  File? safetyhazardspathsimagepath;
-  String? safetyhazardspathsimagename;
-  String? safetyhazardspathsimagedata;
+  File? stairsimagePath;
+  String? stairsimageName;
+  String? stairsimageData;
 
-  File? safetyhazardsstepsimagepath;
-  String? safetyhazardsstepsimagename;
-  String? safetyhazardsstepsimagedata;
+  File? balustradesimagePath;
+  String? balustradesimageName;
+  String? balustradesimageData;
 
-  File? safetyhazardsretainingwallsimagepath;
-  String? safetyhazardsretainingwallsimagename;
-  String? safetyhazardsretainingwallsimagedata;
+  File? balconiesimagePath;
+  String? balconiesimageName;
+  String? balconiesimageData;
 
-  File? safetyhazardscaraccommodationimagepath;
-  String? safetyhazardscaraccommodationimagename;
-  String? safetyhazardscaraccommodationimagedata;
+  File? verandasimagePath;
+  String? verandasimageName;
+  String? verandasimageData;
 
-  File? safetyhazardsdetachedbuildingsimagepath;
-  String? safetyhazardsdetachedbuildingsimagename;
-  String? safetyhazardsdetachedbuildingsimagedata;
+  var exteriordefectstimber = "NA";
 
-  var safetyhazardsdriveways = "NA";
-  var safetyhazardsdrivewaysvalue = "NA";
+  var exteriordefectsstairs = "NA";
 
-  var safetyhazardspaths = "NA";
-  var safetyhazardspathsvalue = "NA";
+  var exteriordefectsbalustrades = "NA";
 
-  var safetyhazardssteps = "NA";
-  var safetyhazardsstepsvalue = "NA";
+  var exteriordefectsbalconies = "NA";
+  var exteriordefectsbalconiesvalue = "NA";
 
-  var safetyhazardswalls = "NA";
-  var safetyhazardswallsvalue = "NA";
-
-  var safetyhazardswaterdrainage = "NA";
-  var safetyhazardswaterdrainagevalue = "NA";
-
-  var safetyhazardscar = "NA";
+  var exteriordefectsverandas = "NA";
+  var exteriordefectsverandasvalue = "NA";
 
   ImagePicker imagePicker = ImagePicker();
 
-  Future<void> getImage() async {
+  Future<void> timbergetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -92,18 +78,17 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsdrivewaysimagepath = File(getimage.path);
-        safetyhazardsdrivewaysimagename = getimage.path.split('/').last;
-        safetyhazardsdrivewaysimagedata =
-            base64Encode(safetyhazardsdrivewaysimagepath!.readAsBytesSync());
-        print(safetyhazardsdrivewaysimagepath);
-        print(safetyhazardsdrivewaysimagename);
-        print(safetyhazardsdrivewaysimagedata);
+        timberimagePath = File(getimage.path);
+        timberimageName = getimage.path.split('/').last;
+        timberimageData = base64Encode(timberimagePath!.readAsBytesSync());
+        print(timberimagePath);
+        print(timberimageName);
+        print(timberimageData);
       }
     });
   }
 
-  Future<void> captureImage() async {
+  Future<void> timbercaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -111,18 +96,17 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsdrivewaysimagepath = File(getimage.path);
-        safetyhazardsdrivewaysimagename = getimage.path.split('/').last;
-        safetyhazardsdrivewaysimagedata =
-            base64Encode(safetyhazardsdrivewaysimagepath!.readAsBytesSync());
-        print(safetyhazardsdrivewaysimagepath);
-        print(safetyhazardsdrivewaysimagename);
-        print(safetyhazardsdrivewaysimagedata);
+        timberimagePath = File(getimage.path);
+        timberimageName = getimage.path.split('/').last;
+        timberimageData = base64Encode(timberimagePath!.readAsBytesSync());
+        print(timberimagePath);
+        print(timberimageName);
+        print(timberimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsPathsGetImage() async {
+  Future<void> stairsgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -130,18 +114,17 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardspathsimagepath = File(getimage.path);
-        safetyhazardspathsimagename = getimage.path.split('/').last;
-        safetyhazardspathsimagedata =
-            base64Encode(safetyhazardspathsimagepath!.readAsBytesSync());
-        print(safetyhazardspathsimagepath);
-        print(safetyhazardspathsimagename);
-        print(safetyhazardspathsimagedata);
+        stairsimagePath = File(getimage.path);
+        stairsimageName = getimage.path.split('/').last;
+        stairsimageData = base64Encode(stairsimagePath!.readAsBytesSync());
+        print(stairsimagePath);
+        print(stairsimageName);
+        print(stairsimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsPathsCaptureImage() async {
+  Future<void> stairscaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -149,18 +132,17 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardspathsimagepath = File(getimage.path);
-        safetyhazardspathsimagename = getimage.path.split('/').last;
-        safetyhazardspathsimagedata =
-            base64Encode(safetyhazardspathsimagepath!.readAsBytesSync());
-        print(safetyhazardspathsimagepath);
-        print(safetyhazardspathsimagename);
-        print(safetyhazardspathsimagedata);
+        stairsimagePath = File(getimage.path);
+        stairsimageName = getimage.path.split('/').last;
+        stairsimageData = base64Encode(stairsimagePath!.readAsBytesSync());
+        print(stairsimagePath);
+        print(stairsimageName);
+        print(stairsimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsStepsGetImage() async {
+  Future<void> balustradesgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -168,18 +150,18 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsstepsimagepath = File(getimage.path);
-        safetyhazardsstepsimagename = getimage.path.split('/').last;
-        safetyhazardsstepsimagedata =
-            base64Encode(safetyhazardsstepsimagepath!.readAsBytesSync());
-        print(safetyhazardsstepsimagepath);
-        print(safetyhazardsstepsimagename);
-        print(safetyhazardsstepsimagedata);
+        balustradesimagePath = File(getimage.path);
+        balustradesimageName = getimage.path.split('/').last;
+        balustradesimageData =
+            base64Encode(balustradesimagePath!.readAsBytesSync());
+        print(balustradesimagePath);
+        print(balustradesimageName);
+        print(balustradesimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsStepsCaptureImage() async {
+  Future<void> balustradescaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -187,18 +169,18 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsstepsimagepath = File(getimage.path);
-        safetyhazardsstepsimagename = getimage.path.split('/').last;
-        safetyhazardsstepsimagedata =
-            base64Encode(safetyhazardsstepsimagepath!.readAsBytesSync());
-        print(safetyhazardsstepsimagepath);
-        print(safetyhazardsstepsimagename);
-        print(safetyhazardsstepsimagedata);
+        balustradesimagePath = File(getimage.path);
+        balustradesimageName = getimage.path.split('/').last;
+        balustradesimageData =
+            base64Encode(balustradesimagePath!.readAsBytesSync());
+        print(balustradesimagePath);
+        print(balustradesimageName);
+        print(balustradesimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsretainingWallsGetImage() async {
+  Future<void> balconiesgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -206,18 +188,18 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsretainingwallsimagepath = File(getimage.path);
-        safetyhazardsretainingwallsimagename = getimage.path.split('/').last;
-        safetyhazardsretainingwallsimagedata = base64Encode(
-            safetyhazardsretainingwallsimagepath!.readAsBytesSync());
-        print(safetyhazardsretainingwallsimagepath);
-        print(safetyhazardsretainingwallsimagename);
-        print(safetyhazardsretainingwallsimagedata);
+        balconiesimagePath = File(getimage.path);
+        balconiesimageName = getimage.path.split('/').last;
+        balconiesimageData =
+            base64Encode(balconiesimagePath!.readAsBytesSync());
+        print(balconiesimagePath);
+        print(balconiesimageName);
+        print(balconiesimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsretainingWallsCaptureImage() async {
+  Future<void> balconiescaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -225,18 +207,18 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsretainingwallsimagepath = File(getimage.path);
-        safetyhazardsretainingwallsimagename = getimage.path.split('/').last;
-        safetyhazardsretainingwallsimagedata = base64Encode(
-            safetyhazardsretainingwallsimagepath!.readAsBytesSync());
-        print(safetyhazardsretainingwallsimagepath);
-        print(safetyhazardsretainingwallsimagename);
-        print(safetyhazardsretainingwallsimagedata);
+        balconiesimagePath = File(getimage.path);
+        balconiesimageName = getimage.path.split('/').last;
+        balconiesimageData =
+            base64Encode(balconiesimagePath!.readAsBytesSync());
+        print(balconiesimagePath);
+        print(balconiesimageName);
+        print(balconiesimageData);
       }
     });
   }
 
-  Future<void> safetyhazardscarAccommodationGetImage() async {
+  Future<void> verandasgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -244,129 +226,58 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardscaraccommodationimagepath = File(getimage.path);
-        safetyhazardscaraccommodationimagename = getimage.path.split('/').last;
-        safetyhazardscaraccommodationimagedata = base64Encode(
-            safetyhazardscaraccommodationimagepath!.readAsBytesSync());
-        print(safetyhazardscaraccommodationimagepath);
-        print(safetyhazardscaraccommodationimagename);
-        print(safetyhazardscaraccommodationimagedata);
+        verandasimagePath = File(getimage.path);
+        verandasimageName = getimage.path.split('/').last;
+        verandasimageData = base64Encode(verandasimagePath!.readAsBytesSync());
+        print(verandasimagePath);
+        print(verandasimageName);
+        print(verandasimageData);
       }
     });
   }
 
-  Future<void> safetyhazardscarAccommodationCaptureImage() async {
-    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+  Future<void> verandascaptureImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
     setState(() {
       if (getimage == null) {
         return;
       } else {
-        safetyhazardscaraccommodationimagepath = File(getimage.path);
-        safetyhazardscaraccommodationimagename = getimage.path.split('/').last;
-        safetyhazardscaraccommodationimagedata = base64Encode(
-            safetyhazardscaraccommodationimagepath!.readAsBytesSync());
-        print(safetyhazardscaraccommodationimagepath);
-        print(safetyhazardscaraccommodationimagename);
-        print(safetyhazardscaraccommodationimagedata);
+        verandasimagePath = File(getimage.path);
+        verandasimageName = getimage.path.split('/').last;
+        verandasimageData = base64Encode(verandasimagePath!.readAsBytesSync());
+        print(verandasimagePath);
+        print(verandasimageName);
+        print(verandasimageData);
       }
     });
   }
 
-  safetyhazardsdrivewaysCheck() {
-    if (safetyhazardsdriveways == "Defects/Safety Hazards found were") {
-      setState(() {
-        safetyhazardsdrivewaysvalue =
-            "Movement Cracking to driveway was observed. This does not have any impact on the building.";
-      });
-
-      return Text(
-          'Movement Cracking to driveway was observed. This does not have any impact on the building.');
-    } else {
-      setState(() {
-        safetyhazardsdrivewaysvalue = " ";
-      });
-    }
-  }
-
-  safetyhazardspathsCheck() {
-    if (safetyhazardspaths == "Defects/Safety Hazards found were") {
-      setState(() {
-        safetyhazardspathsvalue =
-            "Gaps were found between brickwork and concreting due to lose soil under the concrete. It is recommended to contact a certified concreter for further advise.";
-      });
-
-      return Text(
-          'Gaps were found between brickwork and concreting due to lose soil under the concrete. It is recommended to contact a certified concreter for further advise.');
-    } else {
-      setState(() {
-        safetyhazardspathsvalue = " ";
-      });
-    }
-  }
-
-  safetyhazardsstepsCheck() {
-    if (safetyhazardssteps == "Defects/Safety Hazards found were") {
-      setState(() {
-        safetyhazardsstepsvalue =
-            "Cracking to steps found due to General movement.";
-      });
-
-      return Text('Cracking to steps found due to General movement.');
-    } else {
-      setState(() {
-        safetyhazardsstepsvalue = " ";
-      });
-    }
-  }
-
-  safetyhazardswallsCheck() {
-    if (safetyhazardswalls == "Defects/Safety Hazards found were") {
-      setState(() {
-        safetyhazardswallsvalue =
-            "Retaining wall was weathered. It is recommended to contact a certified carpenter for further advise.";
-      });
-
-      return Text(
-          'Retaining wall was weathered. It is recommended to contact a certified carpenter for further advise.');
-    } else {
-      setState(() {
-        safetyhazardswallsvalue = " ";
-      });
-    }
-  }
-
-  safetyhazardswaterdrainageCheck() {
-    if (safetyhazardswaterdrainage == "Defects/Safety Hazards found were") {
+  exteriordefectsbalconiesCheck() {
+    if (exteriordefectsbalconies == "Defects/Safety Hazards found were") {
       return DropdownButtonFormField(
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           label: Text('Defects/Safety Hazards found were'),
         ),
-        value: safetyhazardswaterdrainagevalue,
+        value: exteriordefectsbalconiesvalue,
         items: [
           DropdownMenuItem(
             child: Text('-Select-'),
             value: "NA",
           ),
           DropdownMenuItem(
-            child: Text(
-                'Natural slope of the ground is towards \nthe dwelling. It is recommended to contact\n a licensed plumber to install adequate\n drainage.\n'),
-            value:
-                "Natural slope of the ground is towards the dwelling. It is recommended to contact a licensed plumber to install adequate drainage.",
+            child: Text('Tiles are cracked.'),
+            value: "Tiles are cracked.",
           ),
           DropdownMenuItem(
-            child: Text(
-                'Natural slope of the ground is towards \nthe dwelling. It is recommended to make\n sure that slope must be going away \nfrom the dwelling.'),
-            value:
-                "Natural slope of the ground is towards the dwelling. It is recommended to make sure that slope must be going away from the dwelling.",
+            child: Text('Grouting is damaged.'),
+            value: "Grouting is damaged.",
           ),
         ],
-        onChanged: (safetyhazardswaterdrainagevalue) {
+        onChanged: (exteriordefectsbalconiesvalue) {
           setState(() {
-            this.safetyhazardswaterdrainagevalue =
-                safetyhazardswaterdrainagevalue!;
+            this.exteriordefectsbalconiesvalue = exteriordefectsbalconiesvalue!;
             //print(personsinattendance);
           });
         },
@@ -374,7 +285,23 @@ class _BuildingInspectionTheSiteFragmentsState
     }
   }
 
-  Future<void> updateTheSiteDetails(String id) async {
+  exteriordefectsverandasCheck() {
+    if (exteriordefectsverandas == "Defects/Safety Hazards found were") {
+      setState(() {
+        exteriordefectsverandasvalue =
+            "Retaining wall was weathered. It is recommended to contact a certified carpenter for further advise.";
+      });
+
+      return Text(
+          'Retaining wall was weathered. It is recommended to contact a certified carpenter for further advise.');
+    } else {
+      setState(() {
+        exteriordefectsverandasvalue = " ";
+      });
+    }
+  }
+
+  Future<void> updateTheExteriorDetails(String id) async {
     try {
       showDialog(
         context: context,
@@ -382,41 +309,31 @@ class _BuildingInspectionTheSiteFragmentsState
           return Center(child: CircularProgressIndicator());
         },
       );
-      var res =
-          await http.post(Uri.parse(API.prepurchasethesitedetails), body: {
+      var res = await http
+          .post(Uri.parse(API.prepurchasetheexteriorsteptwodetails), body: {
         "id": id,
-        //"safetyhazardsdriveways": drivewaysController.text.trim(),
-        "safetyhazardsdriveways": safetyhazardsdriveways,
-        "safetyhazardsdrivewaysvalue": safetyhazardsdrivewaysvalue,
-        //"safetyhazardspaths": pathsController.text.trim(),
-        "safetyhazardspaths": safetyhazardspaths,
-        "safetyhazardspathsvalue": safetyhazardspathsvalue,
-        //"safetyhazardssteps": stepsController.text.trim(),
-        "safetyhazardssteps": safetyhazardssteps,
-        "safetyhazardsstepsvalue": safetyhazardsstepsvalue,
-        //"safetyhazardswalls": retainingWallsController.text.trim(),
-        "safetyhazardswalls": safetyhazardswalls,
-        "safetyhazardswallsvalue": safetyhazardswallsvalue,
-        /*"safetyhazardswaterdrainage":
-            surfaceWaterDrainageController.text.trim(),*/
-        "safetyhazardswaterdrainage": safetyhazardswaterdrainage,
-        "safetyhazardswaterdrainagevalue": safetyhazardswaterdrainagevalue,
-        //"safetyhazardscar": carAccommodationController.text.trim(),
-        "safetyhazardscar": safetyhazardscar,
-        "safetyhazardsdrivewaysimagedata": safetyhazardsdrivewaysimagedata,
-        "safetyhazardsdrivewaysimagename": safetyhazardsdrivewaysimagename,
-        "safetyhazardspathsimagedata": safetyhazardspathsimagedata,
-        "safetyhazardspathsimagename": safetyhazardspathsimagename,
-        "safetyhazardsstepsimagedata": safetyhazardsstepsimagedata,
-        "safetyhazardsstepsimagename": safetyhazardsstepsimagename,
-        "safetyhazardsretainingwallsimagedata":
-            safetyhazardsretainingwallsimagedata,
-        "safetyhazardsretainingwallsimagename":
-            safetyhazardsretainingwallsimagename,
-        "safetyhazardscaraccommodationimagedata":
-            safetyhazardscaraccommodationimagedata,
-        "safetyhazardscaraccommodationimagename":
-            safetyhazardscaraccommodationimagename,
+        //"exteriordefectstimber": timberSteelStructuresController.text.trim(),
+        "exteriordefectstimber": exteriordefectstimber,
+        //"exteriordefectsstairs": stairsController.text.trim(),
+        "exteriordefectsstairs": exteriordefectsstairs,
+        //"exteriordefectsbalustrades": balustradesController.text.trim(),
+        "exteriordefectsbalustrades": exteriordefectsbalustrades,
+        //"exteriordefectsbalconies": balconiesController.text.trim(),
+        "exteriordefectsbalconies": exteriordefectsbalconies,
+        "exteriordefectsbalconiesvalue": exteriordefectsbalconiesvalue,
+        //"exteriordefectsverandas": verandasController.text.trim(),
+        "exteriordefectsverandas": exteriordefectsverandas,
+        "exteriordefectsverandasvalue": exteriordefectsverandasvalue,
+        "timberimagedata": timberimageData,
+        "timberimagename": timberimageName,
+        "stairsimagedata": stairsimageData,
+        "stairsimagename": stairsimageName,
+        "balustradesimagedata": balustradesimageData,
+        "balustradesimagename": balustradesimageName,
+        "balconiesimagedata": balconiesimageData,
+        "balconiesimagename": balconiesimageName,
+        "verandasimagedata": verandasimageData,
+        "verandasimagename": verandasimageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -426,13 +343,7 @@ class _BuildingInspectionTheSiteFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectionTheSiteStepTwoFragments(reportId: id)));
-        /*drivewaysController.clear();
-        pathsController.clear();
-        stepsController.clear();
-        retainingWallsController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
+                BuildingInspectorTheExteriorStepThreeFragments(reportId: id)));
       } else {
         Navigator.of(context).pop();
         print("Some Issue.");
@@ -458,7 +369,7 @@ class _BuildingInspectionTheSiteFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'THE SITE (STEP 1)',
+                'EXTERIOR OF THE BUILDING (STEP 2)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -478,16 +389,16 @@ class _BuildingInspectionTheSiteFragmentsState
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
-            //Driveways
+            //Timber and Steel Structures
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Driveways'),
+                  label: Text('Timber and Steel Structures'),
                 ),
-                value: safetyhazardsdriveways,
+                value: exteriordefectstimber,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -510,23 +421,18 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardsdriveways) {
+                onChanged: (exteriordefectstimber) {
                   setState(() {
-                    this.safetyhazardsdriveways = safetyhazardsdriveways!;
+                    this.exteriordefectstimber = exteriordefectstimber!;
                     //print(personsinattendance);
                   });
                 },
               ),
             ),
-            //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsdrivewaysCheck(),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: safetyhazardsdrivewaysimagepath != null
-                  ? Image.file(safetyhazardsdrivewaysimagepath!)
+              child: timberimagePath != null
+                  ? Image.file(timberimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -538,7 +444,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          captureImage();
+                          timbercaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -546,23 +452,23 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          getImage();
+                          timbergetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Paths
+            //Stairs
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Paths'),
+                  label: Text('Stairs'),
                 ),
-                value: safetyhazardspaths,
+                value: exteriordefectsstairs,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -585,23 +491,18 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardspaths) {
+                onChanged: (exteriordefectsstairs) {
                   setState(() {
-                    this.safetyhazardspaths = safetyhazardspaths!;
+                    this.exteriordefectsstairs = exteriordefectsstairs!;
                     //print(personsinattendance);
                   });
                 },
               ),
             ),
-            //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardspathsCheck(),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: safetyhazardspathsimagepath != null
-                  ? Image.file(safetyhazardspathsimagepath!)
+              child: stairsimagePath != null
+                  ? Image.file(stairsimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -613,7 +514,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsPathsCaptureImage();
+                          stairscaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -621,23 +522,23 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsPathsGetImage();
+                          stairsgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Steps
+            //Balustrades
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Steps'),
+                  label: Text('Balustrades'),
                 ),
-                value: safetyhazardssteps,
+                value: exteriordefectsbalustrades,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -660,23 +561,19 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardssteps) {
+                onChanged: (exteriordefectsbalustrades) {
                   setState(() {
-                    this.safetyhazardssteps = safetyhazardssteps!;
+                    this.exteriordefectsbalustrades =
+                        exteriordefectsbalustrades!;
                     //print(personsinattendance);
                   });
                 },
               ),
             ),
-            //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsstepsCheck(),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: safetyhazardsstepsimagepath != null
-                  ? Image.file(safetyhazardsstepsimagepath!)
+              child: balustradesimagePath != null
+                  ? Image.file(balustradesimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -688,7 +585,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsStepsCaptureImage();
+                          balustradescaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -696,23 +593,23 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsStepsGetImage();
+                          balustradesgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Retaining Walls
+            //Balconies
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Retaining Walls'),
+                  label: Text('Balconies'),
                 ),
-                value: safetyhazardswalls,
+                value: exteriordefectsbalconies,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -735,9 +632,9 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardswalls) {
+                onChanged: (exteriordefectsbalconies) {
                   setState(() {
-                    this.safetyhazardswalls = safetyhazardswalls!;
+                    this.exteriordefectsbalconies = exteriordefectsbalconies!;
                     //print(personsinattendance);
                   });
                 },
@@ -746,12 +643,12 @@ class _BuildingInspectionTheSiteFragmentsState
             //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardswallsCheck(),
+              child: exteriordefectsbalconiesCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsretainingwallsimagepath != null
-                  ? Image.file(safetyhazardsretainingwallsimagepath!)
+              child: balconiesimagePath != null
+                  ? Image.file(balconiesimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -763,7 +660,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsretainingWallsCaptureImage();
+                          balconiescaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -771,23 +668,23 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsretainingWallsGetImage();
+                          balconiesgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Surface Water Drainage
+            //Verandas
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Surface Water Drainage'),
+                  label: Text('Verandas'),
                 ),
-                value: safetyhazardswaterdrainage,
+                value: exteriordefectsverandas,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -810,10 +707,9 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardswaterdrainage) {
+                onChanged: (exteriordefectsverandas) {
                   setState(() {
-                    this.safetyhazardswaterdrainage =
-                        safetyhazardswaterdrainage!;
+                    this.exteriordefectsverandas = exteriordefectsverandas!;
                     //print(personsinattendance);
                   });
                 },
@@ -822,52 +718,12 @@ class _BuildingInspectionTheSiteFragmentsState
             //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardswaterdrainageCheck(),
-            ),
-            //Car Accommodation
-
-            Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Car Accommodation'),
-                ),
-                value: safetyhazardscar,
-                items: [
-                  DropdownMenuItem(
-                    child: Text('-Select-'),
-                    value: "NA",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Defects/Safety Hazards found were'),
-                    value: "Defects/Safety Hazards found were",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('No Defects/Safety Hazards found.'),
-                    value: "No Defects/Safety Hazards found",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Not present'),
-                    value: "Not present",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Part of common area'),
-                    value: "Part of common area",
-                  ),
-                ],
-                onChanged: (safetyhazardscar) {
-                  setState(() {
-                    this.safetyhazardscar = safetyhazardscar!;
-                    //print(personsinattendance);
-                  });
-                },
-              ),
+              child: exteriordefectsverandasCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardscaraccommodationimagepath != null
-                  ? Image.file(safetyhazardscaraccommodationimagepath!)
+              child: verandasimagePath != null
+                  ? Image.file(verandasimagePath!)
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -879,7 +735,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardscarAccommodationCaptureImage();
+                          verandascaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -887,7 +743,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardscarAccommodationGetImage();
+                          verandasgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
@@ -906,7 +762,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                         onPressed: () {
-                          updateTheSiteDetails(widget.reportId);
+                          updateTheExteriorDetails(widget.reportId);
                         },
                         child: Text('Save & Next')),
                   ),

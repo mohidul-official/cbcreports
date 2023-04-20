@@ -8,79 +8,78 @@ import 'package:image_picker/image_picker.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-//import 'building_inspection_the_exterior_fragments_screen.dart';
-import 'building_inspection_the_site_step_two_fragments_screen.dart';
+import 'building_inspection_the_interior_step_three_fragments_screen.dart';
+import 'building_inspection_the_roof_interior_fragments_screen.dart';
 
-class BuildingInspectionTheSiteFragments extends StatefulWidget {
+class BuildingInspectionTheInteriorStepTwoFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
 
   String reportId;
-  BuildingInspectionTheSiteFragments({Key? myKey, required this.reportId})
+  BuildingInspectionTheInteriorStepTwoFragments(
+      {Key? myKey, required this.reportId})
       : super(key: myKey);
 
   @override
-  State<BuildingInspectionTheSiteFragments> createState() =>
-      _BuildingInspectionTheSiteFragmentsState();
+  State<BuildingInspectionTheInteriorStepTwoFragments> createState() =>
+      _BuildingInspectionTheInteriorStepTwoFragmentsState();
 }
 
-class _BuildingInspectionTheSiteFragmentsState
-    extends State<BuildingInspectionTheSiteFragments> {
-  TextEditingController drivewaysController = TextEditingController();
-  TextEditingController pathsController = TextEditingController();
-  TextEditingController stepsController = TextEditingController();
-  TextEditingController retainingWallsController = TextEditingController();
+class _BuildingInspectionTheInteriorStepTwoFragmentsState
+    extends State<BuildingInspectionTheInteriorStepTwoFragments> {
+  TextEditingController familyRoomController = TextEditingController();
 
-  TextEditingController surfaceWaterDrainageController =
-      TextEditingController();
+  TextEditingController studyController = TextEditingController();
 
-  TextEditingController carAccommodationController = TextEditingController();
+  TextEditingController stairsController = TextEditingController();
 
-  TextEditingController detachedBuildingsController = TextEditingController();
+  TextEditingController laundryController = TextEditingController();
 
-  TextEditingController gardenShedsFencesController = TextEditingController();
+  TextEditingController toiletController = TextEditingController();
+
+  TextEditingController bathroomController = TextEditingController();
+
+  TextEditingController enSuiteController = TextEditingController();
+
+  TextEditingController bedroomOneController = TextEditingController();
+
+  TextEditingController bedroomTwoController = TextEditingController();
+
+  TextEditingController bedroomThreeController = TextEditingController();
+
+  TextEditingController bedroomFourController = TextEditingController();
 
   TextEditingController otherIfApplicableController = TextEditingController();
 
-  File? safetyhazardsdrivewaysimagepath;
-  String? safetyhazardsdrivewaysimagename;
-  String? safetyhazardsdrivewaysimagedata;
+  var interiordefectsfamily = "NA";
 
-  File? safetyhazardspathsimagepath;
-  String? safetyhazardspathsimagename;
-  String? safetyhazardspathsimagedata;
+  var interiordefectsstudy = "NA";
 
-  File? safetyhazardsstepsimagepath;
-  String? safetyhazardsstepsimagename;
-  String? safetyhazardsstepsimagedata;
+  var interiordefectsstairs = "NA";
 
-  File? safetyhazardsretainingwallsimagepath;
-  String? safetyhazardsretainingwallsimagename;
-  String? safetyhazardsretainingwallsimagedata;
+  var interiordefectslaundry = "NA";
+  var interiordefectslaundryvalue = "NA";
 
-  File? safetyhazardscaraccommodationimagepath;
-  String? safetyhazardscaraccommodationimagename;
-  String? safetyhazardscaraccommodationimagedata;
+  var interiordefectstoilet = "NA";
 
-  File? safetyhazardsdetachedbuildingsimagepath;
-  String? safetyhazardsdetachedbuildingsimagename;
-  String? safetyhazardsdetachedbuildingsimagedata;
+  var imagePath = "NA";
+  var imageName = "NA";
+  var imageData = "NA";
 
-  var safetyhazardsdriveways = "NA";
-  var safetyhazardsdrivewaysvalue = "NA";
+  var interiordefectsstudyimagePath = "NA";
+  var interiordefectsstudyimageName = "NA";
+  var interiordefectsstudyimageData = "NA";
 
-  var safetyhazardspaths = "NA";
-  var safetyhazardspathsvalue = "NA";
+  var interiordefectsstairsimagePath = "NA";
+  var interiordefectsstairsimageName = "NA";
+  var interiordefectsstairsimageData = "NA";
 
-  var safetyhazardssteps = "NA";
-  var safetyhazardsstepsvalue = "NA";
+  var interiordefectslaundryimagePath = "NA";
+  var interiordefectslaundryimageName = "NA";
+  var interiordefectslaundryimageData = "NA";
 
-  var safetyhazardswalls = "NA";
-  var safetyhazardswallsvalue = "NA";
-
-  var safetyhazardswaterdrainage = "NA";
-  var safetyhazardswaterdrainagevalue = "NA";
-
-  var safetyhazardscar = "NA";
+  var interiordefectstoiletimagePath = "NA";
+  var interiordefectstoiletimageName = "NA";
+  var interiordefectstoiletimageData = "NA";
 
   ImagePicker imagePicker = ImagePicker();
 
@@ -92,13 +91,14 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsdrivewaysimagepath = File(getimage.path);
-        safetyhazardsdrivewaysimagename = getimage.path.split('/').last;
-        safetyhazardsdrivewaysimagedata =
-            base64Encode(safetyhazardsdrivewaysimagepath!.readAsBytesSync());
-        print(safetyhazardsdrivewaysimagepath);
-        print(safetyhazardsdrivewaysimagename);
-        print(safetyhazardsdrivewaysimagedata);
+        File imagePath = File(getimage.path);
+
+        imageName = getimage.path.split('/').last;
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
+        print(imagePath);
+        print(imageName);
+        print(imageData);
       }
     });
   }
@@ -111,18 +111,18 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsdrivewaysimagepath = File(getimage.path);
-        safetyhazardsdrivewaysimagename = getimage.path.split('/').last;
-        safetyhazardsdrivewaysimagedata =
-            base64Encode(safetyhazardsdrivewaysimagepath!.readAsBytesSync());
-        print(safetyhazardsdrivewaysimagepath);
-        print(safetyhazardsdrivewaysimagename);
-        print(safetyhazardsdrivewaysimagedata);
+        File imagePath = File(getimage.path);
+        imageName = getimage.path.split('/').last;
+        imageData = base64Encode(imagePath.readAsBytesSync());
+
+        print(imagePath);
+        print(imageName);
+        print(imageData);
       }
     });
   }
 
-  Future<void> safetyhazardsPathsGetImage() async {
+  Future<void> interiordefectsstudygetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -130,18 +130,20 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardspathsimagepath = File(getimage.path);
-        safetyhazardspathsimagename = getimage.path.split('/').last;
-        safetyhazardspathsimagedata =
-            base64Encode(safetyhazardspathsimagepath!.readAsBytesSync());
-        print(safetyhazardspathsimagepath);
-        print(safetyhazardspathsimagename);
-        print(safetyhazardspathsimagedata);
+        File interiordefectsstudyimagePath = File(getimage.path);
+
+        interiordefectsstudyimageName = getimage.path.split('/').last;
+        interiordefectsstudyimageData =
+            base64Encode(interiordefectsstudyimagePath.readAsBytesSync());
+
+        print(interiordefectsstudyimagePath);
+        print(interiordefectsstudyimageName);
+        print(interiordefectsstudyimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsPathsCaptureImage() async {
+  Future<void> interiordefectsstudycaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -149,18 +151,20 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardspathsimagepath = File(getimage.path);
-        safetyhazardspathsimagename = getimage.path.split('/').last;
-        safetyhazardspathsimagedata =
-            base64Encode(safetyhazardspathsimagepath!.readAsBytesSync());
-        print(safetyhazardspathsimagepath);
-        print(safetyhazardspathsimagename);
-        print(safetyhazardspathsimagedata);
+        File interiordefectsstudyimagePath = File(getimage.path);
+
+        interiordefectsstudyimageName = getimage.path.split('/').last;
+        interiordefectsstudyimageData =
+            base64Encode(interiordefectsstudyimagePath.readAsBytesSync());
+
+        print(interiordefectsstudyimagePath);
+        print(interiordefectsstudyimageName);
+        print(interiordefectsstudyimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsStepsGetImage() async {
+  Future<void> interiordefectsstairsgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -168,18 +172,20 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsstepsimagepath = File(getimage.path);
-        safetyhazardsstepsimagename = getimage.path.split('/').last;
-        safetyhazardsstepsimagedata =
-            base64Encode(safetyhazardsstepsimagepath!.readAsBytesSync());
-        print(safetyhazardsstepsimagepath);
-        print(safetyhazardsstepsimagename);
-        print(safetyhazardsstepsimagedata);
+        File interiordefectsstairsimagePath = File(getimage.path);
+
+        interiordefectsstairsimageName = getimage.path.split('/').last;
+        interiordefectsstairsimageData =
+            base64Encode(interiordefectsstairsimagePath.readAsBytesSync());
+
+        print(interiordefectsstairsimagePath);
+        print(interiordefectsstairsimageName);
+        print(interiordefectsstairsimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsStepsCaptureImage() async {
+  Future<void> interiordefectsstairscaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -187,18 +193,19 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsstepsimagepath = File(getimage.path);
-        safetyhazardsstepsimagename = getimage.path.split('/').last;
-        safetyhazardsstepsimagedata =
-            base64Encode(safetyhazardsstepsimagepath!.readAsBytesSync());
-        print(safetyhazardsstepsimagepath);
-        print(safetyhazardsstepsimagename);
-        print(safetyhazardsstepsimagedata);
+        File interiordefectsstairsimagePath = File(getimage.path);
+        interiordefectsstairsimageName = getimage.path.split('/').last;
+        interiordefectsstairsimageData =
+            base64Encode(interiordefectsstairsimagePath.readAsBytesSync());
+
+        print(interiordefectsstairsimagePath);
+        print(interiordefectsstairsimageName);
+        print(interiordefectsstairsimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsretainingWallsGetImage() async {
+  Future<void> interiordefectslaundrygetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -206,18 +213,20 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsretainingwallsimagepath = File(getimage.path);
-        safetyhazardsretainingwallsimagename = getimage.path.split('/').last;
-        safetyhazardsretainingwallsimagedata = base64Encode(
-            safetyhazardsretainingwallsimagepath!.readAsBytesSync());
-        print(safetyhazardsretainingwallsimagepath);
-        print(safetyhazardsretainingwallsimagename);
-        print(safetyhazardsretainingwallsimagedata);
+        File interiordefectslaundryimagePath = File(getimage.path);
+
+        interiordefectslaundryimageName = getimage.path.split('/').last;
+        interiordefectslaundryimageData =
+            base64Encode(interiordefectslaundryimagePath.readAsBytesSync());
+
+        print(interiordefectslaundryimagePath);
+        print(interiordefectslaundryimageName);
+        print(interiordefectslaundryimageData);
       }
     });
   }
 
-  Future<void> safetyhazardsretainingWallsCaptureImage() async {
+  Future<void> interiordefectslaundrycaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -225,18 +234,20 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsretainingwallsimagepath = File(getimage.path);
-        safetyhazardsretainingwallsimagename = getimage.path.split('/').last;
-        safetyhazardsretainingwallsimagedata = base64Encode(
-            safetyhazardsretainingwallsimagepath!.readAsBytesSync());
-        print(safetyhazardsretainingwallsimagepath);
-        print(safetyhazardsretainingwallsimagename);
-        print(safetyhazardsretainingwallsimagedata);
+        File interiordefectslaundryimagePath = File(getimage.path);
+
+        interiordefectslaundryimageName = getimage.path.split('/').last;
+        interiordefectslaundryimageData =
+            base64Encode(interiordefectslaundryimagePath.readAsBytesSync());
+
+        print(interiordefectslaundryimagePath);
+        print(interiordefectslaundryimageName);
+        print(interiordefectslaundryimageData);
       }
     });
   }
 
-  Future<void> safetyhazardscarAccommodationGetImage() async {
+  Future<void> interiordefectstoiletgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -244,18 +255,20 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardscaraccommodationimagepath = File(getimage.path);
-        safetyhazardscaraccommodationimagename = getimage.path.split('/').last;
-        safetyhazardscaraccommodationimagedata = base64Encode(
-            safetyhazardscaraccommodationimagepath!.readAsBytesSync());
-        print(safetyhazardscaraccommodationimagepath);
-        print(safetyhazardscaraccommodationimagename);
-        print(safetyhazardscaraccommodationimagedata);
+        File interiordefectstoiletimagePath = File(getimage.path);
+
+        interiordefectstoiletimageName = getimage.path.split('/').last;
+        interiordefectstoiletimageData =
+            base64Encode(interiordefectstoiletimagePath.readAsBytesSync());
+
+        print(interiordefectstoiletimagePath);
+        print(interiordefectstoiletimageName);
+        print(interiordefectstoiletimageData);
       }
     });
   }
 
-  Future<void> safetyhazardscarAccommodationCaptureImage() async {
+  Future<void> interiordefectstoiletcaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -263,110 +276,51 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardscaraccommodationimagepath = File(getimage.path);
-        safetyhazardscaraccommodationimagename = getimage.path.split('/').last;
-        safetyhazardscaraccommodationimagedata = base64Encode(
-            safetyhazardscaraccommodationimagepath!.readAsBytesSync());
-        print(safetyhazardscaraccommodationimagepath);
-        print(safetyhazardscaraccommodationimagename);
-        print(safetyhazardscaraccommodationimagedata);
+        File interiordefectstoiletimagePath = File(getimage.path);
+
+        interiordefectstoiletimageName = getimage.path.split('/').last;
+        interiordefectstoiletimageData =
+            base64Encode(interiordefectstoiletimagePath.readAsBytesSync());
+
+        print(interiordefectstoiletimagePath);
+        print(interiordefectstoiletimageName);
+        print(interiordefectstoiletimageData);
       }
     });
   }
 
-  safetyhazardsdrivewaysCheck() {
-    if (safetyhazardsdriveways == "Defects/Safety Hazards found were") {
-      setState(() {
-        safetyhazardsdrivewaysvalue =
-            "Movement Cracking to driveway was observed. This does not have any impact on the building.";
-      });
-
-      return Text(
-          'Movement Cracking to driveway was observed. This does not have any impact on the building.');
-    } else {
-      setState(() {
-        safetyhazardsdrivewaysvalue = " ";
-      });
-    }
-  }
-
-  safetyhazardspathsCheck() {
-    if (safetyhazardspaths == "Defects/Safety Hazards found were") {
-      setState(() {
-        safetyhazardspathsvalue =
-            "Gaps were found between brickwork and concreting due to lose soil under the concrete. It is recommended to contact a certified concreter for further advise.";
-      });
-
-      return Text(
-          'Gaps were found between brickwork and concreting due to lose soil under the concrete. It is recommended to contact a certified concreter for further advise.');
-    } else {
-      setState(() {
-        safetyhazardspathsvalue = " ";
-      });
-    }
-  }
-
-  safetyhazardsstepsCheck() {
-    if (safetyhazardssteps == "Defects/Safety Hazards found were") {
-      setState(() {
-        safetyhazardsstepsvalue =
-            "Cracking to steps found due to General movement.";
-      });
-
-      return Text('Cracking to steps found due to General movement.');
-    } else {
-      setState(() {
-        safetyhazardsstepsvalue = " ";
-      });
-    }
-  }
-
-  safetyhazardswallsCheck() {
-    if (safetyhazardswalls == "Defects/Safety Hazards found were") {
-      setState(() {
-        safetyhazardswallsvalue =
-            "Retaining wall was weathered. It is recommended to contact a certified carpenter for further advise.";
-      });
-
-      return Text(
-          'Retaining wall was weathered. It is recommended to contact a certified carpenter for further advise.');
-    } else {
-      setState(() {
-        safetyhazardswallsvalue = " ";
-      });
-    }
-  }
-
-  safetyhazardswaterdrainageCheck() {
-    if (safetyhazardswaterdrainage == "Defects/Safety Hazards found were") {
+  interiordefectslaundryCheck() {
+    if (interiordefectslaundry == "Defects/Safety Hazards found were") {
       return DropdownButtonFormField(
+        isExpanded: true,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           label: Text('Defects/Safety Hazards found were'),
         ),
-        value: safetyhazardswaterdrainagevalue,
+        value: interiordefectslaundryvalue,
         items: [
           DropdownMenuItem(
             child: Text('-Select-'),
             value: "NA",
           ),
           DropdownMenuItem(
-            child: Text(
-                'Natural slope of the ground is towards \nthe dwelling. It is recommended to contact\n a licensed plumber to install adequate\n drainage.\n'),
-            value:
-                "Natural slope of the ground is towards the dwelling. It is recommended to contact a licensed plumber to install adequate drainage.",
+            child: Text('Signs of previous moisture damage were found.'),
+            value: "Signs of previous moisture damage were found.",
+          ),
+          DropdownMenuItem(
+            child: Text('Damage to grouting was found.'),
+            value: "Damage to grouting was found.",
           ),
           DropdownMenuItem(
             child: Text(
-                'Natural slope of the ground is towards \nthe dwelling. It is recommended to make\n sure that slope must be going away \nfrom the dwelling.'),
+                'Signs of previous moisture damage were found. But there were no signs of any moisture on moisture meter at the time of inspection.'),
             value:
-                "Natural slope of the ground is towards the dwelling. It is recommended to make sure that slope must be going away from the dwelling.",
+                "Signs of previous moisture damage were found. But there were no signs of any moisture on moisture meter at the time of inspection.",
           ),
         ],
-        onChanged: (safetyhazardswaterdrainagevalue) {
+        onChanged: (interiordefectslaundryvalue) {
           setState(() {
-            this.safetyhazardswaterdrainagevalue =
-                safetyhazardswaterdrainagevalue!;
+            this.interiordefectslaundryvalue = interiordefectslaundryvalue!;
             //print(personsinattendance);
           });
         },
@@ -374,7 +328,7 @@ class _BuildingInspectionTheSiteFragmentsState
     }
   }
 
-  Future<void> updateTheSiteDetails(String id) async {
+  Future<void> updateTheInteriorDetails(String id) async {
     try {
       showDialog(
         context: context,
@@ -382,41 +336,30 @@ class _BuildingInspectionTheSiteFragmentsState
           return Center(child: CircularProgressIndicator());
         },
       );
-      var res =
-          await http.post(Uri.parse(API.prepurchasethesitedetails), body: {
+      var res = await http
+          .post(Uri.parse(API.prepurchasetheinteriorsteptwodetails), body: {
         "id": id,
-        //"safetyhazardsdriveways": drivewaysController.text.trim(),
-        "safetyhazardsdriveways": safetyhazardsdriveways,
-        "safetyhazardsdrivewaysvalue": safetyhazardsdrivewaysvalue,
-        //"safetyhazardspaths": pathsController.text.trim(),
-        "safetyhazardspaths": safetyhazardspaths,
-        "safetyhazardspathsvalue": safetyhazardspathsvalue,
-        //"safetyhazardssteps": stepsController.text.trim(),
-        "safetyhazardssteps": safetyhazardssteps,
-        "safetyhazardsstepsvalue": safetyhazardsstepsvalue,
-        //"safetyhazardswalls": retainingWallsController.text.trim(),
-        "safetyhazardswalls": safetyhazardswalls,
-        "safetyhazardswallsvalue": safetyhazardswallsvalue,
-        /*"safetyhazardswaterdrainage":
-            surfaceWaterDrainageController.text.trim(),*/
-        "safetyhazardswaterdrainage": safetyhazardswaterdrainage,
-        "safetyhazardswaterdrainagevalue": safetyhazardswaterdrainagevalue,
-        //"safetyhazardscar": carAccommodationController.text.trim(),
-        "safetyhazardscar": safetyhazardscar,
-        "safetyhazardsdrivewaysimagedata": safetyhazardsdrivewaysimagedata,
-        "safetyhazardsdrivewaysimagename": safetyhazardsdrivewaysimagename,
-        "safetyhazardspathsimagedata": safetyhazardspathsimagedata,
-        "safetyhazardspathsimagename": safetyhazardspathsimagename,
-        "safetyhazardsstepsimagedata": safetyhazardsstepsimagedata,
-        "safetyhazardsstepsimagename": safetyhazardsstepsimagename,
-        "safetyhazardsretainingwallsimagedata":
-            safetyhazardsretainingwallsimagedata,
-        "safetyhazardsretainingwallsimagename":
-            safetyhazardsretainingwallsimagename,
-        "safetyhazardscaraccommodationimagedata":
-            safetyhazardscaraccommodationimagedata,
-        "safetyhazardscaraccommodationimagename":
-            safetyhazardscaraccommodationimagename,
+
+        "interiordefectsfamily": interiordefectsfamily,
+        //"interiordefectsstudy": studyController.text.trim(),
+        "interiordefectsstudy": interiordefectsstudy,
+        //"interiordefectsstairs": stairsController.text.trim(),
+        "interiordefectsstairs": interiordefectsstairs,
+        //"interiordefectslaundry": laundryController.text.trim(),
+        "interiordefectslaundry": interiordefectslaundry,
+        "interiordefectslaundryvalue": interiordefectslaundryvalue,
+        //"interiordefectstoilet": toiletController.text.trim(),
+        "interiordefectstoilet": interiordefectstoilet,
+        "data": imageData,
+        "name": imageName,
+        "interiordefectsstudyimagedata": interiordefectsstudyimageData,
+        "interiordefectsstudyimagename": interiordefectsstudyimageName,
+        "interiordefectsstairsimagedata": interiordefectsstairsimageData,
+        "interiordefectsstairsimagename": interiordefectsstairsimageName,
+        "interiordefectslaundryimagedata": interiordefectslaundryimageData,
+        "interiordefectslaundryimagename": interiordefectslaundryimageName,
+        "interiordefectstoiletimagedata": interiordefectstoiletimageData,
+        "interiordefectstoiletimagename": interiordefectstoiletimageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -426,13 +369,7 @@ class _BuildingInspectionTheSiteFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectionTheSiteStepTwoFragments(reportId: id)));
-        /*drivewaysController.clear();
-        pathsController.clear();
-        stepsController.clear();
-        retainingWallsController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
+                BuildingInspectionTheInteriorStepThreeFragments(reportId: id)));
       } else {
         Navigator.of(context).pop();
         print("Some Issue.");
@@ -458,7 +395,7 @@ class _BuildingInspectionTheSiteFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'THE SITE (STEP 1)',
+                'INTERIOR OF THE BUILDING (STEP 2)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -478,16 +415,17 @@ class _BuildingInspectionTheSiteFragmentsState
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
-            //Driveways
+
+            //Family Room
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Driveways'),
+                  label: Text('Family Room'),
                 ),
-                value: safetyhazardsdriveways,
+                value: interiordefectsfamily,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -510,23 +448,18 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardsdriveways) {
+                onChanged: (interiordefectsfamily) {
                   setState(() {
-                    this.safetyhazardsdriveways = safetyhazardsdriveways!;
+                    this.interiordefectsfamily = interiordefectsfamily!;
                     //print(personsinattendance);
                   });
                 },
               ),
             ),
-            //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsdrivewaysCheck(),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: safetyhazardsdrivewaysimagepath != null
-                  ? Image.file(safetyhazardsdrivewaysimagepath!)
+              child: imageData != "NA"
+                  ? Image.memory(base64Decode(imageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -553,16 +486,16 @@ class _BuildingInspectionTheSiteFragmentsState
                 ],
               ),
             ),
-            //Paths
+            //Study
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Paths'),
+                  label: Text('Study'),
                 ),
-                value: safetyhazardspaths,
+                value: interiordefectsstudy,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -585,23 +518,18 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardspaths) {
+                onChanged: (interiordefectsstudy) {
                   setState(() {
-                    this.safetyhazardspaths = safetyhazardspaths!;
+                    this.interiordefectsstudy = interiordefectsstudy!;
                     //print(personsinattendance);
                   });
                 },
               ),
             ),
-            //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardspathsCheck(),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: safetyhazardspathsimagepath != null
-                  ? Image.file(safetyhazardspathsimagepath!)
+              child: interiordefectsstudyimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectsstudyimageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -613,7 +541,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsPathsCaptureImage();
+                          interiordefectsstudycaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -621,23 +549,23 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsPathsGetImage();
+                          interiordefectsstudygetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Steps
+            //Stairs
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Steps'),
+                  label: Text('Stairs'),
                 ),
-                value: safetyhazardssteps,
+                value: interiordefectsstairs,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -660,23 +588,18 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardssteps) {
+                onChanged: (interiordefectsstairs) {
                   setState(() {
-                    this.safetyhazardssteps = safetyhazardssteps!;
+                    this.interiordefectsstairs = interiordefectsstairs!;
                     //print(personsinattendance);
                   });
                 },
               ),
             ),
-            //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsstepsCheck(),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: safetyhazardsstepsimagepath != null
-                  ? Image.file(safetyhazardsstepsimagepath!)
+              child: interiordefectsstairsimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectsstairsimageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -688,7 +611,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsStepsCaptureImage();
+                          interiordefectsstairscaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -696,23 +619,23 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsStepsGetImage();
+                          interiordefectsstairsgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Retaining Walls
+            //Laundry
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Retaining Walls'),
+                  label: Text('Laundry'),
                 ),
-                value: safetyhazardswalls,
+                value: interiordefectslaundry,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -735,9 +658,9 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardswalls) {
+                onChanged: (interiordefectslaundry) {
                   setState(() {
-                    this.safetyhazardswalls = safetyhazardswalls!;
+                    this.interiordefectslaundry = interiordefectslaundry!;
                     //print(personsinattendance);
                   });
                 },
@@ -746,12 +669,12 @@ class _BuildingInspectionTheSiteFragmentsState
             //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardswallsCheck(),
+              child: interiordefectslaundryCheck(),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsretainingwallsimagepath != null
-                  ? Image.file(safetyhazardsretainingwallsimagepath!)
+              child: interiordefectslaundryimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectslaundryimageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -763,7 +686,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsretainingWallsCaptureImage();
+                          interiordefectslaundrycaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -771,23 +694,23 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardsretainingWallsGetImage();
+                          interiordefectslaundrygetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-            //Surface Water Drainage
+            //Toilet
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Surface Water Drainage'),
+                  label: Text('Toilet'),
                 ),
-                value: safetyhazardswaterdrainage,
+                value: interiordefectstoilet,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -810,55 +733,9 @@ class _BuildingInspectionTheSiteFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardswaterdrainage) {
+                onChanged: (interiordefectstoilet) {
                   setState(() {
-                    this.safetyhazardswaterdrainage =
-                        safetyhazardswaterdrainage!;
-                    //print(personsinattendance);
-                  });
-                },
-              ),
-            ),
-            //The limitations were:
-            Container(
-              margin: EdgeInsets.all(10),
-              child: safetyhazardswaterdrainageCheck(),
-            ),
-            //Car Accommodation
-
-            Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Car Accommodation'),
-                ),
-                value: safetyhazardscar,
-                items: [
-                  DropdownMenuItem(
-                    child: Text('-Select-'),
-                    value: "NA",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Defects/Safety Hazards found were'),
-                    value: "Defects/Safety Hazards found were",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('No Defects/Safety Hazards found.'),
-                    value: "No Defects/Safety Hazards found",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Not present'),
-                    value: "Not present",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Part of common area'),
-                    value: "Part of common area",
-                  ),
-                ],
-                onChanged: (safetyhazardscar) {
-                  setState(() {
-                    this.safetyhazardscar = safetyhazardscar!;
+                    this.interiordefectstoilet = interiordefectstoilet!;
                     //print(personsinattendance);
                   });
                 },
@@ -866,8 +743,8 @@ class _BuildingInspectionTheSiteFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardscaraccommodationimagepath != null
-                  ? Image.file(safetyhazardscaraccommodationimagepath!)
+              child: interiordefectstoiletimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectstoiletimageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -879,7 +756,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardscarAccommodationCaptureImage();
+                          interiordefectstoiletcaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -887,7 +764,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          safetyhazardscarAccommodationGetImage();
+                          interiordefectstoiletgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
@@ -906,7 +783,7 @@ class _BuildingInspectionTheSiteFragmentsState
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                         onPressed: () {
-                          updateTheSiteDetails(widget.reportId);
+                          updateTheInteriorDetails(widget.reportId);
                         },
                         child: Text('Save & Next')),
                   ),
