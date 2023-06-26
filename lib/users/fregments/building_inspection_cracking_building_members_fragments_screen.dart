@@ -49,27 +49,35 @@ class _BuildingInspectionCrackingBuildingMemberFragmentsState
   TextEditingController otherAreasDescriptionController =
       TextEditingController();
 
+  var crackingbuildingmembers = "NA";
+
   Future<void> updateCrackingBuildingMembersDetails(String id) async {
     try {
-      var res =
-          await http.post(Uri.parse(API.prepurchasecreckingbuildingmembersdetails), body: {
-        "id": id,
-        "concreteslabslocation": concreteSlabsLocationController.text.trim(),
-        "concreteslabsdefects": concreteSlabsDescriptionController.text.trim(),
-        "suspendedconcreteslabslocation":
-            suspendedConcreteSlabsLocationController.text.trim(),
-        "suspendedconcreteslabsdefects":
-            suspendedConcreteSlabsDescriptionController.text.trim(),
-        "masonrywallslocation": masonryWallsLocationController.text.trim(),
-        "masonrywallsdefects": masonryWallsDescriptionController.text.trim(),
-        "pierslocation": piersLocationController.text.trim(),
-        "piersdefects": piersDescriptionController.text.trim(),
-        "retainingwallslocation": retainingWallsLocationController.text.trim(),
-        "retainingwallsdefects":
-            retainingWallsDescriptionController.text.trim(),
-        "otherareaslocation": otherAreasLocationController.text.trim(),
-        "otherareasdefects": otherAreasDescriptionController.text.trim(),
-      });
+      var res = await http.post(
+          Uri.parse(API.prepurchasecreckingbuildingmembersdetails),
+          body: {
+            "id": id,
+            "crackingbuildingmembers": crackingbuildingmembers,
+            "concreteslabslocation":
+                concreteSlabsLocationController.text.trim(),
+            "concreteslabsdefects":
+                concreteSlabsDescriptionController.text.trim(),
+            "suspendedconcreteslabslocation":
+                suspendedConcreteSlabsLocationController.text.trim(),
+            "suspendedconcreteslabsdefects":
+                suspendedConcreteSlabsDescriptionController.text.trim(),
+            "masonrywallslocation": masonryWallsLocationController.text.trim(),
+            "masonrywallsdefects":
+                masonryWallsDescriptionController.text.trim(),
+            "pierslocation": piersLocationController.text.trim(),
+            "piersdefects": piersDescriptionController.text.trim(),
+            "retainingwallslocation":
+                retainingWallsLocationController.text.trim(),
+            "retainingwallsdefects":
+                retainingWallsDescriptionController.text.trim(),
+            "otherareaslocation": otherAreasLocationController.text.trim(),
+            "otherareasdefects": otherAreasDescriptionController.text.trim(),
+          });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
         //print("Record Inserted");
@@ -78,12 +86,6 @@ class _BuildingInspectionCrackingBuildingMemberFragmentsState
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 BuildingInspectionContactTheIspectorFragments(reportId: id)));
-        /*suspendedConcreteSlabsLocationController.clear();
-        suspendedConcreteSlabsLocationController.clear();
-        masonryWallsLocationController.clear();
-        piersLocationController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
       } else {
         print("Some Issue.");
         Fluttertoast.showToast(msg: "Some Issue.");
@@ -120,6 +122,40 @@ class _BuildingInspectionCrackingBuildingMemberFragmentsState
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
+
+            //Is there cracking to the Building Members:
+
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Is there cracking to the Building Members: '),
+                ),
+                value: crackingbuildingmembers,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Yes'),
+                    value: "Yes",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No'),
+                    value: "No",
+                  ),
+                ],
+                onChanged: (crackingbuildingmembers) {
+                  setState(() {
+                    this.crackingbuildingmembers = crackingbuildingmembers!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+
             //Concrete Slabs
             Container(
               margin: EdgeInsets.all(10),

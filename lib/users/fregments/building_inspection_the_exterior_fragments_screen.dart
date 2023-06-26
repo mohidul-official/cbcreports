@@ -31,7 +31,27 @@ class _BuildingInspectorTheExteriorFragmentsState
 
   TextEditingController windowsController = TextEditingController();*/
 
-  File? wallsimagePath;
+  var wallsimagePath = "NA";
+  var wallsimageName = "NA";
+  var wallsimageData = "NA";
+
+  var claddingimagePath = "NA";
+  var claddingimageName = "NA";
+  var claddingimageData = "NA";
+
+  var lintelsimagePath = "NA";
+  var lintelsimageName = "NA";
+  var lintelsimageData = "NA";
+
+  var doorsimagePath = "NA";
+  var doorsimageName = "NA";
+  var doorsimageData = "NA";
+
+  var windowsimagePath = "NA";
+  var windowsimageName = "NA";
+  var windowsimageData = "NA";
+
+  /*File? wallsimagePath;
   String? wallsimageName;
   String? wallsimageData;
 
@@ -49,7 +69,7 @@ class _BuildingInspectorTheExteriorFragmentsState
 
   File? windowsimagePath;
   String? windowsimageName;
-  String? windowsimageData;
+  String? windowsimageData;*/
 
   var exteriordefectswalls = "NA";
   var exteriordefectswallsvalue = "NA";
@@ -75,9 +95,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        wallsimagePath = File(getimage.path);
+        File wallsimagePath = File(getimage.path);
         wallsimageName = getimage.path.split('/').last;
-        wallsimageData = base64Encode(wallsimagePath!.readAsBytesSync());
+        wallsimageData = base64Encode(wallsimagePath.readAsBytesSync());
         print(wallsimagePath);
         print(wallsimageName);
         print(wallsimageData);
@@ -93,9 +113,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        wallsimagePath = File(getimage.path);
+        File wallsimagePath = File(getimage.path);
         wallsimageName = getimage.path.split('/').last;
-        wallsimageData = base64Encode(wallsimagePath!.readAsBytesSync());
+        wallsimageData = base64Encode(wallsimagePath.readAsBytesSync());
         print(wallsimagePath);
         print(wallsimageName);
         print(wallsimageData);
@@ -111,9 +131,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        claddingimagePath = File(getimage.path);
+        File claddingimagePath = File(getimage.path);
         claddingimageName = getimage.path.split('/').last;
-        claddingimageData = base64Encode(claddingimagePath!.readAsBytesSync());
+        claddingimageData = base64Encode(claddingimagePath.readAsBytesSync());
         print(claddingimagePath);
         print(claddingimageName);
         print(claddingimageData);
@@ -129,9 +149,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        claddingimagePath = File(getimage.path);
+        File claddingimagePath = File(getimage.path);
         claddingimageName = getimage.path.split('/').last;
-        claddingimageData = base64Encode(claddingimagePath!.readAsBytesSync());
+        claddingimageData = base64Encode(claddingimagePath.readAsBytesSync());
         print(claddingimagePath);
         print(claddingimageName);
         print(claddingimageData);
@@ -147,9 +167,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        lintelsimagePath = File(getimage.path);
+        File lintelsimagePath = File(getimage.path);
         lintelsimageName = getimage.path.split('/').last;
-        lintelsimageData = base64Encode(lintelsimagePath!.readAsBytesSync());
+        lintelsimageData = base64Encode(lintelsimagePath.readAsBytesSync());
         print(lintelsimagePath);
         print(lintelsimageName);
         print(lintelsimageData);
@@ -165,9 +185,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        lintelsimagePath = File(getimage.path);
+        File lintelsimagePath = File(getimage.path);
         lintelsimageName = getimage.path.split('/').last;
-        lintelsimageData = base64Encode(lintelsimagePath!.readAsBytesSync());
+        lintelsimageData = base64Encode(lintelsimagePath.readAsBytesSync());
         print(lintelsimagePath);
         print(lintelsimageName);
         print(lintelsimageData);
@@ -183,9 +203,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        doorsimagePath = File(getimage.path);
+        File doorsimagePath = File(getimage.path);
         doorsimageName = getimage.path.split('/').last;
-        doorsimageData = base64Encode(doorsimagePath!.readAsBytesSync());
+        doorsimageData = base64Encode(doorsimagePath.readAsBytesSync());
         print(doorsimagePath);
         print(doorsimageName);
         print(doorsimageData);
@@ -201,9 +221,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        doorsimagePath = File(getimage.path);
+        File doorsimagePath = File(getimage.path);
         doorsimageName = getimage.path.split('/').last;
-        doorsimageData = base64Encode(doorsimagePath!.readAsBytesSync());
+        doorsimageData = base64Encode(doorsimagePath.readAsBytesSync());
         print(doorsimagePath);
         print(doorsimageName);
         print(doorsimageData);
@@ -219,9 +239,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        windowsimagePath = File(getimage.path);
+        File windowsimagePath = File(getimage.path);
         windowsimageName = getimage.path.split('/').last;
-        windowsimageData = base64Encode(windowsimagePath!.readAsBytesSync());
+        windowsimageData = base64Encode(windowsimagePath.readAsBytesSync());
         print(windowsimagePath);
         print(windowsimageName);
         print(windowsimageData);
@@ -237,9 +257,9 @@ class _BuildingInspectorTheExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        windowsimagePath = File(getimage.path);
+        File windowsimagePath = File(getimage.path);
         windowsimageName = getimage.path.split('/').last;
-        windowsimageData = base64Encode(windowsimagePath!.readAsBytesSync());
+        windowsimageData = base64Encode(windowsimagePath.readAsBytesSync());
         print(windowsimagePath);
         print(windowsimageName);
         print(windowsimageData);
@@ -543,8 +563,8 @@ class _BuildingInspectorTheExteriorFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: wallsimagePath != null
-                  ? Image.file(wallsimagePath!)
+              child: wallsimagePath != "NA"
+                  ? Image.memory(base64Decode(wallsimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -618,8 +638,8 @@ class _BuildingInspectorTheExteriorFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: claddingimagePath != null
-                  ? Image.file(claddingimagePath!)
+              child: claddingimagePath != "NA"
+                  ? Image.memory(base64Decode(claddingimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -688,8 +708,8 @@ class _BuildingInspectorTheExteriorFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: lintelsimagePath != null
-                  ? Image.file(lintelsimagePath!)
+              child: lintelsimagePath != "NA"
+                  ? Image.memory(base64Decode(lintelsimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -763,8 +783,8 @@ class _BuildingInspectorTheExteriorFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: doorsimagePath != null
-                  ? Image.file(doorsimagePath!)
+              child: doorsimagePath != "NA"
+                  ? Image.memory(base64Decode(doorsimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -838,8 +858,8 @@ class _BuildingInspectorTheExteriorFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: windowsimagePath != null
-                  ? Image.file(windowsimagePath!)
+              child: windowsimagePath != "NA"
+                  ? Image.memory(base64Decode(windowsimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),

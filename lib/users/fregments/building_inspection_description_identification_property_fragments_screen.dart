@@ -79,6 +79,7 @@ class _BuildingInspetionDescriptionIdentificationPropertyFragmentsState
         "interior": interiorController.text.trim(),
         //"piers": piersCommentsController.text.trim(),
         "piers": piersinspected,
+        "pierscomments": piersCommentsController.text.trim(),
         //"flooring": flooringCommentsController.text.trim(),
         "flooring": flooringintrrior,
         "flooringcomments": flooringintrriorcommentsspace.text.trim(),
@@ -88,6 +89,7 @@ class _BuildingInspetionDescriptionIdentificationPropertyFragmentsState
         "patioother": otherController.text.trim(),
         //"roofing": roofingController.text.trim(),
         "roofing": roofinginspected,
+        "roofingdescription": roofingController.text.trim(),
         //"roofcovering": roofCoveringController.text.trim(),
         "roofcovering": roofcoveringinspected,
         "roofcoveringdescription": roofCoveringController.text.trim(),
@@ -102,12 +104,6 @@ class _BuildingInspetionDescriptionIdentificationPropertyFragmentsState
             builder: (context) =>
                 BuildingInspectionOtherInspectionsReportFragments(
                     reportId: id)));
-        /*typeInspectedController.clear();
-        styleInspectedController.clear();
-        constructionTypeInspectedInspectedController.clear();
-        interiorController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
       } else {
         print("Some Issue.");
         Fluttertoast.showToast(msg: "Some Issue.");
@@ -326,6 +322,19 @@ class _BuildingInspetionDescriptionIdentificationPropertyFragmentsState
                 },
               ),
             ),
+
+            //Piers Comments
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: piersCommentsController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Comments'),
+                ),
+              ),
+            ),
+
             //Flooring
 
             Container(
@@ -465,6 +474,17 @@ class _BuildingInspetionDescriptionIdentificationPropertyFragmentsState
                     //print(personsinattendance);
                   });
                 },
+              ),
+            ),
+            //Roofing Description
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextFormField(
+                controller: roofingController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Description'),
+                ),
               ),
             ),
             //Roof covering

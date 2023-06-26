@@ -36,25 +36,25 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
 
   TextEditingController verandasController = TextEditingController();*/
 
-  File? timberimagePath;
-  String? timberimageName;
-  String? timberimageData;
+  var timberimagePath = "NA";
+  var timberimageName = "NA";
+  var timberimageData = "NA";
 
-  File? stairsimagePath;
-  String? stairsimageName;
-  String? stairsimageData;
+  var stairsimagePath = "NA";
+  var stairsimageName = "NA";
+  var stairsimageData = "NA";
 
-  File? balustradesimagePath;
-  String? balustradesimageName;
-  String? balustradesimageData;
+  var balustradesimagePath = "NA";
+  var balustradesimageName = "NA";
+  var balustradesimageData = "NA";
 
-  File? balconiesimagePath;
-  String? balconiesimageName;
-  String? balconiesimageData;
+  var balconiesimagePath = "NA";
+  var balconiesimageName = "NA";
+  var balconiesimageData = "NA";
 
-  File? verandasimagePath;
-  String? verandasimageName;
-  String? verandasimageData;
+  var verandasimagePath = "NA";
+  var verandasimageName = "NA";
+  var verandasimageData = "NA";
 
   var exteriordefectstimber = "NA";
 
@@ -78,9 +78,9 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        timberimagePath = File(getimage.path);
+        File timberimagePath = File(getimage.path);
         timberimageName = getimage.path.split('/').last;
-        timberimageData = base64Encode(timberimagePath!.readAsBytesSync());
+        timberimageData = base64Encode(timberimagePath.readAsBytesSync());
         print(timberimagePath);
         print(timberimageName);
         print(timberimageData);
@@ -96,9 +96,9 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        timberimagePath = File(getimage.path);
+        File timberimagePath = File(getimage.path);
         timberimageName = getimage.path.split('/').last;
-        timberimageData = base64Encode(timberimagePath!.readAsBytesSync());
+        timberimageData = base64Encode(timberimagePath.readAsBytesSync());
         print(timberimagePath);
         print(timberimageName);
         print(timberimageData);
@@ -114,9 +114,9 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        stairsimagePath = File(getimage.path);
+        File stairsimagePath = File(getimage.path);
         stairsimageName = getimage.path.split('/').last;
-        stairsimageData = base64Encode(stairsimagePath!.readAsBytesSync());
+        stairsimageData = base64Encode(stairsimagePath.readAsBytesSync());
         print(stairsimagePath);
         print(stairsimageName);
         print(stairsimageData);
@@ -132,9 +132,9 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        stairsimagePath = File(getimage.path);
+        File stairsimagePath = File(getimage.path);
         stairsimageName = getimage.path.split('/').last;
-        stairsimageData = base64Encode(stairsimagePath!.readAsBytesSync());
+        stairsimageData = base64Encode(stairsimagePath.readAsBytesSync());
         print(stairsimagePath);
         print(stairsimageName);
         print(stairsimageData);
@@ -150,10 +150,10 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        balustradesimagePath = File(getimage.path);
+        File balustradesimagePath = File(getimage.path);
         balustradesimageName = getimage.path.split('/').last;
         balustradesimageData =
-            base64Encode(balustradesimagePath!.readAsBytesSync());
+            base64Encode(balustradesimagePath.readAsBytesSync());
         print(balustradesimagePath);
         print(balustradesimageName);
         print(balustradesimageData);
@@ -169,10 +169,10 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        balustradesimagePath = File(getimage.path);
+        File balustradesimagePath = File(getimage.path);
         balustradesimageName = getimage.path.split('/').last;
         balustradesimageData =
-            base64Encode(balustradesimagePath!.readAsBytesSync());
+            base64Encode(balustradesimagePath.readAsBytesSync());
         print(balustradesimagePath);
         print(balustradesimageName);
         print(balustradesimageData);
@@ -188,10 +188,9 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        balconiesimagePath = File(getimage.path);
+        File balconiesimagePath = File(getimage.path);
         balconiesimageName = getimage.path.split('/').last;
-        balconiesimageData =
-            base64Encode(balconiesimagePath!.readAsBytesSync());
+        balconiesimageData = base64Encode(balconiesimagePath.readAsBytesSync());
         print(balconiesimagePath);
         print(balconiesimageName);
         print(balconiesimageData);
@@ -207,10 +206,9 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        balconiesimagePath = File(getimage.path);
+        File balconiesimagePath = File(getimage.path);
         balconiesimageName = getimage.path.split('/').last;
-        balconiesimageData =
-            base64Encode(balconiesimagePath!.readAsBytesSync());
+        balconiesimageData = base64Encode(balconiesimagePath.readAsBytesSync());
         print(balconiesimagePath);
         print(balconiesimageName);
         print(balconiesimageData);
@@ -226,9 +224,9 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        verandasimagePath = File(getimage.path);
+        File verandasimagePath = File(getimage.path);
         verandasimageName = getimage.path.split('/').last;
-        verandasimageData = base64Encode(verandasimagePath!.readAsBytesSync());
+        verandasimageData = base64Encode(verandasimagePath.readAsBytesSync());
         print(verandasimagePath);
         print(verandasimageName);
         print(verandasimageData);
@@ -243,9 +241,9 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        verandasimagePath = File(getimage.path);
+        File verandasimagePath = File(getimage.path);
         verandasimageName = getimage.path.split('/').last;
-        verandasimageData = base64Encode(verandasimagePath!.readAsBytesSync());
+        verandasimageData = base64Encode(verandasimagePath.readAsBytesSync());
         print(verandasimagePath);
         print(verandasimageName);
         print(verandasimageData);
@@ -431,8 +429,8 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: timberimagePath != null
-                  ? Image.file(timberimagePath!)
+              child: timberimagePath != "NA"
+                  ? Image.memory(base64Decode(timberimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -501,8 +499,8 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: stairsimagePath != null
-                  ? Image.file(stairsimagePath!)
+              child: stairsimagePath != "NA"
+                  ? Image.memory(base64Decode(stairsimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -572,8 +570,8 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: balustradesimagePath != null
-                  ? Image.file(balustradesimagePath!)
+              child: balustradesimagePath != "NA"
+                  ? Image.memory(base64Decode(balustradesimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -647,8 +645,8 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: balconiesimagePath != null
-                  ? Image.file(balconiesimagePath!)
+              child: balconiesimagePath != "NA"
+                  ? Image.memory(base64Decode(balconiesimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -722,8 +720,8 @@ class _BuildingInspectorTheExteriorStepTwoFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: verandasimagePath != null
-                  ? Image.file(verandasimagePath!)
+              child: verandasimagePath != "NA"
+                  ? Image.memory(base64Decode(verandasimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),

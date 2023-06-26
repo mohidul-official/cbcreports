@@ -55,11 +55,20 @@ class API {
   static const prepurchasetheinteriordetails =
       "$hostConnect/prepurchasetheinteriordetails.php";
 
+  static const prepurchasetheinteriorsteptwodetails =
+      "$hostConnect/prepurchasetheinteriorsteptwodetails.php";
+
+  static const prepurchasetheinteriorstepthreedetails =
+      "$hostConnect/prepurchasetheinteriorstepthreedetails.php";
+
   static const prepurchasetheroofinteriordetails =
       "$hostConnect/prepurchasetheroofinteriordetails.php";
 
   static const prepurchasetheroofexteriordetails =
       "$hostConnect/prepurchasetheroofexteriordetails.php";
+
+  static const prepurchasetheroofexteriorsteptwodetails =
+      "$hostConnect/prepurchasetheroofexteriorsteptwodetails.php";
 
   static const prepurchasethesubfloordetails =
       "$hostConnect/prepurchasethesubfloordetails.php";
@@ -69,6 +78,9 @@ class API {
 
   static const prepurchasecontacttheinspectordetails =
       "$hostConnect/prepurchasecontacttheinspectordetails.php";
+
+  static const prepurchasecontacttheinspectorsignaturedetails =
+      "$hostConnect/prepurchasecontacttheinspectorsignaturedetails.php";
 
   static const prepurchasesignatureupload =
       "$hostConnect/prepurchasesignatureupload.php";

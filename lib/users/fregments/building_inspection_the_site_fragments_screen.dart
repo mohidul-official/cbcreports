@@ -41,11 +41,35 @@ class _BuildingInspectionTheSiteFragmentsState
 
   TextEditingController otherIfApplicableController = TextEditingController();
 
-  File? safetyhazardsdrivewaysimagepath;
-  String? safetyhazardsdrivewaysimagename;
-  String? safetyhazardsdrivewaysimagedata;
+  var safetyhazardsdrivewaysimagepath = "NA";
+  var safetyhazardsdrivewaysimagename = "NA";
+  var safetyhazardsdrivewaysimagedata = "NA";
 
-  File? safetyhazardspathsimagepath;
+  /*File? safetyhazardsdrivewaysimagepath;
+  String? safetyhazardsdrivewaysimagename;
+  String? safetyhazardsdrivewaysimagedata;*/
+
+  var safetyhazardspathsimagepath = "NA";
+  var safetyhazardspathsimagename = "NA";
+  var safetyhazardspathsimagedata = "NA";
+
+  var safetyhazardsstepsimagepath = "NA";
+  var safetyhazardsstepsimagename = "NA";
+  var safetyhazardsstepsimagedata = "NA";
+
+  var safetyhazardsretainingwallsimagepath = "NA";
+  var safetyhazardsretainingwallsimagename = "NA";
+  var safetyhazardsretainingwallsimagedata = "NA";
+
+  var safetyhazardscaraccommodationimagepath = "NA";
+  var safetyhazardscaraccommodationimagename = "NA";
+  var safetyhazardscaraccommodationimagedata = "NA";
+
+  var safetyhazardsdetachedbuildingsimagepath = "NA";
+  var safetyhazardsdetachedbuildingsimagename = "NA";
+  var safetyhazardsdetachedbuildingsimagedata = "NA";
+
+  /*File? safetyhazardspathsimagepath;
   String? safetyhazardspathsimagename;
   String? safetyhazardspathsimagedata;
 
@@ -63,7 +87,7 @@ class _BuildingInspectionTheSiteFragmentsState
 
   File? safetyhazardsdetachedbuildingsimagepath;
   String? safetyhazardsdetachedbuildingsimagename;
-  String? safetyhazardsdetachedbuildingsimagedata;
+  String? safetyhazardsdetachedbuildingsimagedata;*/
 
   var safetyhazardsdriveways = "NA";
   var safetyhazardsdrivewaysvalue = "NA";
@@ -92,10 +116,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsdrivewaysimagepath = File(getimage.path);
+        File safetyhazardsdrivewaysimagepath = File(getimage.path);
         safetyhazardsdrivewaysimagename = getimage.path.split('/').last;
         safetyhazardsdrivewaysimagedata =
-            base64Encode(safetyhazardsdrivewaysimagepath!.readAsBytesSync());
+            base64Encode(safetyhazardsdrivewaysimagepath.readAsBytesSync());
         print(safetyhazardsdrivewaysimagepath);
         print(safetyhazardsdrivewaysimagename);
         print(safetyhazardsdrivewaysimagedata);
@@ -111,10 +135,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsdrivewaysimagepath = File(getimage.path);
+        File safetyhazardsdrivewaysimagepath = File(getimage.path);
         safetyhazardsdrivewaysimagename = getimage.path.split('/').last;
         safetyhazardsdrivewaysimagedata =
-            base64Encode(safetyhazardsdrivewaysimagepath!.readAsBytesSync());
+            base64Encode(safetyhazardsdrivewaysimagepath.readAsBytesSync());
         print(safetyhazardsdrivewaysimagepath);
         print(safetyhazardsdrivewaysimagename);
         print(safetyhazardsdrivewaysimagedata);
@@ -130,10 +154,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardspathsimagepath = File(getimage.path);
+        File safetyhazardspathsimagepath = File(getimage.path);
         safetyhazardspathsimagename = getimage.path.split('/').last;
         safetyhazardspathsimagedata =
-            base64Encode(safetyhazardspathsimagepath!.readAsBytesSync());
+            base64Encode(safetyhazardspathsimagepath.readAsBytesSync());
         print(safetyhazardspathsimagepath);
         print(safetyhazardspathsimagename);
         print(safetyhazardspathsimagedata);
@@ -149,10 +173,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardspathsimagepath = File(getimage.path);
+        File safetyhazardspathsimagepath = File(getimage.path);
         safetyhazardspathsimagename = getimage.path.split('/').last;
         safetyhazardspathsimagedata =
-            base64Encode(safetyhazardspathsimagepath!.readAsBytesSync());
+            base64Encode(safetyhazardspathsimagepath.readAsBytesSync());
         print(safetyhazardspathsimagepath);
         print(safetyhazardspathsimagename);
         print(safetyhazardspathsimagedata);
@@ -168,10 +192,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsstepsimagepath = File(getimage.path);
+        File safetyhazardsstepsimagepath = File(getimage.path);
         safetyhazardsstepsimagename = getimage.path.split('/').last;
         safetyhazardsstepsimagedata =
-            base64Encode(safetyhazardsstepsimagepath!.readAsBytesSync());
+            base64Encode(safetyhazardsstepsimagepath.readAsBytesSync());
         print(safetyhazardsstepsimagepath);
         print(safetyhazardsstepsimagename);
         print(safetyhazardsstepsimagedata);
@@ -187,10 +211,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsstepsimagepath = File(getimage.path);
+        File safetyhazardsstepsimagepath = File(getimage.path);
         safetyhazardsstepsimagename = getimage.path.split('/').last;
         safetyhazardsstepsimagedata =
-            base64Encode(safetyhazardsstepsimagepath!.readAsBytesSync());
+            base64Encode(safetyhazardsstepsimagepath.readAsBytesSync());
         print(safetyhazardsstepsimagepath);
         print(safetyhazardsstepsimagename);
         print(safetyhazardsstepsimagedata);
@@ -206,10 +230,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsretainingwallsimagepath = File(getimage.path);
+        File safetyhazardsretainingwallsimagepath = File(getimage.path);
         safetyhazardsretainingwallsimagename = getimage.path.split('/').last;
         safetyhazardsretainingwallsimagedata = base64Encode(
-            safetyhazardsretainingwallsimagepath!.readAsBytesSync());
+            safetyhazardsretainingwallsimagepath.readAsBytesSync());
         print(safetyhazardsretainingwallsimagepath);
         print(safetyhazardsretainingwallsimagename);
         print(safetyhazardsretainingwallsimagedata);
@@ -225,10 +249,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardsretainingwallsimagepath = File(getimage.path);
+        File safetyhazardsretainingwallsimagepath = File(getimage.path);
         safetyhazardsretainingwallsimagename = getimage.path.split('/').last;
         safetyhazardsretainingwallsimagedata = base64Encode(
-            safetyhazardsretainingwallsimagepath!.readAsBytesSync());
+            safetyhazardsretainingwallsimagepath.readAsBytesSync());
         print(safetyhazardsretainingwallsimagepath);
         print(safetyhazardsretainingwallsimagename);
         print(safetyhazardsretainingwallsimagedata);
@@ -244,10 +268,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardscaraccommodationimagepath = File(getimage.path);
+        File safetyhazardscaraccommodationimagepath = File(getimage.path);
         safetyhazardscaraccommodationimagename = getimage.path.split('/').last;
         safetyhazardscaraccommodationimagedata = base64Encode(
-            safetyhazardscaraccommodationimagepath!.readAsBytesSync());
+            safetyhazardscaraccommodationimagepath.readAsBytesSync());
         print(safetyhazardscaraccommodationimagepath);
         print(safetyhazardscaraccommodationimagename);
         print(safetyhazardscaraccommodationimagedata);
@@ -263,10 +287,10 @@ class _BuildingInspectionTheSiteFragmentsState
       if (getimage == null) {
         return;
       } else {
-        safetyhazardscaraccommodationimagepath = File(getimage.path);
+        File safetyhazardscaraccommodationimagepath = File(getimage.path);
         safetyhazardscaraccommodationimagename = getimage.path.split('/').last;
         safetyhazardscaraccommodationimagedata = base64Encode(
-            safetyhazardscaraccommodationimagepath!.readAsBytesSync());
+            safetyhazardscaraccommodationimagepath.readAsBytesSync());
         print(safetyhazardscaraccommodationimagepath);
         print(safetyhazardscaraccommodationimagename);
         print(safetyhazardscaraccommodationimagedata);
@@ -525,8 +549,8 @@ class _BuildingInspectionTheSiteFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsdrivewaysimagepath != null
-                  ? Image.file(safetyhazardsdrivewaysimagepath!)
+              child: safetyhazardsdrivewaysimagepath != "NA"
+                  ? Image.memory(base64Decode(safetyhazardsdrivewaysimagedata))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -600,8 +624,8 @@ class _BuildingInspectionTheSiteFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardspathsimagepath != null
-                  ? Image.file(safetyhazardspathsimagepath!)
+              child: safetyhazardspathsimagepath != "NA"
+                  ? Image.memory(base64Decode(safetyhazardspathsimagepath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -675,8 +699,8 @@ class _BuildingInspectionTheSiteFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsstepsimagepath != null
-                  ? Image.file(safetyhazardsstepsimagepath!)
+              child: safetyhazardsstepsimagepath != "NA"
+                  ? Image.memory(base64Decode(safetyhazardsstepsimagepath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -750,8 +774,9 @@ class _BuildingInspectionTheSiteFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsretainingwallsimagepath != null
-                  ? Image.file(safetyhazardsretainingwallsimagepath!)
+              child: safetyhazardsretainingwallsimagepath != "NA"
+                  ? Image.memory(
+                      base64Decode(safetyhazardsretainingwallsimagepath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -866,8 +891,9 @@ class _BuildingInspectionTheSiteFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardscaraccommodationimagepath != null
-                  ? Image.file(safetyhazardscaraccommodationimagepath!)
+              child: safetyhazardscaraccommodationimagepath != "NA"
+                  ? Image.memory(
+                      base64Decode(safetyhazardscaraccommodationimagepath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),

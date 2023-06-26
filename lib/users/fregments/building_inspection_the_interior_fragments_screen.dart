@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-import 'building_inspection_the_roof_interior_fragments_screen.dart';
+import 'building_inspection_the_interior_step_two_fragments_screen.dart';
 
 class BuildingInspectionTheInteriorFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
@@ -24,7 +24,7 @@ class BuildingInspectionTheInteriorFragments extends StatefulWidget {
 
 class _BuildingInspectionTheInteriorFragmentsState
     extends State<BuildingInspectionTheInteriorFragments> {
-  TextEditingController entryController = TextEditingController();
+  /*TextEditingController entryController = TextEditingController();
   TextEditingController hallController = TextEditingController();
   TextEditingController linenCupboardController = TextEditingController();
   TextEditingController loungeRoomController = TextEditingController();
@@ -55,7 +55,7 @@ class _BuildingInspectionTheInteriorFragmentsState
 
   TextEditingController bedroomFourController = TextEditingController();
 
-  TextEditingController otherIfApplicableController = TextEditingController();
+  TextEditingController otherIfApplicableController = TextEditingController();*/
 
   var interiordefectsentry = "NA";
 
@@ -72,6 +72,32 @@ class _BuildingInspectionTheInteriorFragmentsState
   var interiordefectskitchenvalue = "NA";
 
   var interiordefectsfamily = "NA";
+
+  var interiordefectsstudy = "NA";
+
+  var interiordefectsstairs = "NA";
+
+  var interiordefectslaundry = "NA";
+  var interiordefectslaundryvalue = "NA";
+
+  var interiordefectstoilet = "NA";
+
+  var interiordefectsbathroom = "NA";
+  var interiordefectsbathroomvalue = "NA";
+
+  var interiordefectsensuite = "NA";
+  var interiordefectsensuitevalue = "NA";
+
+  var interiordefectsbedroomone = "NA";
+
+  var interiordefectsbedroomtwo = "NA";
+
+  var interiordefectsbedroomthree = "NA";
+
+  var interiordefectsbedroomfour = "NA";
+
+  var interiordefectsother = "NA";
+  var interiordefectsothervalue = "NA";
 
   var imagePath = "NA";
   var imageName = "NA";
@@ -400,19 +426,6 @@ class _BuildingInspectionTheInteriorFragmentsState
         //"interiordefectskitchen": kitchenController.text.trim(),
         "interiordefectskitchen": interiordefectskitchen,
         "interiordefectskitchenvalue": interiordefectskitchenvalue,
-        //"interiordefectsfamily": familyRoomController.text.trim(),
-        "interiordefectsfamily": interiordefectsfamily,
-        "interiordefectsstudy": studyController.text.trim(),
-        "interiordefectsstairs": stairsController.text.trim(),
-        "interiordefectslaundry": laundryController.text.trim(),
-        "interiordefectstoilet": toiletController.text.trim(),
-        "interiordefectsbathroom": bathroomController.text.trim(),
-        "interiordefectsensuite": enSuiteController.text.trim(),
-        "interiordefectsbedroomone": bedroomOneController.text.trim(),
-        "interiordefectsbedroomtwo": bedroomTwoController.text.trim(),
-        "interiordefectsbedroomthree": bedroomThreeController.text.trim(),
-        "interiordefectsbedroomfour": bedroomFourController.text.trim(),
-        "interiordefectsother": otherIfApplicableController.text.trim(),
         "data": imageData,
         "name": imageName,
         "hallimagedata": hallimageData,
@@ -434,7 +447,7 @@ class _BuildingInspectionTheInteriorFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectionTheRoofInteriorFragments(reportId: id)));
+                BuildingInspectionTheInteriorStepTwoFragments(reportId: id)));
       } else {
         Navigator.of(context).pop();
         print("Some Issue.");
@@ -460,7 +473,7 @@ class _BuildingInspectionTheInteriorFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'INTERIOR OF THE BUILDING',
+                'INTERIOR OF THE BUILDING (STEP 1)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -908,167 +921,6 @@ class _BuildingInspectionTheInteriorFragmentsState
                         child: Text('Choose Image')),
                   ),
                 ],
-              ),
-            ),
-            //Family Room
-
-            Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Family Room'),
-                ),
-                value: interiordefectsfamily,
-                items: [
-                  DropdownMenuItem(
-                    child: Text('-Select-'),
-                    value: "NA",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Defects/Safety Hazards found were'),
-                    value: "Defects/Safety Hazards found were",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('No Defects/Safety Hazards found.'),
-                    value: "No Defects/Safety Hazards found",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Not present'),
-                    value: "Not present",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Part of common area'),
-                    value: "Part of common area",
-                  ),
-                ],
-                onChanged: (interiordefectsfamily) {
-                  setState(() {
-                    this.interiordefectsfamily = interiordefectsfamily!;
-                    //print(personsinattendance);
-                  });
-                },
-              ),
-            ),
-            //Study
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: studyController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Study'),
-                ),
-              ),
-            ),
-            //Stairs
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: stairsController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Stairs'),
-                ),
-              ),
-            ),
-            //Laundry
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: laundryController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Laundry'),
-                ),
-              ),
-            ),
-            //Toilet
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: toiletController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Toilet'),
-                ),
-              ),
-            ),
-            //Bathroom
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bathroomController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bathroom'),
-                ),
-              ),
-            ),
-            //En-suite
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: enSuiteController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('En-suite'),
-                ),
-              ),
-            ),
-            //Bedroom  1
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bedroomOneController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bedroom  1'),
-                ),
-              ),
-            ),
-            //Bedroom  2
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bedroomTwoController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bedroom 2'),
-                ),
-              ),
-            ),
-            //Bedroom 3
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bedroomThreeController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bedroom 3'),
-                ),
-              ),
-            ),
-            //Bedroom 4
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: bedroomFourController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Bedroom 4'),
-                ),
-              ),
-            ),
-            //Other if Applicable
-            Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: otherIfApplicableController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Other if Applicable'),
-                ),
               ),
             ),
             Container(

@@ -47,14 +47,19 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
   var apparentdefectsvalue = "NA";
   var informationprovidedinspector = "NA";
   var informationprovidedinspectorvalue = "NA";
-  var imagePath = "NA";
 
+  var imagePath = "NA";
   var imageName = "NA";
   var imageData = "NA";
-  File? apparentConcealmentImagePath;
 
+  /*File? apparentConcealmentImagePath;
   String? apparentConcealmentImageName;
-  String? apparentConcealmentImageData;
+  String? apparentConcealmentImageData;*/
+
+  var apparentConcealmentImagePath = "NA";
+  var apparentConcealmentImageName = "NA";
+  var apparentConcealmentImageData = "NA";
+
   ImagePicker imagePicker = ImagePicker();
 
   Future<void> getImage() async {
@@ -104,10 +109,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       if (getimage == null) {
         return;
       } else {
-        apparentConcealmentImagePath = File(getimage.path);
+        File apparentConcealmentImagePath = File(getimage.path);
         apparentConcealmentImageName = getimage.path.split('/').last;
         apparentConcealmentImageData =
-            base64Encode(apparentConcealmentImagePath!.readAsBytesSync());
+            base64Encode(apparentConcealmentImagePath.readAsBytesSync());
         print(apparentConcealmentImagePath);
         print(apparentConcealmentImageName);
         print(apparentConcealmentImageData);
@@ -123,10 +128,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       if (getimage == null) {
         return;
       } else {
-        apparentConcealmentImagePath = File(getimage.path);
+        File apparentConcealmentImagePath = File(getimage.path);
         apparentConcealmentImageName = getimage.path.split('/').last;
         apparentConcealmentImageData =
-            base64Encode(apparentConcealmentImagePath!.readAsBytesSync());
+            base64Encode(apparentConcealmentImagePath.readAsBytesSync());
         print(apparentConcealmentImagePath);
         print(apparentConcealmentImageName);
         print(apparentConcealmentImageData);
@@ -526,8 +531,8 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: apparentConcealmentImagePath != null
-                  ? Image.file(apparentConcealmentImagePath!)
+              child: apparentConcealmentImagePath != "NA"
+                  ? Image.memory(base64Decode(apparentConcealmentImageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),

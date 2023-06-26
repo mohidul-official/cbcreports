@@ -8,55 +8,82 @@ import 'package:image_picker/image_picker.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-import 'building_inspection_the_roof_exterior_step_two_fragments_screen.dart';
-import 'building_inspection_the_sub_floor_fragments_screen.dart';
+import 'building_inspection_the_interior_step_three_fragments_screen.dart';
+import 'building_inspection_the_roof_interior_fragments_screen.dart';
 
-class BuildingInspectionTheRoofExteriorFragments extends StatefulWidget {
+class BuildingInspectionTheInteriorStepTwoFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
 
   String reportId;
-  BuildingInspectionTheRoofExteriorFragments(
+  BuildingInspectionTheInteriorStepTwoFragments(
       {Key? myKey, required this.reportId})
       : super(key: myKey);
 
   @override
-  State<BuildingInspectionTheRoofExteriorFragments> createState() =>
-      _BuildingInspectionTheRoofExteriorFragmentsState();
+  State<BuildingInspectionTheInteriorStepTwoFragments> createState() =>
+      _BuildingInspectionTheInteriorStepTwoFragmentsState();
 }
 
-class _BuildingInspectionTheRoofExteriorFragmentsState
-    extends State<BuildingInspectionTheRoofExteriorFragments> {
-  var roofexteriorflashings = "NA";
-  var roofexteriorflashingsvalue = "NA";
+class _BuildingInspectionTheInteriorStepTwoFragmentsState
+    extends State<BuildingInspectionTheInteriorStepTwoFragments> {
+  TextEditingController familyRoomController = TextEditingController();
 
-  var roofexteriorgutters = "NA";
-  var roofexteriorguttersvalue = "NA";
+  TextEditingController studyController = TextEditingController();
 
-  var roofexteriorvalleys = "NA";
+  TextEditingController stairsController = TextEditingController();
 
-  var roofexteriorskylights = "NA";
+  TextEditingController laundryController = TextEditingController();
 
-  var roofexteriorvents = "NA";
+  TextEditingController toiletController = TextEditingController();
 
-  var roofexteriorflashingsimagePath = "NA";
-  var roofexteriorflashingsimageName = "NA";
-  var roofexteriorflashingsimageData = "NA";
+  TextEditingController bathroomController = TextEditingController();
 
-  var roofexteriorguttersimagePath = "NA";
-  var roofexteriorguttersimageName = "NA";
-  var roofexteriorguttersimageData = "NA";
+  TextEditingController enSuiteController = TextEditingController();
 
-  var roofexteriorvalleysimagePath = "NA";
-  var roofexteriorvalleysimageName = "NA";
-  var roofexteriorvalleysimageData = "NA";
+  TextEditingController bedroomOneController = TextEditingController();
 
-  var roofexteriorskylightsimagePath = "NA";
-  var roofexteriorskylightsimageName = "NA";
-  var roofexteriorskylightsimageData = "NA";
+  TextEditingController bedroomTwoController = TextEditingController();
+
+  TextEditingController bedroomThreeController = TextEditingController();
+
+  TextEditingController bedroomFourController = TextEditingController();
+
+  TextEditingController otherIfApplicableController = TextEditingController();
+
+  var interiordefectsfamily = "NA";
+
+  var interiordefectsstudy = "NA";
+
+  var interiordefectsstairs = "NA";
+
+  var interiordefectslaundry = "NA";
+  var interiordefectslaundryvalue = "NA";
+
+  var interiordefectstoilet = "NA";
+
+  var imagePath = "NA";
+  var imageName = "NA";
+  var imageData = "NA";
+
+  var interiordefectsstudyimagePath = "NA";
+  var interiordefectsstudyimageName = "NA";
+  var interiordefectsstudyimageData = "NA";
+
+  var interiordefectsstairsimagePath = "NA";
+  var interiordefectsstairsimageName = "NA";
+  var interiordefectsstairsimageData = "NA";
+
+  var interiordefectslaundryimagePath = "NA";
+  var interiordefectslaundryimageName = "NA";
+  var interiordefectslaundryimageData = "NA";
+
+  var interiordefectstoiletimagePath = "NA";
+  var interiordefectstoiletimageName = "NA";
+  var interiordefectstoiletimageData = "NA";
 
   ImagePicker imagePicker = ImagePicker();
 
-  Future<void> roofexteriorflashingsgetImage() async {
+  Future<void> getImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -64,20 +91,19 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File roofexteriorflashingsimagePath = File(getimage.path);
+        File imagePath = File(getimage.path);
 
-        roofexteriorflashingsimageName = getimage.path.split('/').last;
-        roofexteriorflashingsimageData =
-            base64Encode(roofexteriorflashingsimagePath.readAsBytesSync());
+        imageName = getimage.path.split('/').last;
+        imageData = base64Encode(imagePath.readAsBytesSync());
 
-        print(roofexteriorflashingsimagePath);
-        print(roofexteriorflashingsimageName);
-        print(roofexteriorflashingsimageData);
+        print(imagePath);
+        print(imageName);
+        print(imageData);
       }
     });
   }
 
-  Future<void> roofexteriorflashingscaptureImage() async {
+  Future<void> captureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -85,20 +111,18 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File roofexteriorflashingsimagePath = File(getimage.path);
+        File imagePath = File(getimage.path);
+        imageName = getimage.path.split('/').last;
+        imageData = base64Encode(imagePath.readAsBytesSync());
 
-        roofexteriorflashingsimageName = getimage.path.split('/').last;
-        roofexteriorflashingsimageData =
-            base64Encode(roofexteriorflashingsimagePath.readAsBytesSync());
-
-        print(roofexteriorflashingsimagePath);
-        print(roofexteriorflashingsimageName);
-        print(roofexteriorflashingsimageData);
+        print(imagePath);
+        print(imageName);
+        print(imageData);
       }
     });
   }
 
-  Future<void> roofexteriorguttersgetImage() async {
+  Future<void> interiordefectsstudygetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -106,20 +130,20 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File roofexteriorguttersimagePath = File(getimage.path);
+        File interiordefectsstudyimagePath = File(getimage.path);
 
-        roofexteriorguttersimageName = getimage.path.split('/').last;
-        roofexteriorguttersimageData =
-            base64Encode(roofexteriorguttersimagePath.readAsBytesSync());
+        interiordefectsstudyimageName = getimage.path.split('/').last;
+        interiordefectsstudyimageData =
+            base64Encode(interiordefectsstudyimagePath.readAsBytesSync());
 
-        print(roofexteriorguttersimagePath);
-        print(roofexteriorguttersimageName);
-        print(roofexteriorguttersimageData);
+        print(interiordefectsstudyimagePath);
+        print(interiordefectsstudyimageName);
+        print(interiordefectsstudyimageData);
       }
     });
   }
 
-  Future<void> roofexteriorgutterscaptureImage() async {
+  Future<void> interiordefectsstudycaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -127,20 +151,20 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File roofexteriorguttersimagePath = File(getimage.path);
+        File interiordefectsstudyimagePath = File(getimage.path);
 
-        roofexteriorguttersimageName = getimage.path.split('/').last;
-        roofexteriorguttersimageData =
-            base64Encode(roofexteriorguttersimagePath.readAsBytesSync());
+        interiordefectsstudyimageName = getimage.path.split('/').last;
+        interiordefectsstudyimageData =
+            base64Encode(interiordefectsstudyimagePath.readAsBytesSync());
 
-        print(roofexteriorguttersimagePath);
-        print(roofexteriorguttersimageName);
-        print(roofexteriorguttersimageData);
+        print(interiordefectsstudyimagePath);
+        print(interiordefectsstudyimageName);
+        print(interiordefectsstudyimageData);
       }
     });
   }
 
-  Future<void> roofexteriorvalleysgetImage() async {
+  Future<void> interiordefectsstairsgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -148,20 +172,20 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File roofexteriorvalleysimagePath = File(getimage.path);
+        File interiordefectsstairsimagePath = File(getimage.path);
 
-        roofexteriorvalleysimageName = getimage.path.split('/').last;
-        roofexteriorvalleysimageData =
-            base64Encode(roofexteriorvalleysimagePath.readAsBytesSync());
+        interiordefectsstairsimageName = getimage.path.split('/').last;
+        interiordefectsstairsimageData =
+            base64Encode(interiordefectsstairsimagePath.readAsBytesSync());
 
-        print(roofexteriorvalleysimagePath);
-        print(roofexteriorvalleysimageName);
-        print(roofexteriorvalleysimageData);
+        print(interiordefectsstairsimagePath);
+        print(interiordefectsstairsimageName);
+        print(interiordefectsstairsimageData);
       }
     });
   }
 
-  Future<void> roofexteriorvalleyscaptureImage() async {
+  Future<void> interiordefectsstairscaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -169,20 +193,19 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File roofexteriorvalleysimagePath = File(getimage.path);
+        File interiordefectsstairsimagePath = File(getimage.path);
+        interiordefectsstairsimageName = getimage.path.split('/').last;
+        interiordefectsstairsimageData =
+            base64Encode(interiordefectsstairsimagePath.readAsBytesSync());
 
-        roofexteriorvalleysimageName = getimage.path.split('/').last;
-        roofexteriorvalleysimageData =
-            base64Encode(roofexteriorvalleysimagePath.readAsBytesSync());
-
-        print(roofexteriorvalleysimagePath);
-        print(roofexteriorvalleysimageName);
-        print(roofexteriorvalleysimageData);
+        print(interiordefectsstairsimagePath);
+        print(interiordefectsstairsimageName);
+        print(interiordefectsstairsimageData);
       }
     });
   }
 
-  Future<void> roofexteriorskylightsgetImage() async {
+  Future<void> interiordefectslaundrygetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -190,20 +213,20 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File roofexteriorskylightsimagePath = File(getimage.path);
+        File interiordefectslaundryimagePath = File(getimage.path);
 
-        roofexteriorskylightsimageName = getimage.path.split('/').last;
-        roofexteriorskylightsimageData =
-            base64Encode(roofexteriorskylightsimagePath.readAsBytesSync());
+        interiordefectslaundryimageName = getimage.path.split('/').last;
+        interiordefectslaundryimageData =
+            base64Encode(interiordefectslaundryimagePath.readAsBytesSync());
 
-        print(roofexteriorskylightsimagePath);
-        print(roofexteriorskylightsimageName);
-        print(roofexteriorskylightsimageData);
+        print(interiordefectslaundryimagePath);
+        print(interiordefectslaundryimageName);
+        print(interiordefectslaundryimageData);
       }
     });
   }
 
-  Future<void> roofexteriorskylightscaptureImage() async {
+  Future<void> interiordefectslaundrycaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -211,45 +234,93 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File roofexteriorskylightsimagePath = File(getimage.path);
+        File interiordefectslaundryimagePath = File(getimage.path);
 
-        roofexteriorskylightsimageName = getimage.path.split('/').last;
-        roofexteriorskylightsimageData =
-            base64Encode(roofexteriorskylightsimagePath.readAsBytesSync());
+        interiordefectslaundryimageName = getimage.path.split('/').last;
+        interiordefectslaundryimageData =
+            base64Encode(interiordefectslaundryimagePath.readAsBytesSync());
 
-        print(roofexteriorskylightsimagePath);
-        print(roofexteriorskylightsimageName);
-        print(roofexteriorskylightsimageData);
+        print(interiordefectslaundryimagePath);
+        print(interiordefectslaundryimageName);
+        print(interiordefectslaundryimageData);
       }
     });
   }
 
-  roofexteriorflashingsCheck() {
-    if (roofexteriorflashings == "Partially Inspected due to") {
+  Future<void> interiordefectstoiletgetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectstoiletimagePath = File(getimage.path);
+
+        interiordefectstoiletimageName = getimage.path.split('/').last;
+        interiordefectstoiletimageData =
+            base64Encode(interiordefectstoiletimagePath.readAsBytesSync());
+
+        print(interiordefectstoiletimagePath);
+        print(interiordefectstoiletimageName);
+        print(interiordefectstoiletimageData);
+      }
+    });
+  }
+
+  Future<void> interiordefectstoiletcaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File interiordefectstoiletimagePath = File(getimage.path);
+
+        interiordefectstoiletimageName = getimage.path.split('/').last;
+        interiordefectstoiletimageData =
+            base64Encode(interiordefectstoiletimagePath.readAsBytesSync());
+
+        print(interiordefectstoiletimagePath);
+        print(interiordefectstoiletimageName);
+        print(interiordefectstoiletimageData);
+      }
+    });
+  }
+
+  interiordefectslaundryCheck() {
+    if (interiordefectslaundry == "Defects/Safety Hazards found were") {
       return DropdownButtonFormField(
         isExpanded: true,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          label: Text('Partially Inspected due to'),
+          label: Text('Defects/Safety Hazards found were'),
         ),
-        value: roofexteriorflashingsvalue,
+        value: interiordefectslaundryvalue,
         items: [
           DropdownMenuItem(
             child: Text('-Select-'),
             value: "NA",
           ),
           DropdownMenuItem(
-            child: Text('and Defects/Safety Hazards were found to'),
-            value: "and Defects/Safety Hazards were found to",
+            child: Text('Signs of previous moisture damage were found.'),
+            value: "Signs of previous moisture damage were found.",
           ),
           DropdownMenuItem(
-            child: Text('and no Defects/Safety Hazards were found there'),
-            value: "and no Defects/Safety Hazards were found there",
+            child: Text('Damage to grouting was found.'),
+            value: "Damage to grouting was found.",
+          ),
+          DropdownMenuItem(
+            child: Text(
+                'Signs of previous moisture damage were found. But there were no signs of any moisture on moisture meter at the time of inspection.'),
+            value:
+                "Signs of previous moisture damage were found. But there were no signs of any moisture on moisture meter at the time of inspection.",
           ),
         ],
-        onChanged: (roofexteriorflashingsvalue) {
+        onChanged: (interiordefectslaundryvalue) {
           setState(() {
-            this.roofexteriorflashingsvalue = roofexteriorflashingsvalue!;
+            this.interiordefectslaundryvalue = interiordefectslaundryvalue!;
             //print(personsinattendance);
           });
         },
@@ -257,40 +328,7 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
     }
   }
 
-  roofexteriorguttersCheck() {
-    if (roofexteriorgutters == "Partially Inspected due to") {
-      return DropdownButtonFormField(
-        isExpanded: true,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          label: Text('Partially Inspected due to'),
-        ),
-        value: roofexteriorguttersvalue,
-        items: [
-          DropdownMenuItem(
-            child: Text('-Select-'),
-            value: "NA",
-          ),
-          DropdownMenuItem(
-            child: Text('and Defects/Safety Hazards were found to'),
-            value: "and Defects/Safety Hazards were found to",
-          ),
-          DropdownMenuItem(
-            child: Text('and no Defects/Safety Hazards were found there'),
-            value: "and no Defects/Safety Hazards were found there",
-          ),
-        ],
-        onChanged: (roofexteriorguttersvalue) {
-          setState(() {
-            this.roofexteriorguttersvalue = roofexteriorguttersvalue!;
-            //print(personsinattendance);
-          });
-        },
-      );
-    }
-  }
-
-  Future<void> updateTheRoofExteriorDetails(String id) async {
+  Future<void> updateTheInteriorDetails(String id) async {
     try {
       showDialog(
         context: context,
@@ -299,23 +337,29 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
         },
       );
       var res = await http
-          .post(Uri.parse(API.prepurchasetheroofexteriordetails), body: {
+          .post(Uri.parse(API.prepurchasetheinteriorsteptwodetails), body: {
         "id": id,
-        "roofexteriorflashings": roofexteriorflashings,
-        "roofexteriorflashingsvalue": roofexteriorflashingsvalue,
-        "roofexteriorgutters": roofexteriorgutters,
-        "roofexteriorguttersvalue": roofexteriorguttersvalue,
-        "roofexteriorvalleys": roofexteriorvalleys,
-        "roofexteriorskylights": roofexteriorskylights,
-        "roofexteriorvents": roofexteriorvents,
-        "roofexteriorflashingsimagedata": roofexteriorflashingsimageData,
-        "roofexteriorflashingsimagename": roofexteriorflashingsimageName,
-        "roofexteriorguttersimagedata": roofexteriorguttersimageData,
-        "roofexteriorguttersimagename": roofexteriorguttersimageName,
-        "roofexteriorvalleysimagedata": roofexteriorvalleysimageData,
-        "roofexteriorvalleysimagename": roofexteriorvalleysimageName,
-        "roofexteriorskylightsimagedata": roofexteriorskylightsimageData,
-        "roofexteriorskylightsimagename": roofexteriorskylightsimageName,
+
+        "interiordefectsfamily": interiordefectsfamily,
+        //"interiordefectsstudy": studyController.text.trim(),
+        "interiordefectsstudy": interiordefectsstudy,
+        //"interiordefectsstairs": stairsController.text.trim(),
+        "interiordefectsstairs": interiordefectsstairs,
+        //"interiordefectslaundry": laundryController.text.trim(),
+        "interiordefectslaundry": interiordefectslaundry,
+        "interiordefectslaundryvalue": interiordefectslaundryvalue,
+        //"interiordefectstoilet": toiletController.text.trim(),
+        "interiordefectstoilet": interiordefectstoilet,
+        "data": imageData,
+        "name": imageName,
+        "interiordefectsstudyimagedata": interiordefectsstudyimageData,
+        "interiordefectsstudyimagename": interiordefectsstudyimageName,
+        "interiordefectsstairsimagedata": interiordefectsstairsimageData,
+        "interiordefectsstairsimagename": interiordefectsstairsimageName,
+        "interiordefectslaundryimagedata": interiordefectslaundryimageData,
+        "interiordefectslaundryimagename": interiordefectslaundryimageName,
+        "interiordefectstoiletimagedata": interiordefectstoiletimageData,
+        "interiordefectstoiletimagename": interiordefectstoiletimageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -325,8 +369,7 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectionTheRoofExteriorStepTwoFragments(
-                    reportId: id)));
+                BuildingInspectionTheInteriorStepThreeFragments(reportId: id)));
       } else {
         Navigator.of(context).pop();
         print("Some Issue.");
@@ -352,7 +395,7 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'THE ROOF EXTERIOR (STEP 1)',
+                'INTERIOR OF THE BUILDING (STEP 2)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -372,16 +415,17 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
-            //Roof Flashings
+
+            //Family Room
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Roof Flashings'),
+                  label: Text('Family Room'),
                 ),
-                value: roofexteriorflashings,
+                value: interiordefectsfamily,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -400,17 +444,223 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
                     value: "Not present",
                   ),
                   DropdownMenuItem(
-                    child: Text('Partially Inspected due to'),
-                    value: "Partially Inspected due to",
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectsfamily) {
+                  setState(() {
+                    this.interiordefectsfamily = interiordefectsfamily!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: imageData != "NA"
+                  ? Image.memory(base64Decode(imageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          captureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          getImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
+            //Study
+
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Study'),
+                ),
+                value: interiordefectsstudy,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
                   ),
                   DropdownMenuItem(
                     child: Text('Part of common area'),
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (roofexteriorflashings) {
+                onChanged: (interiordefectsstudy) {
                   setState(() {
-                    this.roofexteriorflashings = roofexteriorflashings!;
+                    this.interiordefectsstudy = interiordefectsstudy!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectsstudyimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectsstudyimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsstudycaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsstudygetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
+            //Stairs
+
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Stairs'),
+                ),
+                value: interiordefectsstairs,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectsstairs) {
+                  setState(() {
+                    this.interiordefectsstairs = interiordefectsstairs!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: interiordefectsstairsimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectsstairsimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsstairscaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          interiordefectsstairsgetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
+            //Laundry
+
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Laundry'),
+                ),
+                value: interiordefectslaundry,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (interiordefectslaundry) {
+                  setState(() {
+                    this.interiordefectslaundry = interiordefectslaundry!;
                     //print(personsinattendance);
                   });
                 },
@@ -419,13 +669,12 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
             //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: roofexteriorflashingsCheck(),
+              child: interiordefectslaundryCheck(),
             ),
-
             Container(
               margin: EdgeInsets.all(10),
-              child: roofexteriorflashingsimageData != "NA"
-                  ? Image.memory(base64Decode(roofexteriorflashingsimageData))
+              child: interiordefectslaundryimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectslaundryimageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -437,7 +686,7 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          roofexteriorflashingscaptureImage();
+                          interiordefectslaundrycaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -445,105 +694,23 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          roofexteriorflashingsgetImage();
+                          interiordefectslaundrygetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-
-            //Gutters/Downpipes:
-
-            Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Gutters/Downpipes'),
-                ),
-                value: roofexteriorgutters,
-                items: [
-                  DropdownMenuItem(
-                    child: Text('-Select-'),
-                    value: "NA",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Defects/Safety Hazards found were'),
-                    value: "Defects/Safety Hazards found were",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('No Defects/Safety Hazards found.'),
-                    value: "No Defects/Safety Hazards found",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Not present'),
-                    value: "Not present",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Partially Inspected due to'),
-                    value: "Partially Inspected due to",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Part of common area'),
-                    value: "Part of common area",
-                  ),
-                ],
-                onChanged: (roofexteriorgutters) {
-                  setState(() {
-                    this.roofexteriorgutters = roofexteriorgutters!;
-                    //print(personsinattendance);
-                  });
-                },
-              ),
-            ),
-            //The limitations were:
-            Container(
-              margin: EdgeInsets.all(10),
-              child: roofexteriorguttersCheck(),
-            ),
-
-            Container(
-              margin: EdgeInsets.all(10),
-              child: roofexteriorguttersimageData != "NA"
-                  ? Image.memory(base64Decode(roofexteriorguttersimageData))
-                  : Text('Image Not Choose Yet'),
-              //child: Text('Image Goes Here'),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          roofexteriorgutterscaptureImage();
-                        },
-                        child: Text('Capture Image')),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          roofexteriorguttersgetImage();
-                        },
-                        child: Text('Choose Image')),
-                  ),
-                ],
-              ),
-            ),
-
-            //Valleys
+            //Toilet
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Valleys'),
+                  label: Text('Toilet'),
                 ),
-                value: roofexteriorvalleys,
+                value: interiordefectstoilet,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -566,19 +733,18 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (roofexteriorvalleys) {
+                onChanged: (interiordefectstoilet) {
                   setState(() {
-                    this.roofexteriorvalleys = roofexteriorvalleys!;
+                    this.interiordefectstoilet = interiordefectstoilet!;
                     //print(personsinattendance);
                   });
                 },
               ),
             ),
-
             Container(
               margin: EdgeInsets.all(10),
-              child: roofexteriorvalleysimageData != "NA"
-                  ? Image.memory(base64Decode(roofexteriorvalleysimageData))
+              child: interiordefectstoiletimageData != "NA"
+                  ? Image.memory(base64Decode(interiordefectstoiletimageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -590,7 +756,7 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          roofexteriorvalleyscaptureImage();
+                          interiordefectstoiletcaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -598,127 +764,13 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          roofexteriorvalleysgetImage();
+                          interiordefectstoiletgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
-
-            //Skylights
-
-            Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Skylights'),
-                ),
-                value: roofexteriorskylights,
-                items: [
-                  DropdownMenuItem(
-                    child: Text('-Select-'),
-                    value: "NA",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Defects/Safety Hazards found were'),
-                    value: "Defects/Safety Hazards found were",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('No Defects/Safety Hazards found.'),
-                    value: "No Defects/Safety Hazards found",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Not present'),
-                    value: "Not present",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Part of common area'),
-                    value: "Part of common area",
-                  ),
-                ],
-                onChanged: (roofexteriorskylights) {
-                  setState(() {
-                    this.roofexteriorskylights = roofexteriorskylights!;
-                    //print(personsinattendance);
-                  });
-                },
-              ),
-            ),
-
-            Container(
-              margin: EdgeInsets.all(10),
-              child: roofexteriorskylightsimageData != "NA"
-                  ? Image.memory(base64Decode(roofexteriorskylightsimageData))
-                  : Text('Image Not Choose Yet'),
-              //child: Text('Image Goes Here'),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          roofexteriorskylightscaptureImage();
-                        },
-                        child: Text('Capture Image')),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          roofexteriorskylightsgetImage();
-                        },
-                        child: Text('Choose Image')),
-                  ),
-                ],
-              ),
-            ),
-
-            //Vents
-
-            Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButtonFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Vents'),
-                ),
-                value: roofexteriorvents,
-                items: [
-                  DropdownMenuItem(
-                    child: Text('-Select-'),
-                    value: "NA",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Defects/Safety Hazards found were'),
-                    value: "Defects/Safety Hazards found were",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('No Defects/Safety Hazards found.'),
-                    value: "No Defects/Safety Hazards found",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Not present'),
-                    value: "Not present",
-                  ),
-                  DropdownMenuItem(
-                    child: Text('Part of common area'),
-                    value: "Part of common area",
-                  ),
-                ],
-                onChanged: (roofexteriorvents) {
-                  setState(() {
-                    this.roofexteriorvents = roofexteriorvents!;
-                    //print(personsinattendance);
-                  });
-                },
-              ),
-            ),
-
             Container(
               child: Row(
                 children: [
@@ -731,7 +783,7 @@ class _BuildingInspectionTheRoofExteriorFragmentsState
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                         onPressed: () {
-                          updateTheRoofExteriorDetails(widget.reportId);
+                          updateTheInteriorDetails(widget.reportId);
                         },
                         child: Text('Save & Next')),
                   ),

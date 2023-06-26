@@ -8,73 +8,48 @@ import 'package:image_picker/image_picker.dart';
 import '../../api_connection/api_connection.dart';
 import 'package:http/http.dart' as http;
 
-import 'building_inspection_the_exterior_fragments_screen.dart';
+import 'building_inspection_the_sub_floor_fragments_screen.dart';
 
-class BuildingInspectionTheSiteStepTwoFragments extends StatefulWidget {
+class BuildingInspectionTheRoofExteriorStepTwoFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
 
   String reportId;
-  BuildingInspectionTheSiteStepTwoFragments(
+  BuildingInspectionTheRoofExteriorStepTwoFragments(
       {Key? myKey, required this.reportId})
       : super(key: myKey);
 
   @override
-  State<BuildingInspectionTheSiteStepTwoFragments> createState() =>
-      _BuildingInspectionTheSiteStepTwoFragmentsState();
+  State<BuildingInspectionTheRoofExteriorStepTwoFragments> createState() =>
+      _BuildingInspectionTheRoofExteriorStepTwoFragmentsState();
 }
 
-class _BuildingInspectionTheSiteStepTwoFragmentsState
-    extends State<BuildingInspectionTheSiteStepTwoFragments> {
-  TextEditingController drivewaysController = TextEditingController();
-  TextEditingController pathsController = TextEditingController();
-  TextEditingController stepsController = TextEditingController();
-  TextEditingController retainingWallsController = TextEditingController();
+class _BuildingInspectionTheRoofExteriorStepTwoFragmentsState
+    extends State<BuildingInspectionTheRoofExteriorStepTwoFragments> {
+  var roofexteriorflues = "NA";
 
-  TextEditingController surfaceWaterDrainageController =
-      TextEditingController();
+  var roofexterioreaves = "NA";
+  var roofexterioreavesvalue = "NA";
 
-  TextEditingController carAccommodationController = TextEditingController();
+  var roofexteriorbarges = "NA";
+  var roofexteriorbargesvalue = "NA";
 
-  TextEditingController detachedBuildingsController = TextEditingController();
+  var roofexteriorother = "NA";
 
-  TextEditingController gardenShedsFencesController = TextEditingController();
+  var roofexterioreavesimagePath = "NA";
+  var roofexterioreavesimageName = "NA";
+  var roofexterioreavesimageData = "NA";
 
-  TextEditingController otherIfApplicableController = TextEditingController();
+  var roofexteriorbargesimagePath = "NA";
+  var roofexteriorbargesimageName = "NA";
+  var roofexteriorbargesimageData = "NA";
 
-  var imagePath = "NA";
-  var imageName = "NA";
-  var imageData = "NA";
-
-  var gardenimagePath = "NA";
-  var gardenimageName = "NA";
-  var gardenimageData = "NA";
-
-  var otherimagePath = "NA";
-  var otherimageName = "NA";
-  var otherimageData = "NA";
-
-  /*File? imagePath;
-  String? imageName;
-  String? imageData;
-
-  File? gardenimagePath;
-  String? gardenimageName;
-  String? gardenimageData;
-
-  File? otherimagePath;
-  String? otherimageName;
-  String? otherimageData;*/
-
-  var safetyhazardsbuildings = "NA";
-
-  var safetyhazardsgarden = "NA";
-  var safetyhazardsgardenvalue = "NA";
-
-  var safetyhazardsother = "NA";
+  var roofexteriorotherimagePath = "NA";
+  var roofexteriorotherimageName = "NA";
+  var roofexteriorotherimageData = "NA";
 
   ImagePicker imagePicker = ImagePicker();
 
-  Future<void> getImage() async {
+  Future<void> roofexterioreavesgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -82,17 +57,20 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File imagePath = File(getimage.path);
-        imageName = getimage.path.split('/').last;
-        imageData = base64Encode(imagePath.readAsBytesSync());
-        print(imagePath);
-        print(imageName);
-        print(imageData);
+        File roofexterioreavesimagePath = File(getimage.path);
+
+        roofexterioreavesimageName = getimage.path.split('/').last;
+        roofexterioreavesimageData =
+            base64Encode(roofexterioreavesimagePath.readAsBytesSync());
+
+        print(roofexterioreavesimagePath);
+        print(roofexterioreavesimageName);
+        print(roofexterioreavesimageData);
       }
     });
   }
 
-  Future<void> captureImage() async {
+  Future<void> roofexterioreavescaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -100,17 +78,20 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File imagePath = File(getimage.path);
-        imageName = getimage.path.split('/').last;
-        imageData = base64Encode(imagePath.readAsBytesSync());
-        print(imagePath);
-        print(imageName);
-        print(imageData);
+        File roofexterioreavesimagePath = File(getimage.path);
+
+        roofexterioreavesimageName = getimage.path.split('/').last;
+        roofexterioreavesimageData =
+            base64Encode(roofexterioreavesimagePath.readAsBytesSync());
+
+        print(roofexterioreavesimagePath);
+        print(roofexterioreavesimageName);
+        print(roofexterioreavesimageData);
       }
     });
   }
 
-  Future<void> gardengetImage() async {
+  Future<void> roofexteriorbargesgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -118,17 +99,20 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File gardenimagePath = File(getimage.path);
-        gardenimageName = getimage.path.split('/').last;
-        gardenimageData = base64Encode(gardenimagePath.readAsBytesSync());
-        print(gardenimagePath);
-        print(gardenimageName);
-        print(gardenimageData);
+        File roofexteriorbargesimagePath = File(getimage.path);
+
+        roofexteriorbargesimageName = getimage.path.split('/').last;
+        roofexteriorbargesimageData =
+            base64Encode(roofexteriorbargesimagePath.readAsBytesSync());
+
+        print(roofexteriorbargesimagePath);
+        print(roofexteriorbargesimageName);
+        print(roofexteriorbargesimageData);
       }
     });
   }
 
-  Future<void> gardencaptureImage() async {
+  Future<void> roofexteriorbargescaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -136,17 +120,20 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File gardenimagePath = File(getimage.path);
-        gardenimageName = getimage.path.split('/').last;
-        gardenimageData = base64Encode(gardenimagePath.readAsBytesSync());
-        print(gardenimagePath);
-        print(gardenimageName);
-        print(gardenimageData);
+        File roofexteriorbargesimagePath = File(getimage.path);
+
+        roofexteriorbargesimageName = getimage.path.split('/').last;
+        roofexteriorbargesimageData =
+            base64Encode(roofexteriorbargesimagePath.readAsBytesSync());
+
+        print(roofexteriorbargesimagePath);
+        print(roofexteriorbargesimageName);
+        print(roofexteriorbargesimageData);
       }
     });
   }
 
-  Future<void> othergetImage() async {
+  Future<void> roofexteriorothergetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
     //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
@@ -154,17 +141,20 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File otherimagePath = File(getimage.path);
-        otherimageName = getimage.path.split('/').last;
-        otherimageData = base64Encode(otherimagePath.readAsBytesSync());
-        print(otherimagePath);
-        print(otherimageName);
-        print(otherimageData);
+        File roofexteriorotherimagePath = File(getimage.path);
+
+        roofexteriorotherimageName = getimage.path.split('/').last;
+        roofexteriorotherimageData =
+            base64Encode(roofexteriorotherimagePath.readAsBytesSync());
+
+        print(roofexteriorotherimagePath);
+        print(roofexteriorotherimageName);
+        print(roofexteriorotherimageData);
       }
     });
   }
 
-  Future<void> othercaptureImage() async {
+  Future<void> roofexteriorothercaptureImage() async {
     ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
     var getimage = await imagePicker.pickImage(
         source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
@@ -172,52 +162,48 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
       if (getimage == null) {
         return;
       } else {
-        File otherimagePath = File(getimage.path);
-        otherimageName = getimage.path.split('/').last;
-        otherimageData = base64Encode(otherimagePath.readAsBytesSync());
-        print(otherimagePath);
-        print(otherimageName);
-        print(otherimageData);
+        File roofexteriorotherimagePath = File(getimage.path);
+
+        roofexteriorotherimageName = getimage.path.split('/').last;
+        roofexteriorotherimageData =
+            base64Encode(roofexteriorotherimagePath.readAsBytesSync());
+
+        print(roofexteriorotherimagePath);
+        print(roofexteriorotherimageName);
+        print(roofexteriorotherimageData);
       }
     });
   }
 
-  safetyhazardsgardenCheck() {
-    if (safetyhazardsgarden == "Defects/Safety Hazards found were") {
-      return DropdownButtonFormField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          label: Text('Defects/Safety Hazards found were'),
-        ),
-        value: safetyhazardsgardenvalue,
-        items: [
-          DropdownMenuItem(
-            child: Text('-Select-'),
-            value: "NA",
-          ),
-          DropdownMenuItem(
-            child:
-                Text('Fence is in bad condition and\n needs to be replaced.\n'),
-            value: "Fence is in bad condition and needs to be replaced.",
-          ),
-          DropdownMenuItem(
-            child: Text(
-                'Fence is leaning. It is recommended to\n contact a certified fencer to fix it.'),
-            value:
-                "Fence is leaning. It is recommended to contact a certified fencer to fix it.",
-          ),
-        ],
-        onChanged: (safetyhazardsgardenvalue) {
-          setState(() {
-            this.safetyhazardsgardenvalue = safetyhazardsgardenvalue!;
-            //print(personsinattendance);
-          });
-        },
-      );
+  roofexterioreavesCheck() {
+    if (roofexterioreaves == "Defects/Safety Hazards found were") {
+      setState(() {
+        roofexterioreavesvalue = "Signs of water damage can be seen.";
+      });
+
+      return Text('Signs of water damage can be seen.');
+    } else {
+      setState(() {
+        roofexterioreavesvalue = " ";
+      });
     }
   }
 
-  Future<void> updateTheSiteDetails(String id) async {
+  roofexteriorbargesCheck() {
+    if (roofexteriorbarges == "Defects/Safety Hazards found were") {
+      setState(() {
+        roofexteriorbargesvalue = "Signs of water damage can be seen.";
+      });
+
+      return Text('Signs of water damage can be seen.');
+    } else {
+      setState(() {
+        roofexteriorbargesvalue = " ";
+      });
+    }
+  }
+
+  Future<void> updateTheRoofExteriorDetails(String id) async {
     try {
       showDialog(
         context: context,
@@ -226,21 +212,20 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
         },
       );
       var res = await http
-          .post(Uri.parse(API.prepurchasethesitesteptwodetails), body: {
+          .post(Uri.parse(API.prepurchasetheroofexteriorsteptwodetails), body: {
         "id": id,
-        //"safetyhazardsbuildings": detachedBuildingsController.text.trim(),
-        "safetyhazardsbuildings": safetyhazardsbuildings,
-        //"safetyhazardsgarden": gardenShedsFencesController.text.trim(),
-        "safetyhazardsgarden": safetyhazardsgarden,
-        "safetyhazardsgardenvalue": safetyhazardsgardenvalue,
-        //"safetyhazardsother": otherIfApplicableController.text.trim(),
-        "safetyhazardsother": safetyhazardsother,
-        "data": imageData,
-        "name": imageName,
-        "gardendata": gardenimageData,
-        "gardenname": gardenimageName,
-        "otherdata": otherimageData,
-        "othername": otherimageName,
+        "roofexteriorflues": roofexteriorflues,
+        "roofexterioreaves": roofexterioreaves,
+        "roofexterioreavesvalue": roofexterioreavesvalue,
+        "roofexteriorbarges": roofexteriorbarges,
+        "roofexteriorbargesvalue": roofexteriorbargesvalue,
+        "roofexteriorother": roofexteriorother,
+        "roofexterioreavesimagedata": roofexterioreavesimageData,
+        "roofexterioreavesimagename": roofexterioreavesimageName,
+        "roofexteriorbargesimagedata": roofexteriorbargesimageData,
+        "roofexteriorbargesimagename": roofexteriorbargesimageName,
+        "roofexteriorotherimagedata": roofexteriorotherimageData,
+        "roofexteriorotherimagename": roofexteriorotherimageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -250,13 +235,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspectorTheExteriorFragments(reportId: id)));
-        /*drivewaysController.clear();
-        pathsController.clear();
-        stepsController.clear();
-        retainingWallsController.clear();
-        piersCommentsController.clear();
-        flooringCommentsController.clear();*/
+                BuildingInspectionTheSubFloorFragments(reportId: id)));
       } else {
         Navigator.of(context).pop();
         print("Some Issue.");
@@ -282,7 +261,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                'THE SITE (STEP 2)',
+                'THE ROOF EXTERIOR (STEP 2)',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -302,16 +281,17 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
-            //Detached Buildings
+
+            //Flues
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Detached Buildings'),
+                  label: Text('Flues'),
                 ),
-                value: safetyhazardsbuildings,
+                value: roofexteriorflues,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -334,54 +314,25 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardsbuildings) {
+                onChanged: (roofexteriorflues) {
                   setState(() {
-                    this.safetyhazardsbuildings = safetyhazardsbuildings!;
+                    this.roofexteriorflues = roofexteriorflues!;
                     //print(personsinattendance);
                   });
                 },
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: imagePath != "NA"
-                  ? Image.memory(base64Decode(imagePath))
-                  : Text('Image Not Choose Yet'),
-              //child: Text('Image Goes Here'),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          captureImage();
-                        },
-                        child: Text('Capture Image')),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          getImage();
-                        },
-                        child: Text('Choose Image')),
-                  ),
-                ],
-              ),
-            ),
-            //Garden Sheds and Fences
+
+            //Eaves
 
             Container(
               margin: EdgeInsets.all(10),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Garden Sheds and Fences'),
+                  label: Text('Eaves'),
                 ),
-                value: safetyhazardsgarden,
+                value: roofexterioreaves,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -404,9 +355,9 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardsgarden) {
+                onChanged: (roofexterioreaves) {
                   setState(() {
-                    this.safetyhazardsgarden = safetyhazardsgarden!;
+                    this.roofexterioreaves = roofexterioreaves!;
                     //print(personsinattendance);
                   });
                 },
@@ -415,12 +366,13 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
             //The limitations were:
             Container(
               margin: EdgeInsets.all(10),
-              child: safetyhazardsgardenCheck(),
+              child: roofexterioreavesCheck(),
             ),
+
             Container(
               margin: EdgeInsets.all(10),
-              child: gardenimagePath !=  "NA"
-                  ? Image.memory(base64Decode(gardenimagePath))
+              child: roofexterioreavesimageData != "NA"
+                  ? Image.memory(base64Decode(roofexterioreavesimageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -432,7 +384,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          gardencaptureImage();
+                          roofexterioreavescaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -440,13 +392,90 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          gardengetImage();
+                          roofexterioreavesgetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
+            //Facia and Barges:
+
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DropdownButtonFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Facia and Barges'),
+                ),
+                value: roofexteriorbarges,
+                items: [
+                  DropdownMenuItem(
+                    child: Text('-Select-'),
+                    value: "NA",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Defects/Safety Hazards found were'),
+                    value: "Defects/Safety Hazards found were",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('No Defects/Safety Hazards found.'),
+                    value: "No Defects/Safety Hazards found",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Not present'),
+                    value: "Not present",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Part of common area'),
+                    value: "Part of common area",
+                  ),
+                ],
+                onChanged: (roofexteriorbarges) {
+                  setState(() {
+                    this.roofexteriorbarges = roofexteriorbarges!;
+                    //print(personsinattendance);
+                  });
+                },
+              ),
+            ),
+            //The limitations were:
+            Container(
+              margin: EdgeInsets.all(10),
+              child: roofexteriorbargesCheck(),
+            ),
+
+            Container(
+              margin: EdgeInsets.all(10),
+              child: roofexteriorbargesimageData != "NA"
+                  ? Image.memory(base64Decode(roofexteriorbargesimageData))
+                  : Text('Image Not Choose Yet'),
+              //child: Text('Image Goes Here'),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          roofexteriorbargescaptureImage();
+                        },
+                        child: Text('Capture Image')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          roofexteriorbargesgetImage();
+                        },
+                        child: Text('Choose Image')),
+                  ),
+                ],
+              ),
+            ),
+
             //Other if Applicable
 
             Container(
@@ -456,7 +485,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                   border: OutlineInputBorder(),
                   label: Text('Other if Applicable'),
                 ),
-                value: safetyhazardsother,
+                value: roofexteriorother,
                 items: [
                   DropdownMenuItem(
                     child: Text('-Select-'),
@@ -479,18 +508,19 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     value: "Part of common area",
                   ),
                 ],
-                onChanged: (safetyhazardsother) {
+                onChanged: (roofexteriorother) {
                   setState(() {
-                    this.safetyhazardsother = safetyhazardsother!;
+                    this.roofexteriorother = roofexteriorother!;
                     //print(personsinattendance);
                   });
                 },
               ),
             ),
+
             Container(
               margin: EdgeInsets.all(10),
-              child: otherimagePath !=  "NA"
-                  ? Image.memory(base64Decode(otherimagePath))
+              child: roofexteriorotherimageData != "NA"
+                  ? Image.memory(base64Decode(roofexteriorotherimageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -502,7 +532,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          othercaptureImage();
+                          roofexteriorothercaptureImage();
                         },
                         child: Text('Capture Image')),
                   ),
@@ -510,13 +540,14 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          othergetImage();
+                          roofexteriorothergetImage();
                         },
                         child: Text('Choose Image')),
                   ),
                 ],
               ),
             ),
+
             Container(
               child: Row(
                 children: [
@@ -529,7 +560,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                         onPressed: () {
-                          updateTheSiteDetails(widget.reportId);
+                          updateTheRoofExteriorDetails(widget.reportId);
                         },
                         child: Text('Save & Next')),
                   ),

@@ -33,21 +33,21 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
 
   TextEditingController otherIfApplicableController = TextEditingController();*/
 
-  File? patiosimagePath;
-  String? patiosimageName;
-  String? patiosimageData;
+  var patiosimagePath = "NA";
+  var patiosimageName = "NA";
+  var patiosimageData = "NA";
 
-  File? decksimagePath;
-  String? decksimageName;
-  String? decksimageData;
+  var decksimagePath = "NA";
+  var decksimageName = "NA";
+  var decksimageData = "NA";
 
-  File? chimneysimagePath;
-  String? chimneysimageName;
-  String? chimneysimageData;
+  var chimneysimagePath = "NA";
+  var chimneysimageName = "NA";
+  var chimneysimageData = "NA";
 
-  File? otherimagePath;
-  String? otherimageName;
-  String? otherimageData;
+  var otherimagePath = "NA";
+  var otherimageName = "NA";
+  var otherimageData = "NA";
 
   var exteriordefectspatios = "NA";
 
@@ -68,9 +68,9 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
       if (getimage == null) {
         return;
       } else {
-        patiosimagePath = File(getimage.path);
+        File patiosimagePath = File(getimage.path);
         patiosimageName = getimage.path.split('/').last;
-        patiosimageData = base64Encode(patiosimagePath!.readAsBytesSync());
+        patiosimageData = base64Encode(patiosimagePath.readAsBytesSync());
         print(patiosimagePath);
         print(patiosimageName);
         print(patiosimageData);
@@ -86,9 +86,9 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
       if (getimage == null) {
         return;
       } else {
-        patiosimagePath = File(getimage.path);
+        File patiosimagePath = File(getimage.path);
         patiosimageName = getimage.path.split('/').last;
-        patiosimageData = base64Encode(patiosimagePath!.readAsBytesSync());
+        patiosimageData = base64Encode(patiosimagePath.readAsBytesSync());
         print(patiosimagePath);
         print(patiosimageName);
         print(patiosimageData);
@@ -104,9 +104,9 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
       if (getimage == null) {
         return;
       } else {
-        decksimagePath = File(getimage.path);
+        File decksimagePath = File(getimage.path);
         decksimageName = getimage.path.split('/').last;
-        decksimageData = base64Encode(decksimagePath!.readAsBytesSync());
+        decksimageData = base64Encode(decksimagePath.readAsBytesSync());
         print(decksimagePath);
         print(decksimageName);
         print(decksimageData);
@@ -122,9 +122,9 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
       if (getimage == null) {
         return;
       } else {
-        decksimagePath = File(getimage.path);
+        File decksimagePath = File(getimage.path);
         decksimageName = getimage.path.split('/').last;
-        decksimageData = base64Encode(decksimagePath!.readAsBytesSync());
+        decksimageData = base64Encode(decksimagePath.readAsBytesSync());
         print(decksimagePath);
         print(decksimageName);
         print(decksimageData);
@@ -140,9 +140,9 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
       if (getimage == null) {
         return;
       } else {
-        chimneysimagePath = File(getimage.path);
+        File chimneysimagePath = File(getimage.path);
         chimneysimageName = getimage.path.split('/').last;
-        chimneysimageData = base64Encode(chimneysimagePath!.readAsBytesSync());
+        chimneysimageData = base64Encode(chimneysimagePath.readAsBytesSync());
         print(chimneysimagePath);
         print(chimneysimageName);
         print(chimneysimageData);
@@ -158,9 +158,9 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
       if (getimage == null) {
         return;
       } else {
-        chimneysimagePath = File(getimage.path);
+        File chimneysimagePath = File(getimage.path);
         chimneysimageName = getimage.path.split('/').last;
-        chimneysimageData = base64Encode(chimneysimagePath!.readAsBytesSync());
+        chimneysimageData = base64Encode(chimneysimagePath.readAsBytesSync());
         print(chimneysimagePath);
         print(chimneysimageName);
         print(chimneysimageData);
@@ -176,9 +176,9 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
       if (getimage == null) {
         return;
       } else {
-        otherimagePath = File(getimage.path);
+        File otherimagePath = File(getimage.path);
         otherimageName = getimage.path.split('/').last;
-        otherimageData = base64Encode(otherimagePath!.readAsBytesSync());
+        otherimageData = base64Encode(otherimagePath.readAsBytesSync());
         print(otherimagePath);
         print(otherimageName);
         print(otherimageData);
@@ -194,9 +194,9 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
       if (getimage == null) {
         return;
       } else {
-        otherimagePath = File(getimage.path);
+        File otherimagePath = File(getimage.path);
         otherimageName = getimage.path.split('/').last;
-        otherimageData = base64Encode(otherimagePath!.readAsBytesSync());
+        otherimageData = base64Encode(otherimagePath.readAsBytesSync());
         print(otherimagePath);
         print(otherimageName);
         print(otherimageData);
@@ -363,8 +363,8 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: patiosimagePath != null
-                  ? Image.file(patiosimagePath!)
+              child: patiosimagePath != "NA"
+                  ? Image.memory(base64Decode(patiosimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -438,8 +438,8 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: decksimagePath != null
-                  ? Image.file(decksimagePath!)
+              child: decksimagePath != "NA"
+                  ? Image.memory(base64Decode(decksimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -508,8 +508,8 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: chimneysimagePath != null
-                  ? Image.file(chimneysimagePath!)
+              child: chimneysimagePath != "NA"
+                  ? Image.memory(base64Decode(chimneysimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
@@ -575,8 +575,8 @@ class _BuildingInspectorTheExteriorStepThreeFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: otherimagePath != null
-                  ? Image.file(otherimagePath!)
+              child: otherimagePath != "NA"
+                  ? Image.memory(base64Decode(otherimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
             ),
