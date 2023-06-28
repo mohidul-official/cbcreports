@@ -24,9 +24,13 @@ class BuildingInspectionUploadSignatureFragments extends StatefulWidget {
 
 class _BuildingInspectionUploadSignatureFragmentsState
     extends State<BuildingInspectionUploadSignatureFragments> {
-  File? imagePath;
+  /*File? imagePath;
   String? imageName;
-  String? imageData;
+  String? imageData;*/
+
+  var imagePath = "NA";
+  var imageName = "NA";
+  var imageData = "NA";
   ImagePicker imagePicker = new ImagePicker();
 
   Future<void> getImage() async {
@@ -35,9 +39,9 @@ class _BuildingInspectionUploadSignatureFragmentsState
       if (getimage == null) {
         return;
       } else {
-        imagePath = File(getimage!.path);
+        File imagePath = File(getimage.path);
         imageName = getimage.path.split('/').last;
-        imageData = base64Encode(imagePath!.readAsBytesSync());
+        imageData = base64Encode(imagePath.readAsBytesSync());
         print(imagePath);
         print(imageName);
         print(imageData);
@@ -101,8 +105,8 @@ class _BuildingInspectionUploadSignatureFragmentsState
               ),
               Container(
                 margin: EdgeInsets.all(10),
-                child: imagePath != null
-                    ? Image.file(imagePath!)
+                child: imageData != "NA"
+                    ? Image.memory(base64Decode(imageData))
                     : Text('Image Not Choose Yet'),
                 //child: Text('Image Goes Here'),
               ),

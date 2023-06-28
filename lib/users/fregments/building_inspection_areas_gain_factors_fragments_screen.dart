@@ -9,6 +9,7 @@ import 'package:multiselect/multiselect.dart';
 
 import '../../api_connection/api_connection.dart';
 import 'building_inspection_description_identification_property_fragments_screen.dart';
+import 'building_inspection_limitations_time_of_inspection_images_fragments_screen.dart';
 
 class BuildingIspectionAreasGrainFactorsFragments extends StatefulWidget {
   //const BuildingInspectionAgreementFragments({super.key});
@@ -39,6 +40,8 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
   //var actualareasinspected = "NA";
   List<String> actualareasinspectedselected = [];
   var actualareasinspected = "NA";
+  var anotherimageTwo = "NA";
+  bool viewVisible = false;
 
   var limitationsyesno = "No Limitations at Time of Inspection";
   var limitationsis = "NA";
@@ -51,6 +54,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
   var imagePath = "NA";
   var imageName = "NA";
   var imageData = "NA";
+
+  var limitationsyesnotwoimagePath = "NA";
+  var limitationsyesnotwoimageName = "NA";
+  var limitationsyesnotwoimageData = "NA";
 
   /*File? apparentConcealmentImagePath;
   String? apparentConcealmentImageName;
@@ -97,6 +104,48 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         print(imagePath);
         print(imageName);
         print(imageData);
+      }
+    });
+  }
+
+  Future<void> limitationsyesnotwogetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File limitationsyesnotwoimagePath = File(getimage.path);
+
+        limitationsyesnotwoimageName = getimage.path.split('/').last;
+        limitationsyesnotwoimageData =
+            base64Encode(limitationsyesnotwoimagePath.readAsBytesSync());
+
+        print(limitationsyesnotwoimagePath);
+        print(limitationsyesnotwoimageName);
+        print(limitationsyesnotwoimageData);
+      }
+    });
+  }
+
+  Future<void> limitationsyesnotwocaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File limitationsyesnotwoimagePath = File(getimage.path);
+
+        limitationsyesnotwoimageName = getimage.path.split('/').last;
+        limitationsyesnotwoimageData =
+            base64Encode(limitationsyesnotwoimagePath.readAsBytesSync());
+
+        print(limitationsyesnotwoimagePath);
+        print(limitationsyesnotwoimageName);
+        print(limitationsyesnotwoimageData);
       }
     });
   }
@@ -168,6 +217,8 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
             influencingTheInspectionController.text.trim(),
         "data": imageData,
         "name": imageName,
+        "limitationsyesnotwoimagedata": limitationsyesnotwoimageData,
+        "limitationsyesnotwoimagename": limitationsyesnotwoimageName,
         "apparentconcealmentimagedata": apparentConcealmentImageData,
         "apparentconcealmentimagename": apparentConcealmentImageName,
       });
@@ -179,8 +230,12 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         Fluttertoast.showToast(msg: "Record Inserted");
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                BuildingInspetionDescriptionIdentificationPropertyFragments(
+                BuildingIspectionLimitationsTimeOfInspectionImageFragments(
                     reportId: id)));
+        /*Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                BuildingInspetionDescriptionIdentificationPropertyFragments(
+                    reportId: id)));*/
         /*otherAreasInspectedController.clear();
         areasNotInspectedInspectedController.clear();
         areasNotFullyInspectedInspectedController.clear();
@@ -197,6 +252,24 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
       print(e);
 
       Fluttertoast.showToast(msg: e.toString());
+    }
+  }
+
+  void hideWidget() {
+    if (viewVisible == true) {
+      setState(() {
+        viewVisible = false;
+        //Fluttertoast.showToast(msg: viewVisible.toString());
+
+        limitationsyesnotwoimagePath = "NA";
+        limitationsyesnotwoimageName = "NA";
+        limitationsyesnotwoimageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewVisible = true;
+        //Fluttertoast.showToast(msg: viewVisible.toString());
+      });
     }
   }
 
@@ -458,6 +531,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
               margin: EdgeInsets.all(10),
               child: conditionCheck(),
             ),
+
             Container(
               margin: EdgeInsets.all(10),
               child: imageData != "NA"
@@ -487,6 +561,62 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
                   ),
                 ],
               ),
+            ),
+
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Fluttertoast.showToast(msg: "Add More Image");
+                    //conditionCheck();
+                    hideWidget();
+                  },
+                  child: Text('Add More Image')),
+            ),
+
+            Container(
+              child: Visibility(
+                  maintainSize: true,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  visible: viewVisible,
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: limitationsyesnotwoimageData != "NA"
+                              ? Image.memory(
+                                  base64Decode(limitationsyesnotwoimageData))
+                              : Text('Image Not Choose Yet'),
+                          //child: Text('Image Goes Here'),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      limitationsyesnotwocaptureImage();
+                                    },
+                                    child: Text('Capture Image')),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      limitationsyesnotwogetImage();
+                                    },
+                                    child: Text('Choose Image')),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
             ),
 
             //Details of Apparent concealment of possible defects:
@@ -531,7 +661,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: apparentConcealmentImagePath != "NA"
+              child: apparentConcealmentImageData != "NA"
                   ? Image.memory(base64Decode(apparentConcealmentImageData))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),

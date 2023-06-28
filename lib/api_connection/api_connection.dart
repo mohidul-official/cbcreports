@@ -101,4 +101,7 @@ class API {
 
   static const timberpestinspectionsteptwodetails =
       "$hostConnect/timberpestinspectionsteptwodetails.php";
+
+  static const prepurchaselimitationtimeofinspectionimage =
+      "$hostConnect/prepurchaselimitationtimeofinspectionimage.php";
 }

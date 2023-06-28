@@ -45,6 +45,9 @@ dependencies:
   image_gallery_saver: ^1.7.1
   image_picker: ^0.8.7
   multiselect: ^0.1.0
+  multiple_images_picker: ^1.0.1
+  http_parser: ^4.0.2
+  dio: ^5.2.1+1
 
 dev_dependencies:
   flutter_test:
