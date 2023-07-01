@@ -419,7 +419,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: gardenimagePath !=  "NA"
+              child: gardenimagePath != "NA"
                   ? Image.memory(base64Decode(gardenimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
@@ -489,7 +489,7 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: otherimagePath !=  "NA"
+              child: otherimagePath != "NA"
                   ? Image.memory(base64Decode(otherimagePath))
                   : Text('Image Not Choose Yet'),
               //child: Text('Image Goes Here'),
@@ -522,8 +522,11 @@ class _BuildingInspectionTheSiteStepTwoFragmentsState
                 children: [
                   Container(
                     margin: EdgeInsets.all(10),
-                    child:
-                        ElevatedButton(onPressed: () {}, child: Text('Back')),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Back')),
                   ),
                   Container(
                     margin: EdgeInsets.all(10),

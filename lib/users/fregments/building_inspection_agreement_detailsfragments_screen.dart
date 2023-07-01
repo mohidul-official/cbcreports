@@ -181,8 +181,11 @@ class _BuildingInspectionAgreementFragmentsState
                 children: [
                   Container(
                     margin: EdgeInsets.all(10),
-                    child:
-                        ElevatedButton(onPressed: () {}, child: Text('Back')),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Back')),
                   ),
                   Container(
                     margin: EdgeInsets.all(10),

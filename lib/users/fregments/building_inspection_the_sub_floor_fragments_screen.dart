@@ -24,8 +24,6 @@ class BuildingInspectionTheSubFloorFragments extends StatefulWidget {
 
 class _BuildingInspectionTheSubFloorFragmentsState
     extends State<BuildingInspectionTheSubFloorFragments> {
-  
-
   var structurehavesubfloor = "NA";
 
   var subfloortimbers = "NA";
@@ -936,8 +934,11 @@ class _BuildingInspectionTheSubFloorFragmentsState
                 children: [
                   Container(
                     margin: EdgeInsets.all(10),
-                    child:
-                        ElevatedButton(onPressed: () {}, child: Text('Back')),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Back')),
                   ),
                   Container(
                     margin: EdgeInsets.all(10),
