@@ -41,8 +41,14 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
   List<String> actualareasinspectedselected = [];
   var actualareasinspected = "NA";
   var anotherimageTwo = "NA";
+
   bool viewVisible = false;
   bool viewVisibleTwo = false;
+  bool viewVisibleThree = false;
+
+  bool viewapparentVisible = false;
+  bool viewapparentVisibleTwo = false;
+  bool viewapparentVisibleThree = false;
 
   var limitationsyesno = "No Limitations at Time of Inspection";
   var limitationsis = "NA";
@@ -64,6 +70,10 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
   var limitationsyesnothreeimageName = "NA";
   var limitationsyesnothreeimageData = "NA";
 
+  var limitationsyesnofourimagePath = "NA";
+  var limitationsyesnofourimageName = "NA";
+  var limitationsyesnofourimageData = "NA";
+
   /*File? apparentConcealmentImagePath;
   String? apparentConcealmentImageName;
   String? apparentConcealmentImageData;*/
@@ -71,6 +81,18 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
   var apparentConcealmentImagePath = "NA";
   var apparentConcealmentImageName = "NA";
   var apparentConcealmentImageData = "NA";
+
+  var apparentConcealmenttwoImagePath = "NA";
+  var apparentConcealmenttwoImageName = "NA";
+  var apparentConcealmenttwoImageData = "NA";
+
+  var apparentConcealmentthreeImagePath = "NA";
+  var apparentConcealmentthreeImageName = "NA";
+  var apparentConcealmentthreeImageData = "NA";
+
+  var apparentConcealmentfourImagePath = "NA";
+  var apparentConcealmentfourImageName = "NA";
+  var apparentConcealmentfourImageData = "NA";
 
   ImagePicker imagePicker = ImagePicker();
 
@@ -197,6 +219,48 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
     });
   }
 
+  Future<void> limitationsyesnofourgetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File limitationsyesnofourimagePath = File(getimage.path);
+
+        limitationsyesnofourimageName = getimage.path.split('/').last;
+        limitationsyesnofourimageData =
+            base64Encode(limitationsyesnofourimagePath.readAsBytesSync());
+
+        print(limitationsyesnofourimagePath);
+        print(limitationsyesnofourimageName);
+        print(limitationsyesnofourimageData);
+      }
+    });
+  }
+
+  Future<void> limitationsyesnofourcaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File limitationsyesnofourimagePath = File(getimage.path);
+
+        limitationsyesnofourimageName = getimage.path.split('/').last;
+        limitationsyesnofourimageData =
+            base64Encode(limitationsyesnofourimagePath.readAsBytesSync());
+
+        print(limitationsyesnofourimagePath);
+        print(limitationsyesnofourimageName);
+        print(limitationsyesnofourimageData);
+      }
+    });
+  }
+
   Future<void> apparentConcealmentGetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
@@ -235,6 +299,120 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
     });
   }
 
+  Future<void> apparentConcealmentTwoGetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File apparentConcealmenttwoImagePath = File(getimage.path);
+        apparentConcealmenttwoImageName = getimage.path.split('/').last;
+        apparentConcealmenttwoImageData =
+            base64Encode(apparentConcealmenttwoImagePath.readAsBytesSync());
+        print(apparentConcealmenttwoImagePath);
+        print(apparentConcealmenttwoImageName);
+        print(apparentConcealmenttwoImageData);
+      }
+    });
+  }
+
+  Future<void> apparentConcealmentTwoCaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File apparentConcealmenttwoImagePath = File(getimage.path);
+        apparentConcealmenttwoImageName = getimage.path.split('/').last;
+        apparentConcealmenttwoImageData =
+            base64Encode(apparentConcealmenttwoImagePath.readAsBytesSync());
+        print(apparentConcealmenttwoImagePath);
+        print(apparentConcealmenttwoImageName);
+        print(apparentConcealmenttwoImageData);
+      }
+    });
+  }
+
+  Future<void> apparentConcealmentThreeGetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File apparentConcealmentthreeImagePath = File(getimage.path);
+        apparentConcealmentthreeImageName = getimage.path.split('/').last;
+        apparentConcealmentthreeImageData =
+            base64Encode(apparentConcealmentthreeImagePath.readAsBytesSync());
+        print(apparentConcealmentthreeImagePath);
+        print(apparentConcealmentthreeImageName);
+        print(apparentConcealmentthreeImageData);
+      }
+    });
+  }
+
+  Future<void> apparentConcealmentThreeCaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File apparentConcealmentthreeImagePath = File(getimage.path);
+        apparentConcealmentthreeImageName = getimage.path.split('/').last;
+        apparentConcealmentthreeImageData =
+            base64Encode(apparentConcealmentthreeImagePath.readAsBytesSync());
+        print(apparentConcealmentthreeImagePath);
+        print(apparentConcealmentthreeImageName);
+        print(apparentConcealmentthreeImageData);
+      }
+    });
+  }
+
+  Future<void> apparentConcealmentFourGetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File apparentConcealmentfourImagePath = File(getimage.path);
+        apparentConcealmentfourImageName = getimage.path.split('/').last;
+        apparentConcealmentfourImageData =
+            base64Encode(apparentConcealmentfourImagePath.readAsBytesSync());
+        print(apparentConcealmentfourImagePath);
+        print(apparentConcealmentfourImageName);
+        print(apparentConcealmentfourImageData);
+      }
+    });
+  }
+
+  Future<void> apparentConcealmentFourCaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File apparentConcealmentfourImagePath = File(getimage.path);
+        apparentConcealmentfourImageName = getimage.path.split('/').last;
+        apparentConcealmentfourImageData =
+            base64Encode(apparentConcealmentfourImagePath.readAsBytesSync());
+        print(apparentConcealmentfourImagePath);
+        print(apparentConcealmentfourImageName);
+        print(apparentConcealmentfourImageData);
+      }
+    });
+  }
+
   Future<void> updateAreasGainFactorsDetails(String id) async {
     try {
       showDialog(
@@ -268,8 +446,16 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
         "limitationsyesnotwoimagename": limitationsyesnotwoimageName,
         "limitationsyesnothreeimagedata": limitationsyesnothreeimageData,
         "limitationsyesnothreeimagename": limitationsyesnothreeimageName,
+        "limitationsyesnofourimagedata": limitationsyesnofourimageData,
+        "limitationsyesnofourimagename": limitationsyesnofourimageName,
         "apparentconcealmentimagedata": apparentConcealmentImageData,
         "apparentconcealmentimagename": apparentConcealmentImageName,
+        "apparentconcealmenttwoimagedata": apparentConcealmenttwoImageData,
+        "apparentconcealmenttwoimagename": apparentConcealmenttwoImageName,
+        "apparentconcealmentthreeimagedata": apparentConcealmentthreeImageData,
+        "apparentconcealmentthreeimagename": apparentConcealmentthreeImageName,
+        "apparentconcealmentfourimagedata": apparentConcealmentfourImageData,
+        "apparentconcealmentfourimagename": apparentConcealmentfourImageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -308,15 +494,27 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
     if (viewVisible == true) {
       setState(() {
         viewVisible = false;
+        viewVisibleTwo = false;
+        viewVisibleThree = false;
         //Fluttertoast.showToast(msg: viewVisible.toString());
 
         limitationsyesnotwoimagePath = "NA";
         limitationsyesnotwoimageName = "NA";
         limitationsyesnotwoimageData = "NA";
+
+        limitationsyesnothreeimagePath = "NA";
+        limitationsyesnothreeimageName = "NA";
+        limitationsyesnothreeimageData = "NA";
+
+        limitationsyesnofourimagePath = "NA";
+        limitationsyesnofourimageName = "NA";
+        limitationsyesnofourimageData = "NA";
       });
     } else {
       setState(() {
         viewVisible = true;
+        viewVisibleTwo = false;
+        viewVisibleThree = false;
         //Fluttertoast.showToast(msg: viewVisible.toString());
       });
     }
@@ -326,15 +524,111 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
     if (viewVisibleTwo == true) {
       setState(() {
         viewVisibleTwo = false;
+        viewVisibleThree = false;
         //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
 
         limitationsyesnothreeimagePath = "NA";
         limitationsyesnothreeimageName = "NA";
         limitationsyesnothreeimageData = "NA";
+
+        limitationsyesnofourimagePath = "NA";
+        limitationsyesnofourimageName = "NA";
+        limitationsyesnofourimageData = "NA";
       });
     } else {
       setState(() {
         viewVisibleTwo = true;
+        viewVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+      });
+    }
+  }
+
+  void hidethreeWidget() {
+    if (viewVisibleThree == true) {
+      setState(() {
+        viewVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+
+        limitationsyesnofourimagePath = "NA";
+        limitationsyesnofourimageName = "NA";
+        limitationsyesnofourimageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewVisibleThree = true;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+      });
+    }
+  }
+
+  void hideapparentWidget() {
+    if (viewapparentVisible == true) {
+      setState(() {
+        viewapparentVisible = false;
+        viewapparentVisibleTwo = false;
+        viewapparentVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisible.toString());
+
+        apparentConcealmenttwoImagePath = "NA";
+        apparentConcealmenttwoImageName = "NA";
+        apparentConcealmenttwoImageData = "NA";
+
+        apparentConcealmentthreeImagePath = "NA";
+        apparentConcealmentthreeImageName = "NA";
+        apparentConcealmentthreeImageData = "NA";
+
+        apparentConcealmentfourImagePath = "NA";
+        apparentConcealmentfourImageName = "NA";
+        apparentConcealmentfourImageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewapparentVisible = true;
+        viewapparentVisibleTwo = false;
+        viewapparentVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisible.toString());
+      });
+    }
+  }
+
+  void hideapparenttwoWidget() {
+    if (viewapparentVisibleTwo == true) {
+      setState(() {
+        viewapparentVisibleTwo = false;
+        viewapparentVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+
+        apparentConcealmentthreeImagePath = "NA";
+        apparentConcealmentthreeImageName = "NA";
+        apparentConcealmentthreeImageData = "NA";
+
+        apparentConcealmentfourImagePath = "NA";
+        apparentConcealmentfourImageName = "NA";
+        apparentConcealmentfourImageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewapparentVisibleTwo = true;
+        viewapparentVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+      });
+    }
+  }
+
+  void hideapparentthreeWidget() {
+    if (viewapparentVisibleThree == true) {
+      setState(() {
+        viewapparentVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+
+        apparentConcealmentfourImagePath = "NA";
+        apparentConcealmentfourImageName = "NA";
+        apparentConcealmentfourImageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewapparentVisibleThree = true;
         //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
       });
     }
@@ -609,6 +903,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -635,98 +930,41 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
               margin: EdgeInsets.all(10),
               child: ElevatedButton(
                   onPressed: () {
-                    Fluttertoast.showToast(msg: "Add More Image");
+                    //Fluttertoast.showToast(msg: "Add or Delete More Image");
                     //conditionCheck();
                     hideWidget();
                   },
-                  child: Text('Add More Image')),
+                  child: Text('Add or Delete More Image')),
             ),
 
             //1st Add More Image
-            Container(
-              child: Visibility(
-                  maintainSize: true,
-                  maintainAnimation: true,
-                  maintainState: true,
-                  visible: viewVisible,
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          child: limitationsyesnotwoimageData != "NA"
-                              ? Image.memory(
-                                  base64Decode(limitationsyesnotwoimageData))
-                              : Text('Image Not Choose Yet'),
-                          //child: Text('Image Goes Here'),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      limitationsyesnotwocaptureImage();
-                                    },
-                                    child: Text('Capture Image')),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      limitationsyesnotwogetImage();
-                                    },
-                                    child: Text('Choose Image')),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        //2nd Add More Button
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Fluttertoast.showToast(msg: "Add More Image");
-                                //conditionCheck();
-                                hidetwoWidget();
-                              },
-                              child: Text('Add More Image')),
-                        ),
-                      ],
-                    ),
-                  )),
-            ),
-
-            //2nd Add More Image
-            Container(
-              child: Visibility(
-                maintainSize: true,
+            Visibility(
+                maintainSize: false,
                 maintainAnimation: true,
                 maintainState: true,
-                visible: viewVisibleTwo,
+                visible: viewVisible,
+                replacement: const SizedBox.shrink(),
                 child: Container(
                   child: Column(
                     children: [
                       Container(
                         margin: EdgeInsets.all(10),
-                        child: limitationsyesnothreeimageData != "NA"
+                        child: limitationsyesnotwoimageData != "NA"
                             ? Image.memory(
-                                base64Decode(limitationsyesnothreeimageData))
+                                base64Decode(limitationsyesnotwoimageData))
                             : Text('Image Not Choose Yet'),
                         //child: Text('Image Goes Here'),
                       ),
                       Container(
                         margin: EdgeInsets.all(10),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: ElevatedButton(
                                   onPressed: () {
-                                    limitationsyesnothreecaptureImage();
+                                    limitationsyesnotwocaptureImage();
                                   },
                                   child: Text('Capture Image')),
                             ),
@@ -734,7 +972,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
                               padding: const EdgeInsets.all(5.0),
                               child: ElevatedButton(
                                   onPressed: () {
-                                    limitationsyesnothreegetImage();
+                                    limitationsyesnotwogetImage();
                                   },
                                   child: Text('Choose Image')),
                             ),
@@ -742,19 +980,135 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
                         ),
                       ),
 
-                      //3rd Add More Button
-                      /*Container(
+                      //2nd Add More Button
+                      Container(
                         margin: EdgeInsets.all(10),
                         child: ElevatedButton(
                             onPressed: () {
-                              Fluttertoast.showToast(msg: "Add More Image");
+                              //Fluttertoast.showToast(msg: "Add or Delete More Image");
                               //conditionCheck();
-                              hideWidgetTwo();
+                              hidetwoWidget();
+                            },
+                            child: Text('Add or Delete More Image')),
+                      ),
+                    ],
+                  ),
+                )),
+
+            //2nd Add More Image
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewVisibleTwo,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: limitationsyesnothreeimageData != "NA"
+                          ? Image.memory(
+                              base64Decode(limitationsyesnothreeimageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  limitationsyesnothreecaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  limitationsyesnothreegetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //3rd Add More Button
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                            //conditionCheck();
+                            hidethreeWidget();
+                          },
+                          child: Text('Add or Delete More Image')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            //3rd Add More Image
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewVisibleThree,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: limitationsyesnofourimageData != "NA"
+                          ? Image.memory(
+                              base64Decode(limitationsyesnofourimageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  limitationsyesnofourcaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  limitationsyesnofourgetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //4th Add More Button
+                    /*Container(
+                        margin: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                            onPressed: () {
+                    //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                              //conditionCheck();
+                              hidetwoWidget();
                             },
                             child: Text('Add More Image')),
                       ),*/
-                    ],
-                  ),
+                  ],
                 ),
               ),
             ),
@@ -808,6 +1162,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -828,6 +1183,199 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
                 ],
               ),
             ),
+
+            //1st apparent Add More Button
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                  onPressed: () {
+                    //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                    //conditionCheck();
+                    hideapparentWidget();
+                  },
+                  child: Text('Add or Delete More Image')),
+            ),
+
+            //1st apparent Add More Image
+
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewapparentVisible,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: apparentConcealmenttwoImageData != "NA"
+                          ? Image.memory(
+                              base64Decode(apparentConcealmenttwoImageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  apparentConcealmentTwoCaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  apparentConcealmentTwoGetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //2nd apparent Add More Button
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                            //conditionCheck();
+                            hideapparenttwoWidget();
+                          },
+                          child: Text('Add or Delete More Image')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            //2nd apparent Add More Image
+
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewapparentVisibleTwo,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: apparentConcealmentthreeImageData != "NA"
+                          ? Image.memory(
+                              base64Decode(apparentConcealmentthreeImageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  apparentConcealmentThreeCaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  apparentConcealmentThreeGetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //3rd apparent Add More Button
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                            //conditionCheck();
+                            hideapparentthreeWidget();
+                          },
+                          child: Text('Add or Delete More Image')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            //3rd apparent Add More Image
+
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewapparentVisibleThree,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: apparentConcealmentfourImageData != "NA"
+                          ? Image.memory(
+                              base64Decode(apparentConcealmentfourImageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  apparentConcealmentFourCaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  apparentConcealmentFourGetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //3rd apparent Add More Button
+                    /*Container(
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                            //conditionCheck();
+                            hideapparentthreeWidget();
+                          },
+                          child: Text('Add or Delete More Image')),
+                    ),*/
+                  ],
+                ),
+              ),
+            ),
+
             //Information provided to the Inspector that has a bearing on the Inspection and/or Report and from whom and when that information was provided:
             Container(
               margin: EdgeInsets.all(10),
