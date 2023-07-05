@@ -43,6 +43,14 @@ class _BuildingInspectorTheExteriorFragmentsState
   bool viewlintelsVisibleTwo = false;
   bool viewlintelsVisibleThree = false;
 
+  bool viewdoorsVisible = false;
+  bool viewdoorsVisibleTwo = false;
+  bool viewdoorsVisibleThree = false;
+
+  bool viewwindowsVisible = false;
+  bool viewwindowsVisibleTwo = false;
+  bool viewwindowsVisibleThree = false;
+
   var wallsimagePath = "NA";
   var wallsimageName = "NA";
   var wallsimageData = "NA";
@@ -95,9 +103,33 @@ class _BuildingInspectorTheExteriorFragmentsState
   var doorsimageName = "NA";
   var doorsimageData = "NA";
 
+  var doorstwoimagePath = "NA";
+  var doorstwoimageName = "NA";
+  var doorstwoimageData = "NA";
+
+  var doorsthreeimagePath = "NA";
+  var doorsthreeimageName = "NA";
+  var doorsthreeimageData = "NA";
+
+  var doorsfourimagePath = "NA";
+  var doorsfourimageName = "NA";
+  var doorsfourimageData = "NA";
+
   var windowsimagePath = "NA";
   var windowsimageName = "NA";
   var windowsimageData = "NA";
+
+  var windowstwoimagePath = "NA";
+  var windowstwoimageName = "NA";
+  var windowstwoimageData = "NA";
+
+  var windowsthreeimagePath = "NA";
+  var windowsthreeimageName = "NA";
+  var windowsthreeimageData = "NA";
+
+  var windowsfourimagePath = "NA";
+  var windowsfourimageName = "NA";
+  var windowsfourimageData = "NA";
 
   /*File? wallsimagePath;
   String? wallsimageName;
@@ -653,6 +685,128 @@ class _BuildingInspectorTheExteriorFragmentsState
     });
   }
 
+  Future<void> doorstwogetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File doorstwoimagePath = File(getimage.path);
+
+        doorstwoimageName = getimage.path.split('/').last;
+        doorstwoimageData = base64Encode(doorstwoimagePath.readAsBytesSync());
+
+        print(doorstwoimagePath);
+        print(doorstwoimageName);
+        print(doorstwoimageData);
+      }
+    });
+  }
+
+  Future<void> doorstwocaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File doorstwoimagePath = File(getimage.path);
+
+        doorstwoimageName = getimage.path.split('/').last;
+        doorstwoimageData = base64Encode(doorstwoimagePath.readAsBytesSync());
+
+        print(doorstwoimagePath);
+        print(doorstwoimageName);
+        print(doorstwoimageData);
+      }
+    });
+  }
+
+  Future<void> doorsthreegetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File doorsthreeimagePath = File(getimage.path);
+
+        doorsthreeimageName = getimage.path.split('/').last;
+        doorsthreeimageData =
+            base64Encode(doorsthreeimagePath.readAsBytesSync());
+
+        print(doorsthreeimagePath);
+        print(doorsthreeimageName);
+        print(doorsthreeimageData);
+      }
+    });
+  }
+
+  Future<void> doorsthreecaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File doorsthreeimagePath = File(getimage.path);
+
+        doorsthreeimageName = getimage.path.split('/').last;
+        doorsthreeimageData =
+            base64Encode(doorsthreeimagePath.readAsBytesSync());
+
+        print(doorsthreeimagePath);
+        print(doorsthreeimageName);
+        print(doorsthreeimageData);
+      }
+    });
+  }
+
+  Future<void> doorsfourgetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File doorsfourimagePath = File(getimage.path);
+
+        doorsfourimageName = getimage.path.split('/').last;
+        doorsfourimageData = base64Encode(doorsfourimagePath.readAsBytesSync());
+
+        print(doorsfourimagePath);
+        print(doorsfourimageName);
+        print(doorsfourimageData);
+      }
+    });
+  }
+
+  Future<void> doorsfourcaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File doorsfourimagePath = File(getimage.path);
+
+        doorsfourimageName = getimage.path.split('/').last;
+        doorsfourimageData = base64Encode(doorsfourimagePath.readAsBytesSync());
+
+        print(doorsfourimagePath);
+        print(doorsfourimageName);
+        print(doorsfourimageData);
+      }
+    });
+  }
+
   Future<void> windowsgetImage() async {
     var getimage = await imagePicker.pickImage(
         source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
@@ -685,6 +839,132 @@ class _BuildingInspectorTheExteriorFragmentsState
         print(windowsimagePath);
         print(windowsimageName);
         print(windowsimageData);
+      }
+    });
+  }
+
+  Future<void> windowstwogetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File windowstwoimagePath = File(getimage.path);
+
+        windowstwoimageName = getimage.path.split('/').last;
+        windowstwoimageData =
+            base64Encode(windowstwoimagePath.readAsBytesSync());
+
+        print(windowstwoimagePath);
+        print(windowstwoimageName);
+        print(windowstwoimageData);
+      }
+    });
+  }
+
+  Future<void> windowstwocaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File windowstwoimagePath = File(getimage.path);
+
+        windowstwoimageName = getimage.path.split('/').last;
+        windowstwoimageData =
+            base64Encode(windowstwoimagePath.readAsBytesSync());
+
+        print(windowstwoimagePath);
+        print(windowstwoimageName);
+        print(windowstwoimageData);
+      }
+    });
+  }
+
+  Future<void> windowsthreegetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File windowsthreeimagePath = File(getimage.path);
+
+        windowsthreeimageName = getimage.path.split('/').last;
+        windowsthreeimageData =
+            base64Encode(windowsthreeimagePath.readAsBytesSync());
+
+        print(windowsthreeimagePath);
+        print(windowsthreeimageName);
+        print(windowsthreeimageData);
+      }
+    });
+  }
+
+  Future<void> windowsthreecaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File windowsthreeimagePath = File(getimage.path);
+
+        windowsthreeimageName = getimage.path.split('/').last;
+        windowsthreeimageData =
+            base64Encode(windowsthreeimagePath.readAsBytesSync());
+
+        print(windowsthreeimagePath);
+        print(windowsthreeimageName);
+        print(windowsthreeimageData);
+      }
+    });
+  }
+
+  Future<void> windowsfourgetImage() async {
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.gallery, maxHeight: 500, maxWidth: 500);
+    //var getimage = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File windowsfourimagePath = File(getimage.path);
+
+        windowsfourimageName = getimage.path.split('/').last;
+        windowsfourimageData =
+            base64Encode(windowsfourimagePath.readAsBytesSync());
+
+        print(windowsfourimagePath);
+        print(windowsfourimageName);
+        print(windowsfourimageData);
+      }
+    });
+  }
+
+  Future<void> windowsfourcaptureImage() async {
+    ///var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+    var getimage = await imagePicker.pickImage(
+        source: ImageSource.camera, maxHeight: 500, maxWidth: 500);
+    setState(() {
+      if (getimage == null) {
+        return;
+      } else {
+        File windowsfourimagePath = File(getimage.path);
+
+        windowsfourimageName = getimage.path.split('/').last;
+        windowsfourimageData =
+            base64Encode(windowsfourimagePath.readAsBytesSync());
+
+        print(windowsfourimagePath);
+        print(windowsfourimageName);
+        print(windowsfourimageData);
       }
     });
   }
@@ -899,8 +1179,20 @@ class _BuildingInspectorTheExteriorFragmentsState
         "lintelsfourimagename": lintelsfourimageName,
         "doorsimagedata": doorsimageData,
         "doorsimagename": doorsimageName,
+        "doorstwoimagedata": doorstwoimageData,
+        "doorstwoimagename": doorstwoimageName,
+        "doorsthreeimagedata": doorsthreeimageData,
+        "doorsthreeimagename": doorsthreeimageName,
+        "doorsfourimagedata": doorsfourimageData,
+        "doorsfourimagename": doorsfourimageName,
         "windowsimagedata": windowsimageData,
         "windowsimagename": windowsimageName,
+        "windowstwoimagedata": windowstwoimageData,
+        "windowstwoimagename": windowstwoimageName,
+        "windowsthreeimagedata": windowsthreeimageData,
+        "windowsthreeimagename": windowsthreeimageName,
+        "windowsfourimagedata": windowsfourimageData,
+        "windowsfourimagename": windowsfourimageName,
       });
       var responce = jsonDecode(res.body);
       if (responce["success"] == "true") {
@@ -1135,6 +1427,150 @@ class _BuildingInspectorTheExteriorFragmentsState
     } else {
       setState(() {
         viewlintelsVisibleThree = true;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+      });
+    }
+  }
+
+  void hidedoorsWidget() {
+    if (viewdoorsVisible == true) {
+      setState(() {
+        viewdoorsVisible = false;
+        viewdoorsVisibleTwo = false;
+        viewdoorsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisible.toString());
+
+        doorstwoimagePath = "NA";
+        doorstwoimageName = "NA";
+        doorstwoimageData = "NA";
+
+        doorsthreeimagePath = "NA";
+        doorsthreeimageName = "NA";
+        doorsthreeimageData = "NA";
+
+        doorsfourimagePath = "NA";
+        doorsfourimageName = "NA";
+        doorsfourimageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewdoorsVisible = true;
+        viewdoorsVisibleTwo = false;
+        viewdoorsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisible.toString());
+      });
+    }
+  }
+
+  void hidedoorstwoWidget() {
+    if (viewdoorsVisibleTwo == true) {
+      setState(() {
+        viewdoorsVisibleTwo = false;
+        viewdoorsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+
+        doorsthreeimagePath = "NA";
+        doorsthreeimageName = "NA";
+        doorsthreeimageData = "NA";
+
+        doorsfourimagePath = "NA";
+        doorsfourimageName = "NA";
+        doorsfourimageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewdoorsVisibleTwo = true;
+        viewdoorsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+      });
+    }
+  }
+
+  void hidedoorsthreeWidget() {
+    if (viewdoorsVisibleThree == true) {
+      setState(() {
+        viewdoorsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+
+        doorsfourimagePath = "NA";
+        doorsfourimageName = "NA";
+        doorsfourimageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewdoorsVisibleThree = true;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+      });
+    }
+  }
+
+  void hidewindowsWidget() {
+    if (viewwindowsVisible == true) {
+      setState(() {
+        viewwindowsVisible = false;
+        viewwindowsVisibleTwo = false;
+        viewwindowsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisible.toString());
+
+        windowstwoimagePath = "NA";
+        windowstwoimageName = "NA";
+        windowstwoimageData = "NA";
+
+        windowsthreeimagePath = "NA";
+        windowsthreeimageName = "NA";
+        windowsthreeimageData = "NA";
+
+        windowsfourimagePath = "NA";
+        windowsfourimageName = "NA";
+        windowsfourimageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewwindowsVisible = true;
+        viewwindowsVisibleTwo = false;
+        viewwindowsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisible.toString());
+      });
+    }
+  }
+
+  void hidewindowstwoWidget() {
+    if (viewwindowsVisibleTwo == true) {
+      setState(() {
+        viewwindowsVisibleTwo = false;
+        viewwindowsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+
+        windowsthreeimagePath = "NA";
+        windowsthreeimageName = "NA";
+        windowsthreeimageData = "NA";
+
+        windowsfourimagePath = "NA";
+        windowsfourimageName = "NA";
+        windowsfourimageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewwindowsVisibleTwo = true;
+        viewwindowsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+      });
+    }
+  }
+
+  void hidewindowsthreeWidget() {
+    if (viewwindowsVisibleThree == true) {
+      setState(() {
+        viewwindowsVisibleThree = false;
+        //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
+
+        windowsfourimagePath = "NA";
+        windowsfourimageName = "NA";
+        windowsfourimageData = "NA";
+      });
+    } else {
+      setState(() {
+        viewwindowsVisibleThree = true;
         //Fluttertoast.showToast(msg: viewVisibleTwo.toString());
       });
     }
@@ -2011,6 +2447,7 @@ class _BuildingInspectorTheExteriorFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -2031,6 +2468,193 @@ class _BuildingInspectorTheExteriorFragmentsState
                 ],
               ),
             ),
+
+            //1st doors Add More Button
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                  onPressed: () {
+                    //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                    //conditionCheck();
+                    hidedoorsWidget();
+                  },
+                  child: Text('Add or Delete More Image')),
+            ),
+
+            //1st doors Add More Image
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewdoorsVisible,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: doorstwoimageData != "NA"
+                          ? Image.memory(base64Decode(doorstwoimageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  doorstwocaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  doorstwogetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //2nd doors Add More Button
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                            //conditionCheck();
+                            hidedoorstwoWidget();
+                          },
+                          child: Text('Add or Delete More Image')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            //2nd doors Add More Image
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewdoorsVisibleTwo,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: doorsthreeimageData != "NA"
+                          ? Image.memory(base64Decode(doorsthreeimageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  doorsthreecaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  doorsthreegetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //3rd doors Add More Button
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                            //conditionCheck();
+                            hidedoorsthreeWidget();
+                          },
+                          child: Text('Add or Delete More Image')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            //3rd Add More Image
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewdoorsVisibleThree,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: doorsfourimageData != "NA"
+                          ? Image.memory(base64Decode(doorsfourimageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  doorsfourcaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  doorsfourgetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //4th Add More Button
+                    /*Container(
+                        margin: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                            onPressed: () {
+                    //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                              //conditionCheck();
+                              hidetwoWidget();
+                            },
+                            child: Text('Add More Image')),
+                      ),*/
+                  ],
+                ),
+              ),
+            ),
+
             //Windows
 
             Container(
@@ -2086,6 +2710,7 @@ class _BuildingInspectorTheExteriorFragmentsState
             Container(
               margin: EdgeInsets.all(10),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -2106,6 +2731,193 @@ class _BuildingInspectorTheExteriorFragmentsState
                 ],
               ),
             ),
+
+            //1st windows Add More Button
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                  onPressed: () {
+                    //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                    //conditionCheck();
+                    hidewindowsWidget();
+                  },
+                  child: Text('Add or Delete More Image')),
+            ),
+
+            //1st Add More Image
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewwindowsVisible,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: windowstwoimageData != "NA"
+                          ? Image.memory(base64Decode(windowstwoimageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  windowstwocaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  windowstwogetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //2nd windows Add More Button
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                            //conditionCheck();
+                            hidewindowstwoWidget();
+                          },
+                          child: Text('Add or Delete More Image')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            //2nd windows Add More Image
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewwindowsVisibleTwo,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: windowsthreeimageData != "NA"
+                          ? Image.memory(base64Decode(windowsthreeimageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  windowsthreecaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  windowsthreegetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //3rd windows Add More Button
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                            //conditionCheck();
+                            hidewindowsthreeWidget();
+                          },
+                          child: Text('Add or Delete More Image')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            //3rd windows Add More Image
+            Visibility(
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewwindowsVisibleThree,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: windowsfourimageData != "NA"
+                          ? Image.memory(base64Decode(windowsfourimageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  windowsfourcaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  windowsfourgetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //4th Add More Button
+                    /*Container(
+                        margin: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                            onPressed: () {
+                    //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                              //conditionCheck();
+                              hidetwoWidget();
+                            },
+                            child: Text('Add More Image')),
+                      ),*/
+                  ],
+                ),
+              ),
+            ),
+
             Container(
               child: Row(
                 children: [
