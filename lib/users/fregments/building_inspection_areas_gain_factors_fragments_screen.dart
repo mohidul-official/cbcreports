@@ -925,6 +925,9 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
               ),
             ),
 
+            
+            
+            
             //1st Add More Button
             Container(
               margin: EdgeInsets.all(10),
@@ -939,61 +942,62 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
 
             //1st Add More Image
             Visibility(
-                maintainSize: false,
-                maintainAnimation: true,
-                maintainState: true,
-                visible: viewVisible,
-                replacement: const SizedBox.shrink(),
-                child: Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        child: limitationsyesnotwoimageData != "NA"
-                            ? Image.memory(
-                                base64Decode(limitationsyesnotwoimageData))
-                            : Text('Image Not Choose Yet'),
-                        //child: Text('Image Goes Here'),
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewVisible,
+              replacement: const SizedBox.shrink(),
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: limitationsyesnotwoimageData != "NA"
+                          ? Image.memory(
+                              base64Decode(limitationsyesnotwoimageData))
+                          : Text('Image Not Choose Yet'),
+                      //child: Text('Image Goes Here'),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  limitationsyesnotwocaptureImage();
+                                },
+                                child: Text('Capture Image')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  limitationsyesnotwogetImage();
+                                },
+                                child: Text('Choose Image')),
+                          ),
+                        ],
                       ),
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    limitationsyesnotwocaptureImage();
-                                  },
-                                  child: Text('Capture Image')),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    limitationsyesnotwogetImage();
-                                  },
-                                  child: Text('Choose Image')),
-                            ),
-                          ],
-                        ),
-                      ),
+                    ),
 
-                      //2nd Add More Button
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              //Fluttertoast.showToast(msg: "Add or Delete More Image");
-                              //conditionCheck();
-                              hidetwoWidget();
-                            },
-                            child: Text('Add or Delete More Image')),
-                      ),
-                    ],
-                  ),
-                )),
+                    //2nd Add More Button
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            //Fluttertoast.showToast(msg: "Add or Delete More Image");
+                            //conditionCheck();
+                            hidetwoWidget();
+                          },
+                          child: Text('Add or Delete More Image')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
             //2nd Add More Image
             Visibility(
@@ -1112,6 +1116,7 @@ class _BuildingIspectionAreasGrainFactorsFragmentsState
                 ),
               ),
             ),
+
             //Details of Apparent concealment of possible defects:
             Container(
               margin: EdgeInsets.all(10),
